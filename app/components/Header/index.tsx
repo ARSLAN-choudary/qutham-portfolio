@@ -114,10 +114,10 @@ export const Header = () => {
         }`}
       >
         <div className="py-[18px] w-full flex items-center justify-center">
-          <div className="relative flex items-center justify-center px-3 w-full">
+          <div className="relative flex items-center justify-end md:justify-center px-3 w-full">
             <div
               onClick={() => setSearch(false)}
-              className="cursor-pointer top-1/2 -translate-y-1/2 left-[50px] block absolute"
+              className="cursor-pointer top-1/2 -translate-y-1/2 left-[25px] md:left-[50px] block absolute"
             >
               <Image
                 width={32}
@@ -139,12 +139,25 @@ export const Header = () => {
       </div>
 
       <div
-        className={`fixed top-0 left-0 h-screen bg-[hsla(0,0%,8%,.4)] backdrop-blur-2xl z-20 transform transition-all duration-300 ease-in-out ${
-          isMobile ? "!w-full" : ""
-        }`}
+        className={`fixed top-0 left-0 h-screen bg-[hsla(0,0%,8%,.4)] backdrop-blur-2xl z-20 ${
+          isMobile
+            ? "w-full transform transition-transform duration-300 ease-in-out"
+            : sidebar
+            ? nestedChildOpen
+              ? "w-[1200px]"
+              : childOpen
+              ? "w-[800px]"
+              : "w-[400px]"
+            : "w-0"
+        } transition-all duration-300 ease-in-out`}
         style={{
-          width: nestedChildOpen ? 1200 : childOpen ? 800 : sidebar ? 400 : 0,
-          transform: sidebar ? "translateX(0)" : "translateX(-100%)",
+          transform: isMobile
+            ? sidebar
+              ? "translateY(0)"
+              : "translateY(-100%)"
+            : sidebar
+            ? "translateX(0)"
+            : "translateX(-100%)",
         }}
       >
         <Sidebar
