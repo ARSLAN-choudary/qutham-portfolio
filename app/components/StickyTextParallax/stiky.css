@@ -1,0 +1,47 @@
+/* Add to stiky.css */
+.bgImg {
+  background-image: url("/scroler/socials-bg-desktop.c0beceae096e8677d45b.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.card {
+  transition: transform 0.3s ease;
+  pointer-events: none !important;
+}
+
+.card > .relative {
+  pointer-events: none !important;
+}
+
+/* Enable pointer events only on the clickable overlay */
+.card .absolute.inset-0.z-10 {
+  pointer-events: all !important;
+}
+
+/* Make sure cards are above text content */
+.card {
+  z-index: 50;
+}
+
+.parallax-word {
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Ensure the custom cursor is above everything */
+.fixed.z-\[100\] {
+  z-index: 100;
+}
+
+/* Smooth cursor movement */
+.fixed {
+  will-change: transform;
+}
+
+/* Remove global cursor hiding */
+/* * {
+  cursor: none !important;
+} */

@@ -1,0 +1,217 @@
+.style_footer__section__HZm2M {
+  background: #000;
+  max-width: 100vw;
+  width: 100%;
+}
+.style_footer__grid__zAmB0 {
+  align-items: center;
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.style_footer__logo__Gjeig {
+  border-color: #222;
+  border-style: solid;
+  border-width: 1px 0;
+  padding: 50px 10px;
+}
+
+.style_footer__column__kqYF\+ {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  order: 1;
+}
+.style_footer__column__kqYF\+,
+.style_footer__connect__QuLYT,
+.style_footer__links__z6SRB {
+  width: 100%;
+}
+.style_footer__links__z6SRB {
+  border: solid #222;
+  border-width: 0 0 1px;
+  order: 3;
+  padding: 40px 10px;
+}
+.style_footer__column__kqYF\+,
+.style_footer__connect__QuLYT,
+.style_footer__links__z6SRB {
+  width: 100%;
+}
+.style_links__content__-IcOB {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.style_links__content__-IcOB h3 {
+  -webkit-text-fill-color: transparent;
+  background: linear-gradient(
+    90deg,
+    #f92daf 38.87%,
+    #fa367a 47.77%,
+    #fc442f 60.5%
+  );
+  -webkit-background-clip: text;
+  display: inline-block;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.style_links__content__-IcOB h3,
+.style_links__content__-IcOB li a {
+  font-family: Lato;
+  font-size: 12px;
+  letter-spacing: 2%;
+  line-height: 10px;
+  text-align: center;
+  vertical-align: middle;
+}
+.style_links__content__-IcOB ul {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  justify-content: center;
+  list-style: none;
+}
+.style_links__content__-IcOB li {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+.style_footer__connect__QuLYT {
+  border: solid #222;
+  border-width: 0 0 1px;
+  order: 2;
+  padding: 40px 10px;
+}
+
+.style_footer__column__kqYF\+,
+.style_footer__connect__QuLYT,
+.style_footer__links__z6SRB {
+  width: 100%;
+}
+.style_connect__content__2lw-t {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+.style_links__content__-IcOB {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.style_footer__address__ZhTcd {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+}
+.style_footer__address__ZhTcd:before {
+  background-color: #fff;
+  content: "";
+  height: 1px;
+  left: 50%;
+  position: absolute;
+  top: 0;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  width: 16px;
+}
+.style_social__logos__37Scg {
+  align-items: center;
+  display: flex;
+  gap: 30px;
+  margin-top: 20px;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+.style_social__logos__37Scg img {
+  scale: 1;
+  transition: all 0.3s ease;
+}
+.style_footer__bottom__Zb-QC {
+  padding: 20px 0;
+  width: 100%;
+}
+.style_footer__bottom__Zb-QC ul {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  list-style: none;
+  margin: 0 auto;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.style_footer__bottom__Zb-QC ul li,
+.style_footer__bottom__Zb-QC ul li a {
+  color: #fff;
+  font-family: Lato;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2%;
+  line-height: 10px;
+  text-align: center;
+  vertical-align: middle;
+}
+.style_footer__bottom__Zb-QC ul li {
+  text-transform: uppercase;
+}
+@media (min-width: 767px) {
+  .style_footer__bottom__Zb-QC ul li,
+  .style_footer__bottom__Zb-QC ul li a {
+    font-weight: 300;
+    line-height: 18px;
+  }
+  .style_footer__bottom__Zb-QC ul li,
+  .style_footer__bottom__Zb-QC ul li a {
+    font-weight: 300;
+    line-height: 18px;
+  }
+  .style_footer__bottom__Zb-QC ul {
+    flex-direction: row;
+    gap: 70px;
+  }
+  .style_footer__bottom__Zb-QC ul li,
+  .style_footer__bottom__Zb-QC ul li a {
+    font-weight: 300;
+    line-height: 18px;
+  }
+  .style_links__content__-IcOB {
+    gap: 30px;
+  }
+  .style_footer__connect__QuLYT {
+    border-width: 1px 0 1px 1px;
+    order: 3;
+  }
+  .style_links__content__-IcOB ul {
+    gap: 22px;
+  }
+  .style_links__content__-IcOB h3 {
+    font-size: 14px;
+    line-height: 18px;
+  }
+  .style_links__content__-IcOB {
+    gap: 30px;
+  }
+  .style_footer__links__z6SRB {
+    border-width: 1px 0 1px 1px;
+    order: 2;
+  }
+  .style_footer__grid__zAmB0 {
+    flex-direction: row;
+  }
+  .style_footer__logo__Gjeig {
+    border-width: 1px 0;
+  }
+}
