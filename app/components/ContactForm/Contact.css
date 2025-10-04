@@ -1,0 +1,306 @@
+/* === Contact Us Wrapper === */
+.style_contact__us__wrappper__62fYI {
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+/* === Contact Us Container === */
+.style_contactus__container__Flquh {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  width: 100%;
+  min-height: 100vh;
+  padding: 94px 15px 40px;
+  background-image: url("/scroler/socials-bg-desktop.c0beceae096e8677d45b.webp");
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* Blur overlay for background */
+.style_contactus__container__Flquh::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+
+  z-index: 1;
+}
+
+.style_contactus__container__Flquh > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* === Left Wrapper === */
+.style_contactus__left__wrapper__NCGr8 {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* === Form Content === */
+.style_form__content__xGxAH {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  width: 100%;
+}
+
+.style_form__content__xGxAH header {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.style_form__content__xGxAH header h1 {
+  color: #fff;
+  font-family: Lato;
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 46px;
+  margin: 0;
+}
+
+.style_form__content__xGxAH header p {
+  color: #fff;
+  font-family: Lato;
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: 2%;
+  line-height: 18px;
+  margin: 0;
+}
+
+/* === Contact Details === */
+.style_contactus__left__wrapper__NCGr8 .style_contact__details__qtUh0 {
+  display: flex;
+  align-items: center;
+  gap: 34px;
+  flex-wrap: wrap;
+}
+
+.style_contactus__left__wrapper__NCGr8 .style_contact__details__qtUh0 > div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.style_contactus__left__wrapper__NCGr8
+  .style_contact__details__qtUh0
+  > div
+  img {
+  width: 18px;
+  height: 18px;
+}
+
+.style_contactus__left__wrapper__NCGr8 .style_contact__details__qtUh0 > div a {
+  color: #fff;
+  font-family: Lato;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 14px;
+  text-decoration: none;
+}
+
+/* === Form Wrapper === */
+.style_form__wrapper__eIlmx {
+  width: 100%;
+  padding: 34px 28px;
+  border-radius: 12px;
+  background-color: hsla(0, 0%, 100%, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-sizing: border-box;
+  border: 1px solid hsla(0, 0%, 100%, 0.1);
+}
+
+/* === Form === */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 100%;
+}
+
+form .style_form__group__46EVf {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid hsla(0, 0%, 100%, 0.6);
+}
+
+/* === Form Labels & Inputs === */
+.style_form__label__-sYoI {
+  color: #fff;
+  font-family: Lato;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: 2%;
+  margin: 0;
+}
+
+.style_inputfield__FJ49s {
+  width: 100%;
+  background: none;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-family: Lato;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 15.25px;
+  letter-spacing: 2%;
+  padding: 2px 0;
+  margin: 0;
+}
+
+.style_inputfield__FJ49s:focus {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.style_required__star__UTD67 {
+  color: #ff4444 !important;
+}
+
+/* Error Styles */
+.style_input__error__8x9K2 {
+  border-bottom: 1px solid #ff4444 !important;
+}
+
+.style_error__message__vL3pQ {
+  color: #ff4444;
+  font-family: Lato;
+  font-size: 12px;
+  font-weight: 400;
+  margin-top: 4px;
+}
+
+/* === Submit Button === */
+.style_form__submit__btn__F8DVM {
+  border: none;
+  border-radius: 76px;
+  cursor: pointer;
+  background: linear-gradient(90deg, #f92cb7, #fd4431);
+  color: #fff;
+  font-family: Lato, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2%;
+  line-height: 142%;
+  padding: 22px 12px;
+  text-align: center;
+  margin-top: 20px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.style_form__submit__btn__F8DVM:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(253, 68, 49, 0.3);
+}
+
+/* Placeholder color */
+.style_inputfield__FJ49s::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Select dropdown styles */
+.style_inputfield__FJ49s option {
+  background: #2a2a2a;
+  color: #fff;
+}
+
+@media screen and (min-width: 768px) {
+  .style_contactus__left__wrapper__NCGr8 {
+    width: 50%;
+    height: 100vh;
+    padding: 94px 50px;
+    display: flex;
+    align-items: start;
+  }
+  .style_contactus__left__wrapper__NCGr8 .style_contact__details__qtUh0 {
+    gap: 60px;
+  }
+  .style_contactus__left__wrapper__NCGr8 .style_contact__details__qtUh0 > div {
+    gap: 12px;
+  }
+
+  .style_contactus__left__wrapper__NCGr8
+    .style_contact__details__qtUh0
+    > div
+    img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .style_contactus__left__wrapper__NCGr8
+    .style_contact__details__qtUh0
+    > div
+    a {
+    font-size: 20px;
+    line-height: 20px;
+  }
+  .style_form__wrapper__eIlmx {
+    width: 50%;
+    min-height: 100dvh;
+    border-radius: 0;
+    padding: 100px 133px 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: start;
+    backdrop-filter: blur(16px);
+  }
+
+  .style_form__wrapper__eIlmx form {
+    width: 100% !important;
+  }
+  .style_contactus__container__Flquh {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 0;
+    padding: 0;
+  }
+  form .style_form__group__46EVf {
+    gap: 11px;
+    padding-bottom: 12px;
+  }
+  .style_form__label__-sYoI {
+    font-size: 16px;
+    line-height: 20px;
+  }
+  .style_inputfield__FJ49s {
+    padding-top: 7px;
+  }
+  .style_form__submit__btn__F8DVM {
+    font-size: 16px;
+    line-height: 12px;
+    padding: 24px 20px;
+  }
+  .style_form__content__xGxAH,
+  .style_form__content__xGxAH header {
+    gap: 50px;
+  }
+
+  .style_form__content__xGxAH header h1 {
+    font-size: 60px;
+    line-height: 80px;
+  }
+
+  .style_form__content__xGxAH header p {
+    font-size: 24px;
+    line-height: 38px;
+  }
+}
