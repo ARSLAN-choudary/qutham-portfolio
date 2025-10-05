@@ -6,6 +6,10 @@ export const FeaturedEvents = () => {
   const sectionRef = useRef<HTMLDivElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
 
+  const TOTAL_X = 3702;
+  const THRESHOLD_X = 2500;
+  const V_TO_H_RATIO = 1;
+
   const events = [
     {
       id: 1,
@@ -20,8 +24,8 @@ export const FeaturedEvents = () => {
       title: "Valorant Masters",
       image: "/uic-mobile.webp",
       views: "1.2M",
-      players: "80",
       matches: "30",
+      players: "80",
     },
   ];
 
@@ -29,61 +33,135 @@ export const FeaturedEvents = () => {
     const section = sectionRef.current;
     const container = containerRef.current;
     if (!section || !container) return;
-
-    // Run only on desktop
     if (window.innerWidth < 768) return;
 
+    // ----- STATE -----
     let translateX = 0;
     let isLocked = false;
-    let scrollDistance = container.scrollWidth - window.innerWidth;
+    let mode: "A" | "B" = "A";
+    let phaseBStartScrollY = 0;
+
+    let actualScrollable = Math.max(
+      0,
+      container.scrollWidth - window.innerWidth
+    );
+    let MAX_X = Math.min(TOTAL_X, actualScrollable);
+    let THRESH_X_CLAMPED = Math.min(THRESHOLD_X, MAX_X);
+    let PHASE_B_REMAINING = Math.max(0, MAX_X - THRESH_X_CLAMPED);
 
     const lockScroll = () => {
-      document.body.style.overflow = "hidden";
-      isLocked = true;
+      if (!isLocked) {
+        document.body.style.overflow = "hidden";
+        isLocked = true;
+      }
     };
-
     const unlockScroll = () => {
-      document.body.style.overflow = "";
-      isLocked = false;
+      if (isLocked) {
+        document.body.style.overflow = "";
+        isLocked = false;
+      }
+    };
+    const applyTransform = () => {
+      container.style.transform = `translateX(${translateX}px)`;
+    };
+    const centerInView = () => {
+      const r = section.getBoundingClientRect();
+      return (
+        r.top <= window.innerHeight * 0.5 &&
+        r.bottom >= window.innerHeight * 0.5
+      );
+    };
+    const partlyInView = () => {
+      const r = section.getBoundingClientRect();
+      return r.bottom >= 0 && r.top <= window.innerHeight;
     };
 
-    const handleWheel = (e: WheelEvent) => {
-      const rect = section.getBoundingClientRect();
-      const inView =
-        rect.top <= window.innerHeight * 0.5 &&
-        rect.bottom >= window.innerHeight * 0.5;
+    const switchToA = () => {
+      mode = "A";
+      lockScroll();
+      translateX = Math.min(0, Math.max(-MAX_X, translateX));
+      applyTransform();
+    };
 
-      if (!inView) {
-        if (isLocked) unlockScroll();
+    const switchToB = () => {
+      mode = "B";
+      translateX = -THRESH_X_CLAMPED;
+      applyTransform();
+      unlockScroll();
+      phaseBStartScrollY = window.scrollY;
+    };
+
+    const handleWheelA = (e: WheelEvent) => {
+      if (mode !== "A") return;
+
+      const inCenter = centerInView();
+      if (!inCenter) {
+        unlockScroll();
         return;
       }
 
-      const atEnd = Math.abs(translateX) >= scrollDistance - 2;
       const atStart = translateX >= -2;
+      const atEnd = Math.abs(translateX) >= MAX_X - 2;
 
-      // Let natural scroll pass at edges
-      if ((e.deltaY > 0 && atEnd) || (e.deltaY < 0 && atStart)) {
-        if (isLocked) unlockScroll();
+      if ((e.deltaY < 0 && atStart) || (e.deltaY > 0 && atEnd)) {
+        unlockScroll();
         return;
       }
 
-      if (!isLocked) lockScroll();
+      lockScroll();
       e.preventDefault();
 
       translateX -= e.deltaY * 0.8;
-      translateX = Math.min(0, Math.max(-scrollDistance, translateX));
-      container.style.transform = `translateX(${translateX}px)`;
+      translateX = Math.min(0, Math.max(-MAX_X, translateX));
+      applyTransform();
+
+      if (Math.abs(translateX) >= THRESH_X_CLAMPED && e.deltaY > 0) {
+        switchToB();
+      }
     };
 
+    const handleScrollB = () => {
+      if (mode !== "B") return;
+      if (!partlyInView()) return;
+
+      const deltaY = window.scrollY - phaseBStartScrollY;
+
+      const mapped = Math.max(
+        0,
+        Math.min(PHASE_B_REMAINING, deltaY * V_TO_H_RATIO)
+      );
+      translateX = -THRESH_X_CLAMPED - mapped;
+      translateX = Math.max(-MAX_X, translateX);
+      applyTransform();
+
+      // ----- REVERSE behavior -----
+
+      if (deltaY <= 0 || mapped <= 0 + 0.5) {
+        translateX = -THRESH_X_CLAMPED;
+        applyTransform();
+        switchToA();
+      }
+    };
+
+    // ----- resize recompute -----
     const handleResize = () => {
-      scrollDistance = container.scrollWidth - window.innerWidth;
+      actualScrollable = Math.max(0, container.scrollWidth - window.innerWidth);
+      MAX_X = Math.min(TOTAL_X, actualScrollable);
+      THRESH_X_CLAMPED = Math.min(THRESHOLD_X, MAX_X);
+      PHASE_B_REMAINING = Math.max(0, MAX_X - THRESH_X_CLAMPED);
+      translateX = Math.min(0, Math.max(-MAX_X, translateX));
+      applyTransform();
     };
 
-    window.addEventListener("wheel", handleWheel, { passive: false });
+    switchToA();
+
+    window.addEventListener("wheel", handleWheelA, { passive: false });
+    window.addEventListener("scroll", handleScrollB, { passive: true });
     window.addEventListener("resize", handleResize);
 
     return () => {
-      window.removeEventListener("wheel", handleWheel);
+      window.removeEventListener("wheel", handleWheelA);
+      window.removeEventListener("scroll", handleScrollB);
       window.removeEventListener("resize", handleResize);
       unlockScroll();
     };
@@ -101,7 +179,7 @@ export const FeaturedEvents = () => {
             className="flex items-center flex-col gap-9 mx-auto md:flex-row md:gap-[176px] will-change-transform transition-transform duration-200 ease-out"
           >
             <h2 className="uppercase z-10">
-              <span className="text-[42px] md:text-[124px] font-[900] leading-[120%] text-shadow-[0_0_2px_#cdff00,0_0_5px_#cdff00,0_0_4px_#cdff00]">
+              <span className="text-[42px] md:text-[124px] font-[900] leading-[120%] [text-shadow:0_0_2px_#cdff00,0_0_5px_#cdff00,0_0_4px_#cdff00]">
                 Featured <br /> Events
               </span>
             </h2>
@@ -133,7 +211,7 @@ export const FeaturedEvents = () => {
                       </div>
                       <div className="flex gap-[30px] md:gap-[62px]">
                         <div className="flex flex-col gap-1.5 md:gap-3">
-                          <h4 className="text-white text-[16px] md:text-[38px] font-[900] leading-[100%] text-shadow-[0_3px_6px_rgba(0,0,0,.58)]">
+                          <h4 className="text-white text-[16px] md:text-[38px] font-[900] leading-[100%] [text-shadow:0_3px_6px_rgba(0,0,0,.58)]">
                             {event.views}
                           </h4>
                           <span className="text-white text-[12px] md:text-[24px] font-normal leading-[100%]">
@@ -141,7 +219,7 @@ export const FeaturedEvents = () => {
                           </span>
                         </div>
                         <div className="flex flex-col gap-1.5">
-                          <h4 className="text-white text-[16px] md:text-[38px] font-[900] leading-[100%] text-shadow-[0_3px_6px_rgba(0,0,0,.58)]">
+                          <h4 className="text-white text-[16px] md:text-[38px] font-[900] leading-[100%] [text-shadow:0_3px_6px_rgba(0,0,0,.58)]">
                             {event.players}
                           </h4>
                           <span className="text-white text-[12px] md:text-[24px] font-normal leading-[100%]">
@@ -149,7 +227,7 @@ export const FeaturedEvents = () => {
                           </span>
                         </div>
                         <div className="flex flex-col gap-1.5">
-                          <h4 className="text-white text-[16px] md:text-[38px] font-[900] leading-[100%] text-shadow-[0_3px_6px_rgba(0,0,0,.58)]">
+                          <h4 className="text-white text-[16px] md:text-[38px] font-[900] leading-[100%] [text-shadow:0_3px_6px_rgba(0,0,0,.58)]">
                             {event.matches}
                           </h4>
                           <span className="text-white text-[12px] md:text-[24px] font-normal leading-[100%]">
