@@ -74,28 +74,73 @@ export const FeaturedEvents = () => {
     if (scrollDistance <= 0) return;
 
     let isActive = false;
-    let lastUnlockTime = 0;
     let animating = false;
+    let lastUnlockTime = 0;
+    let activationTime = 0;
+
+    // blocker overlay to stop outside interactions
+    const blocker = document.createElement("div");
+    Object.assign(blocker.style, {
+      position: "fixed",
+      inset: "0",
+      width: "100vw",
+      height: "100vh",
+      pointerEvents: "none",
+      zIndex: "9999",
+      background: "transparent",
+    });
+
+    const activateBlocker = () => {
+      blocker.style.pointerEvents = "auto";
+      if (!blocker.parentNode) document.body.appendChild(blocker);
+    };
+
+    const deactivateBlocker = () => {
+      blocker.style.pointerEvents = "none";
+      if (blocker.parentNode) blocker.parentNode.removeChild(blocker);
+    };
+
+    const lockSection = () => {
+      isActive = true;
+      activationTime = Date.now();
+      activateBlocker();
+      document.body.style.overflow = "hidden";
+    };
+
+    const unlockSection = () => {
+      isActive = false;
+      deactivateBlocker();
+      document.body.style.overflow = "";
+      lastUnlockTime = Date.now();
+    };
 
     const handleWheel = (e: WheelEvent) => {
-      const sectionRect = section.getBoundingClientRect();
-      const isInSection = sectionRect.top <= 100 && sectionRect.bottom >= 100;
+      const rect = section.getBoundingClientRect();
+      const inView =
+        rect.top < window.innerHeight * 0.6 &&
+        rect.bottom > window.innerHeight * 0.4;
 
       // prevent rapid reactivation
-      if (Date.now() - lastUnlockTime < 250) return;
+      if (Date.now() - lastUnlockTime < 300) return;
 
-      if (isInSection && !isActive) {
-        isActive = true;
-        document.body.style.overflow = "hidden";
+      // activate early when entering
+      if (inView && !isActive) {
+        lockSection();
+        // restore section top in view if overshoot happened
+        window.scrollTo({
+          top: window.scrollY + rect.top - 50,
+          behavior: "instant" as ScrollBehavior,
+        });
       }
 
-      if (!isInSection && isActive) {
-        isActive = false;
-        document.body.style.overflow = "";
+      // skip if inactive
+      if (!isActive) return;
+
+      // absorb the first few deltas immediately after activation
+      if (Date.now() - activationTime < 150) {
+        e.preventDefault();
         return;
       }
-
-      if (!isActive || !isInSection) return;
 
       e.preventDefault();
 
@@ -106,31 +151,27 @@ export const FeaturedEvents = () => {
 
       newX = Math.max(-scrollDistance, Math.min(0, newX));
 
-      if (!animating) {
-        animating = true;
-        gsap.to(container, {
-          x: newX,
-          duration: 0.25,
-          ease: "power2.out",
-          onComplete: () => {
-            animating = false;
-          },
-        });
-      } else {
-        gsap.to(container, { x: newX, duration: 0.25, ease: "power2.out" });
-      }
+      gsap.to(container, {
+        x: newX,
+        duration: 0.25,
+        ease: "power2.out",
+        onComplete: () => {
+          animating = false;
+        },
+      });
 
       const isAtEnd = Math.abs(newX) >= scrollDistance - 10;
       const isAtStart = newX >= -10;
 
       if ((delta > 0 && isAtEnd) || (delta < 0 && isAtStart)) {
-        isActive = false;
-        document.body.style.overflow = "";
-        lastUnlockTime = Date.now();
+        unlockSection();
 
-        // Smooth continuation of native scroll
+        // smooth continuation of native scroll
         requestAnimationFrame(() => {
-          window.scrollBy({ top: delta > 0 ? 2 : -2, behavior: "smooth" });
+          window.scrollBy({
+            top: delta > 0 ? 2 : -2,
+            behavior: "smooth",
+          });
         });
       }
     };
@@ -139,6 +180,7 @@ export const FeaturedEvents = () => {
 
     return () => {
       window.removeEventListener("wheel", handleWheel);
+      deactivateBlocker();
       document.body.style.overflow = "";
     };
   }, []);
@@ -149,7 +191,7 @@ export const FeaturedEvents = () => {
       className="max-w-screen w-full mt-[50px] h-screen overflow-hidden"
     >
       <div className="h-full relative">
-        <div className="relative top-[50px] h-full pb-[50px] bg-[url('/bg-mobile.webp')] bg-[position:50%] bg-no-repeat bg-[length:100%_100%] flex justify-start overflow-hidden px-3 py-9 w-full">
+        <div className="sticky top-[50px] md:top-[64px] h-[calc(100vh-50px)] md:h-[calc(100vh-64px)] pb-[50px] bg-[url('/bg-mobile.webp')] bg-[position:50%] bg-no-repeat bg-[length:100%_100%] flex justify-start overflow-hidden px-3 py-9 w-full">
           <div
             ref={containerRef}
             className="flex items-center flex-col gap-9 mx-auto md:flex-row md:gap-[176px] will-change-transform"
