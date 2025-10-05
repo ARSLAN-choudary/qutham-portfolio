@@ -30,67 +30,72 @@ export const FeaturedEvents = () => {
     const container = containerRef.current;
     if (!section || !container) return;
 
+    // Run only on desktop
+    if (window.innerWidth < 768) return;
+
     let translateX = 0;
     let isLocked = false;
     let scrollDistance = container.scrollWidth - window.innerWidth;
 
-    const onWheel = (e: WheelEvent) => {
+    const lockScroll = () => {
+      document.body.style.overflow = "hidden";
+      isLocked = true;
+    };
+
+    const unlockScroll = () => {
+      document.body.style.overflow = "";
+      isLocked = false;
+    };
+
+    const handleWheel = (e: WheelEvent) => {
       const rect = section.getBoundingClientRect();
       const inView =
         rect.top <= window.innerHeight * 0.5 &&
         rect.bottom >= window.innerHeight * 0.5;
 
-      if (inView) {
-        const atEnd = Math.abs(translateX) >= scrollDistance - 2;
-        const atStart = translateX >= -2;
-
-        // ✅ allow normal scroll if we're at start or end
-        if ((e.deltaY > 0 && atEnd) || (e.deltaY < 0 && atStart)) {
-          if (isLocked) {
-            document.body.style.overflow = "";
-            isLocked = false;
-          }
-          return; // let browser handle vertical scroll
-        }
-
-        // otherwise, lock and handle horizontal
-        if (!isLocked) {
-          document.body.style.overflow = "hidden";
-          isLocked = true;
-        }
-
-        e.preventDefault();
-
-        translateX -= e.deltaY * 0.8;
-        translateX = Math.min(0, Math.max(-scrollDistance, translateX));
-        container.style.transform = `translateX(${translateX}px)`;
-      } else if (isLocked) {
-        document.body.style.overflow = "";
-        isLocked = false;
+      if (!inView) {
+        if (isLocked) unlockScroll();
+        return;
       }
+
+      const atEnd = Math.abs(translateX) >= scrollDistance - 2;
+      const atStart = translateX >= -2;
+
+      // Let natural scroll pass at edges
+      if ((e.deltaY > 0 && atEnd) || (e.deltaY < 0 && atStart)) {
+        if (isLocked) unlockScroll();
+        return;
+      }
+
+      if (!isLocked) lockScroll();
+      e.preventDefault();
+
+      translateX -= e.deltaY * 0.8;
+      translateX = Math.min(0, Math.max(-scrollDistance, translateX));
+      container.style.transform = `translateX(${translateX}px)`;
     };
 
-    const onResize = () => {
+    const handleResize = () => {
       scrollDistance = container.scrollWidth - window.innerWidth;
     };
 
-    window.addEventListener("wheel", onWheel, { passive: false });
-    window.addEventListener("resize", onResize);
+    window.addEventListener("wheel", handleWheel, { passive: false });
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      window.removeEventListener("wheel", onWheel);
-      window.removeEventListener("resize", onResize);
-      document.body.style.overflow = "";
+      window.removeEventListener("wheel", handleWheel);
+      window.removeEventListener("resize", handleResize);
+      unlockScroll();
     };
   }, []);
 
   return (
     <section
       ref={sectionRef}
-      className="max-w-screen w-full mt-[50px] h-screen overflow-hidden"
+      className="max-w-screen w-full mt-[50px] h-max min-h-screen md:h-screen overflow-hidden"
     >
-      <div className="h-full relative">
-        <div className="sticky top-[50px] md:top-[64px] h-[calc(100vh-50px)] md:h-[calc(100vh-64px)] pb-[50px] bg-[url('/bg-mobile.webp')] bg-[position:50%] bg-no-repeat bg-[length:100%_100%] flex justify-start overflow-hidden px-3 py-9 w-full">
+      <div className="h-max md:h-full relative">
+        <div className="md:sticky top-[50px] md:top-[64px] h-max md:h-[calc(100vh-64px)] pb-[50px] bg-[url('/bg-mobile.webp')] md:bg-[url('/bg-desktop.webp')] bg-[position:50%_center] md:bg-[position:50%] bg-no-repeat bg-[length:100%_100%] flex justify-start overflow-hidden px-3 py-9 w-full">
           <div
             ref={containerRef}
             className="flex items-center flex-col gap-9 mx-auto md:flex-row md:gap-[176px] will-change-transform transition-transform duration-200 ease-out"
@@ -158,8 +163,7 @@ export const FeaturedEvents = () => {
               ))}
             </ul>
 
-            {/* 👇 Add an empty gap at the end equal to one card width */}
-            <div className="min-w-[1234px] md:min-w-[1234px]" />
+            <div className="hidden md:block min-w-[1234px]" />
           </div>
         </div>
       </div>
