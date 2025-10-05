@@ -1,0 +1,221 @@
+"use client";
+import Link from "next/link";
+import React, { useRef, useState } from "react";
+
+function Page() {
+  const jobs = [
+    {
+      title: "Frontend Developer (Angular)",
+      desc: `We are looking for a passionate Angular Frontend Developer responsible for building dynamic, scalable, and high-performing web interfaces. 
+The ideal candidate should have 2–3 years of professional experience developing complex SPAs (Single Page Applications) using Angular 10+.
+
+Key Responsibilities:
+- Develop modular, reusable, and efficient front-end components using Angular, TypeScript, and RxJS.
+- Collaborate closely with designers and backend developers to translate UI/UX wireframes into functional web applications.
+- Implement REST API integrations, lazy loading, and route guards for optimized user experiences.
+- Optimize applications for maximum speed and scalability.
+- Troubleshoot and debug cross-browser compatibility issues.
+
+Requirements:
+- Strong command of TypeScript, Angular CLI, and state management using NgRx.
+- Experience with responsive layouts, CSS pre-processors (SASS/SCSS), and component lifecycle management.
+- Good understanding of authentication, JWT, and role-based access control.
+- Excellent problem-solving skills and attention to detail.`,
+    },
+    {
+      title: "Frontend Developer (React / Next.js)",
+      desc: `We’re hiring a mid-level React / Next.js Developer to join our fast-paced development team. 
+You’ll build modern, scalable, and SEO-optimized applications with React, Redux Toolkit, and Next.js. 
+Must have 2–3 years of hands-on experience in frontend development using React ecosystem.
+
+Key Responsibilities:
+- Create pixel-perfect, responsive UI components using React and Tailwind CSS.
+- Work with APIs, handle async data fetching, and manage application state with Redux/RTK Query.
+- Implement SSR (Server-Side Rendering) and SSG (Static Site Generation) in Next.js for better performance and SEO.
+- Manage dynamic routing, middleware, and API routes in Next.js.
+- Work closely with UI/UX designers and backend developers to ensure seamless integration.
+
+Requirements:
+- Strong understanding of React hooks, context API, and React Query.
+- Experience with Git, code reviews, and agile development environments.
+- Familiarity with performance optimization and Lighthouse audits.
+- Excellent teamwork and communication skills.`,
+    },
+    {
+      title: "Backend Developer",
+      desc: `We are looking for a skilled Backend Developer with 3+ years of experience in building scalable and secure APIs. 
+You will work closely with frontend developers to design, implement, and maintain backend logic, databases, and integrations.
+
+Key Responsibilities:
+- Design and develop RESTful APIs using Node.js (Express.js) or Laravel.
+- Create and manage relational (MySQL/PostgreSQL) and NoSQL (MongoDB) databases.
+- Implement authentication, authorization, and role-based access using JWT or Passport.
+- Write efficient, maintainable, and testable code following clean architecture principles.
+- Optimize server performance and handle large datasets.
+
+Requirements:
+- Proficiency in Node.js / Laravel and database query optimization.
+- Experience with cloud services (AWS, DigitalOcean) and deployment pipelines.
+- Understanding of MVC architecture, version control (Git), and CI/CD tools.
+- Strong problem-solving mindset and debugging skills.`,
+    },
+    {
+      title: "Flutter Developer",
+      desc: `We are seeking a mid-level Flutter Developer to design and develop beautiful cross-platform mobile applications. 
+You should have 2–3 years of experience in Flutter, with a focus on performance optimization and user experience.
+
+Key Responsibilities:
+- Develop Android and iOS apps using Flutter and Dart.
+- Integrate RESTful APIs, Firebase, and third-party SDKs.
+- Implement clean architecture, reusable widgets, and state management (Bloc, Riverpod, or Provider).
+- Ensure high performance and smooth animations across all devices.
+- Collaborate with designers to match UI/UX expectations.
+
+Requirements:
+- Hands-on experience with Firebase Auth, Firestore, and Push Notifications.
+- Knowledge of Git, Play Store, and App Store deployment processes.
+- Understanding of app lifecycle, navigation, and debugging tools.
+- Creative problem solver with strong attention to detail.`,
+    },
+    {
+      title: "Graphic Designer",
+      desc: `We are searching for a talented Graphic Designer to produce engaging and on-brand visual materials for a variety of media. 
+Candidates should have 2–4 years of experience creating designs for web, print, and social media.
+
+Key Responsibilities:
+- Design marketing materials including banners, brochures, posters, and digital ads.
+- Develop consistent visual identities and brand guidelines.
+- Work on UI mockups, wireframes, and prototypes using Figma or Adobe XD.
+- Collaborate with developers to ensure accurate design implementation.
+- Stay updated on design trends and digital aesthetics.
+
+Requirements:
+- Proficiency in Adobe Photoshop, Illustrator, and Figma.
+- Strong sense of layout, typography, and color theory.
+- Ability to manage multiple projects under tight deadlines.
+- Good communication and presentation skills.`,
+    },
+    {
+      title: "Social Media Marketer",
+      desc: `We are looking for a mid-level Social Media Marketer to grow our online presence and create meaningful engagement across multiple platforms. 
+Ideal candidates have 2–3 years of experience in social media strategy, content creation, and campaign management.
+
+Key Responsibilities:
+- Plan, schedule, and manage daily social media posts across Facebook, Instagram, and LinkedIn.
+- Create creative campaigns to improve engagement and reach.
+- Monitor insights and optimize content using analytics tools.
+- Collaborate with designers and writers for high-quality visuals and captions.
+- Stay ahead of algorithm changes and platform trends.
+
+Requirements:
+- Strong knowledge of Meta Business Suite, Buffer, or Hootsuite.
+- Experience with paid ad campaigns and audience targeting.
+- Basic understanding of SEO, email marketing, and content funnels.
+- Excellent writing and communication skills.`,
+    },
+    {
+      title: "WordPress Developer",
+      desc: `We are seeking a WordPress Developer to design, develop, and maintain responsive websites. 
+The ideal candidate should have 2–3 years of experience with custom WordPress development and theme customization.
+
+Key Responsibilities:
+- Build and customize WordPress themes using Elementor, ACF, or custom PHP templates.
+- Integrate APIs and optimize website speed and performance.
+- Implement on-page SEO best practices.
+- Manage hosting, backups, and plugin security updates.
+- Troubleshoot website issues and ensure smooth deployment.
+
+Requirements:
+- Proficient in PHP, HTML, CSS, JavaScript, and jQuery.
+- Experience with WooCommerce and custom post types.
+- Familiar with cPanel, domain management, and migrations.
+- Detail-oriented and able to work independently under minimal supervision.`,
+    },
+  ];
+
+  const [selectedJob, setSelectedJob] = useState(jobs[0]);
+  const jobRefs = useRef<HTMLDivElement[]>([]);
+  const jobSectionRef = useRef<HTMLDivElement | null>(null);
+
+  const handleJobClick = (jobs: any) => {
+    setSelectedJob(jobs);
+    jobSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+
+
+  return (
+    <div className="relative w-full min-h-[calc(100vh-112px)]">
+      {/* ✅ Background Layer */}
+      <div className="fixed top-0 left-0 w-full h-full bg-[linear-gradient(180deg,#055912_0.24%,#000_46.06%,#000_99.76%)] -z-10"></div>
+
+      {/* ✅ Layout Container */}
+      <div className="w-full flex items-start justify-center gap-[24px] flex-wrap mt-[45px] min-[1440px]:mt-[100px] pb-[100px] px-[12px] min-[1440px]:px-[20px] max-[1440px]:flex-col-reverse max-[1440px]:items-center">
+
+        {/* ✅ Main Content */}
+        <div className="w-[calc(100%-420px)] max-[1440px]:w-full min-[1440px]:bg-[hsla(0,0%,100%,.07)] bg-transparent rounded-[40px] min-h-[400px] p-0 min-[1440px]:p-[20px]" >
+
+          <div className="px-0 min-[1440px]:px-[20px] flex items-center flex-col">
+            {/* <img src="/card-test.webp" alt="" className="max-w-full rounded-[16px]" /> */}
+            <div className="bg-[linear-gradient(180deg,hsla(0,0%,100%,.1),hsla(0,0%,100%,.07))] border border-[hsla(0,0%,100%,.1)] rounded-[24px] h-auto min-h-[100px] py-[13px] px-[12px] w-full flex items-center gap-[12px] max-[640px]:w-full   backdrop-blur-[7px]">
+              <div className="bg-[hsla(0,0%,100%,.3)] rounded-full min-h-[74px] w-[74px] p-2 flex-shrink-0">
+                <img src="/qutham-logo.enc" alt="" className="rounded-full h-full w-full" />
+              </div>
+
+              {/* ✅ Job Title */}
+              <div className="flex flex-col items-start text-center max-[640px]:items-center" ref={jobSectionRef}>
+                <p className="text-[20px] font-semibold text-white ">{selectedJob.title}</p>
+                <div className="flex items-center gap-1.5 max-[640px]:justify-center">
+                  <img src="/location-icon.svg" alt="" className="w-[12px] h-[12px]" />
+                  <span className="text-white text-[12px]">Bahawalpur</span>
+                </div>
+              </div>
+            </div>
+
+            {/* ✅ Job Description */}
+            <div className="mt-[14px] py-[14px] px-[18px] text-white bg-[hsla(0,0%,100%,.06)] w-full rounded-[20px]">
+              <p className="text-center text-white text-[16px] font-semibold p-[10px] border-b border-white">Requirements</p>
+              <p className="whitespace-pre-line text-[15px] leading-relaxed flex items-center justify-center p-[12px]">{selectedJob.desc}</p>
+            </div>
+
+            {/* ✅ Buttons */}
+            <div className="flex items-center gap-[12px] my-[24px] w-full max-[640px]:flex-col">
+              <button className="bg-[linear-gradient(90deg,hsla(0,0%,100%,.03),hsla(0,0%,100%,.1)_54.16%,hsla(0,0%,100%,.06))] border border-[hsla(0,0%,100%,.1)] min-h-[58px] rounded-[24px] w-full max-[640px]:w-full text-white font-medium cursor-pointer">
+                <Link href="/contact?from=careers" className="block w-full h-full text-center text-[18px] font-semibold text-white py-[15px]">
+                  Apply Now
+                </Link>
+              </button>
+
+              {/* <button className="bg-[linear-gradient(90deg,hsla(0,0%,100%,.03),hsla(0,0%,100%,.1)_54.16%,hsla(0,0%,100%,.06))] border border-[hsla(0,0%,100%,.1)] min-h-[58px] rounded-[24px] w-[calc(50%-6px)] max-[640px]:w-full text-white font-medium cursor-pointer">
+                <p className="text-[18px] tex-white font-semibold">Join Us</p>
+              </button> */}
+            </div>
+          </div>
+        </div>
+
+        {/* ✅ Sidebar */}
+        <div className="w-[384px] max-[1440px]:w-full bg-[hsla(0,0%,100%,.1)] border border-[hsla(0,0%,100%,.2)] rounded-[32px] overflow-hidden max-[1440px]:mt-[40px] ">
+          <p className="bg-[hsla(0,0%,100%,.05)] text-white text-[16px] font-semibold px-[24px] pt-[24px] pb-[18px]">
+            Jobs
+          </p>
+          <div className="px-[12px] pb-[12px] flex flex-col items-center gap-[10px] mt-[14px]">
+            {jobs.map((job, idx) => (
+              <div
+                key={idx}
+                onClick={() => handleJobClick(job)}
+                className={`rounded-[100px] h-[74px] py-[19px] pl-[16px] pr-[8px] w-full border text-[14px] font-medium text-white flex items-center justify-center cursor-pointer transition-all duration-200 ${selectedJob.title === job.title
+                    ? "bg-[hsla(0,0%,100%,.15)] border-[hsla(0,0%,100%,.3)]"
+                    : "bg-[rgba(0,0,0,.4)] border-[hsla(0,0%,100%,.2)] hover:bg-[rgba(255,255,255,.05)]"
+                  }`}
+              >
+                {job.title}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default Page;
