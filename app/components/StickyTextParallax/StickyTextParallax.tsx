@@ -11,7 +11,7 @@ gsap.registerPlugin(ScrollTrigger);
 const cardData = [
   {
     id: 1,
-    mainImage: "/projects/first.jpeg",
+    mainImage: "/projects/one.png",
     gallery: [
       "/projects/first.jpeg",
       "/projects/second.jpeg",
@@ -22,25 +22,17 @@ const cardData = [
   },
   {
     id: 2,
-    mainImage: "/cards/card-2.webp",
-    gallery: [
-      "/cards/card-2.webp",
-      "/cards/card-2-2.webp",
-      "/cards/card-2-3.webp",
-    ],
-    title: "Project Two",
-    description: "Description for project two with stunning visuals.",
+    mainImage: "/projects/three.png",
+    gallery: ["/projects/h2.jpeg", "/projects/h3.jpeg", "/projects/h4.jpeg"],
+    title: "Mooli Hospital",
+    description: "Description for Mooli Hospital with stunning visuals.",
   },
   {
     id: 3,
-    mainImage: "/cards/card-3.webp",
-    gallery: [
-      "/cards/card-3.webp",
-      "/cards/card-3-2.webp",
-      "/cards/card-3-3.webp",
-    ],
-    title: "Project Three",
-    description: "Description for project three highlighting innovation.",
+    mainImage: "/projects/two.png",
+    gallery: ["/projects/L2.jpeg", "/projects/L3.jpeg", "/projects/L4.jpeg"],
+    title: "Lushspaces",
+    description: "Description for Lushspaces highlighting innovation.",
   },
   {
     id: 4,

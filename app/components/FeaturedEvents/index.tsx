@@ -6,8 +6,8 @@ export const FeaturedEvents = () => {
   const sectionRef = useRef<HTMLDivElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
 
-const TOTAL_X = 3702;
-const THRESHOLD_X = 5000;
+  const TOTAL_X = 5000;
+  const THRESHOLD_X = 3000;
 
   const V_TO_H_RATIO = 1;
 
@@ -247,13 +247,12 @@ const THRESHOLD_X = 5000;
                     </div> */}
                     <div className="absolute -z-[1] bottom-0 left-0 bg-no-repeat cursor-pointer">
                       <Image
-  className="w-[336px] md:w-[1234px] h-[216px] md:h-[548px] object-cover rounded-xl"
-  width={1234}
-  height={548}
-  src={event.image}
-  alt=""
-/>
-
+                        className="w-[336px] md:w-[1234px] h-[216px] md:h-[548px] object-cover rounded-xl"
+                        width={1234}
+                        height={548}
+                        src={event.image}
+                        alt=""
+                      />
                     </div>
                   </div>
                 </li>
