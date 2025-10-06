@@ -189,7 +189,7 @@ export const FeaturedEvents = () => {
                 <li key={event.id} className="flex-[0_0_auto]">
                   <div
                     className="min-w-[336px] w-full bg-[position:50%] bg-no-repeat bg-cover rounded-[14px] cursor-pointer flex flex-col h-[216px] justify-end py-[30px] px-3 relative md:rounded-[54px] md:h-[548px] md:p-[50px] md:w-[1234px]"
-                    style={{ backgroundImage: `url('${event.image}')` }}
+                    // style={{ backgroundImage: `url('${event.image}')` }}
                   >
                     <div className="flex flex-start flex-col gap-6 w-full md:gap-[50px]">
                       <div className="flex flex-col gap-1.5 h-full md:gap-5">
@@ -235,6 +235,15 @@ export const FeaturedEvents = () => {
                           </span>
                         </div>
                       </div>
+                    </div>
+                    <div className="absolute -z-[1] bottom-0 left-0 bg-no-repeat cursor-pointer">
+                      <Image
+                        className="w-[336px] md:w-[1234px] h-[216px] md:h-[548px]"
+                        width={336}
+                        height={216}
+                        src={event.image}
+                        alt=""
+                      />
                     </div>
                   </div>
                 </li>
