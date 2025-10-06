@@ -135,7 +135,7 @@ Requirements:
   ];
 
   const [selectedJob, setSelectedJob] = useState(jobs[0]);
-  const jobRefs = useRef<HTMLDivElement[]>([]);
+  // const jobRefs = useRef<HTMLDivElement[]>([]);
   const jobSectionRef = useRef<HTMLDivElement | null>(null);
 
   const handleJobClick = (jobs: any) => {
