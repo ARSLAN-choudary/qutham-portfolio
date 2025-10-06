@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import React, { useRef, useState } from "react";
+import Image from "next/image";
 
 function Page() {
   const jobs = [
@@ -159,14 +160,14 @@ Requirements:
             {/* <img src="/card-test.webp" alt="" className="max-w-full rounded-[16px]" /> */}
             <div className="bg-[linear-gradient(180deg,hsla(0,0%,100%,.1),hsla(0,0%,100%,.07))] border border-[hsla(0,0%,100%,.1)] rounded-[24px] h-auto min-h-[100px] py-[13px] px-[12px] w-full flex items-center gap-[12px] max-[640px]:w-full   backdrop-blur-[7px]">
               <div className="bg-[hsla(0,0%,100%,.3)] rounded-full min-h-[74px] w-[74px] p-2 flex-shrink-0">
-                <img src="/qutham-logo.enc" alt="" className="rounded-full h-full w-full" />
+                <Image src="/qutham-logo.enc" alt="" width={100} height={100} className="rounded-full h-full w-full" />
               </div>
 
               {/* ✅ Job Title */}
               <div className="flex flex-col items-start text-center max-[640px]:items-center" ref={jobSectionRef}>
                 <p className="text-[20px] font-semibold text-white ">{selectedJob.title}</p>
                 <div className="flex items-center gap-1.5 max-[640px]:justify-center">
-                  <img src="/location-icon.svg" alt="" className="w-[12px] h-[12px]" />
+                  <Image src="/location-icon.svg" alt="" width={12} height={12} className="w-[12px] h-[12px]" />
                   <span className="text-white text-[12px]">Bahawalpur</span>
                 </div>
               </div>
