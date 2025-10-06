@@ -6,15 +6,16 @@ export const FeaturedEvents = () => {
   const sectionRef = useRef<HTMLDivElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
 
-  const TOTAL_X = 3702;
-  const THRESHOLD_X = 2500;
+const TOTAL_X = 3702;
+const THRESHOLD_X = 5000;
+
   const V_TO_H_RATIO = 1;
 
   const events = [
     {
       id: 1,
       title: "PUBG Global",
-      image: "/uic-mobile.webp",
+      image: "/cards/cricket.jpg",
       views: "2.5M",
       players: "120",
       matches: "48",
@@ -22,7 +23,15 @@ export const FeaturedEvents = () => {
     {
       id: 2,
       title: "Valorant Masters",
-      image: "/uic-mobile.webp",
+      image: "/cards/in-office.jpg",
+      views: "1.2M",
+      matches: "30",
+      players: "80",
+    },
+    {
+      id: 2,
+      title: "Valorant Masters",
+      image: "/cards/dinner.jpeg",
       views: "1.2M",
       matches: "30",
       players: "80",
@@ -180,7 +189,7 @@ export const FeaturedEvents = () => {
           >
             <h2 className="uppercase z-10">
               <span className="text-[42px] md:text-[124px] font-[900] leading-[120%] [text-shadow:0_0_2px_#cdff00,0_0_5px_#cdff00,0_0_4px_#cdff00]">
-                Featured <br /> Events
+                Our <br /> Events
               </span>
             </h2>
 
@@ -191,7 +200,7 @@ export const FeaturedEvents = () => {
                     className="min-w-[336px] w-full bg-[position:50%] bg-no-repeat bg-cover rounded-[14px] cursor-pointer flex flex-col h-[216px] justify-end py-[30px] px-3 relative md:rounded-[54px] md:h-[548px] md:p-[50px] md:w-[1234px]"
                     // style={{ backgroundImage: `url('${event.image}')` }}
                   >
-                    <div className="flex flex-start flex-col gap-6 w-full md:gap-[50px]">
+                    {/* <div className="flex flex-start flex-col gap-6 w-full md:gap-[50px]">
                       <div className="flex flex-col gap-1.5 h-full md:gap-5">
                         <h3 className="text-white font-bold text-[18px] md:text-[48px] leading-[100%]">
                           {event.title}
@@ -235,15 +244,16 @@ export const FeaturedEvents = () => {
                           </span>
                         </div>
                       </div>
-                    </div>
+                    </div> */}
                     <div className="absolute -z-[1] bottom-0 left-0 bg-no-repeat cursor-pointer">
                       <Image
-                        className="w-[336px] md:w-[1234px] h-[216px] md:h-[548px]"
-                        width={336}
-                        height={216}
-                        src={event.image}
-                        alt=""
-                      />
+  className="w-[336px] md:w-[1234px] h-[216px] md:h-[548px] object-cover rounded-xl"
+  width={1234}
+  height={548}
+  src={event.image}
+  alt=""
+/>
+
                     </div>
                   </div>
                 </li>
