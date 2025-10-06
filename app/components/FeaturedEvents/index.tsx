@@ -189,7 +189,7 @@ const THRESHOLD_X = 5000;
           >
             <h2 className="uppercase z-10">
               <span className="text-[42px] md:text-[124px] font-[900] leading-[120%] [text-shadow:0_0_2px_#cdff00,0_0_5px_#cdff00,0_0_4px_#cdff00]">
-                Featured <br /> Events
+                Our <br /> Events
               </span>
             </h2>
 
