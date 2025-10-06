@@ -2,6 +2,7 @@
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import { Sidebar } from "../sidebar";
+import Link from "next/link";
 
 export const Header = () => {
   const [sidebar, isSidebar] = useState(false);
@@ -64,12 +65,12 @@ export const Header = () => {
               className="!h-[24px] lg:h-[32px]"
               height={32}
               width={115}
-              src="https://gully91.com/static/media/gully91-logo.98a0235ee48d4496b777097e91bcba3d.svg"
+              src="qutham-logo.svg"
               alt="logo"
             />
           </div>
 
-          <div className="flex items-center ml-auto gap-3 lg:gap-6 mr-[45px] lg:mr-[96px]">
+          <div className="flex items-center ml-auto gap-3 lg:gap-6 mr-[45px]">
             <button
               onClick={() => setSearch(true)}
               className="relative cursor-pointer"
@@ -85,24 +86,15 @@ export const Header = () => {
               />
             </button>
 
-            <Image
-              width={24}
-              height={24}
-              src="https://gully91.com/static/media/Headset.3f51e9b54c5060409c7e983a74790d3d.svg"
-              alt=""
-              className="cursor-pointer"
-            />
-
-            <div className="fixed right-3 lg:right-[50px] top-1/2 -translate-y-1/2 z-10">
-              <div className="flex items-center justify-center cursor-pointer h-[22px] w-[22px]">
-                <Image
-                  width={22}
-                  height={22}
-                  src="https://gully91.com/static/media/shareIcon.1ff039b4ec4f44c5b0ae75ee59448980.svg"
-                  alt=""
-                />
-              </div>
-            </div>
+            <Link href="/contact">
+              <Image
+                width={24}
+                height={24}
+                src="https://gully91.com/static/media/Headset.3f51e9b54c5060409c7e983a74790d3d.svg"
+                alt=""
+                className="cursor-pointer"
+              />
+            </Link>
           </div>
         </div>
       </div>

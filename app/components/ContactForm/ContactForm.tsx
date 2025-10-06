@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { useSearchParams } from "next/navigation"; 
+import { useSearchParams } from "next/navigation";
 import "./Contact.css";
 
 export default function ContactForm() {
@@ -20,20 +20,23 @@ export default function ContactForm() {
 
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [resume, setResume] = useState<File | null>(null); 
+  const [resume, setResume] = useState<File | null>(null);
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
     if (!formData.name.trim()) newErrors.name = "Full name is required";
     if (!formData.phone.trim()) newErrors.phone = "Phone number is required";
     if (!formData.location.trim()) newErrors.location = "Location is required";
-    if (!formData.expertise) newErrors.expertise = "Please select an expertise area";
+    if (!formData.expertise)
+      newErrors.expertise = "Please select an expertise area";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -68,7 +71,9 @@ export default function ContactForm() {
       alert("Thank you! Your message has been sent successfully.");
     } catch (error) {
       console.error("Error submitting form:", error);
-      alert("Sorry, there was an error submitting your form. Please try again.");
+      alert(
+        "Sorry, there was an error submitting your form. Please try again."
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -76,7 +81,10 @@ export default function ContactForm() {
 
   return (
     <div className="style_contact__us__wrappper__62fYI">
-      <section className="style_contactus__container__Flquh" aria-labelledby="contact-heading">
+      <section
+        className="style_contactus__container__Flquh"
+        aria-labelledby="contact-heading"
+      >
         {/* LEFT SIDE */}
         <div className="style_contactus__left__wrapper__NCGr8">
           <div className="style_form__content__xGxAH">
@@ -91,13 +99,23 @@ export default function ContactForm() {
 
             <div className="style_contact__details__qtUh0">
               <div>
-                <Image src="/contact/phone.svg" alt="phone icon" width={20} height={20} />
-                <a href="tel:+919774587007">+91 9774587007</a>
+                <Image
+                  src="/contact/phone.svg"
+                  alt="phone icon"
+                  width={20}
+                  height={20}
+                />
+                <a href="tel:+923287079495">+92 328 7079495</a>
               </div>
 
               <div>
-                <Image src="/contact/email.svg" alt="email icon" width={20} height={20} />
-                <a href="mailto:hello@gully91.com">hello@gully91.com</a>
+                <Image
+                  src="/contact/email.svg"
+                  alt="email icon"
+                  width={20}
+                  height={20}
+                />
+                <a href="mailto:quthamtech@gmail.com">quthamtech@gmail.com</a>
               </div>
             </div>
           </div>
@@ -126,13 +144,18 @@ export default function ContactForm() {
                 onChange={handleChange}
                 disabled={isSubmitting}
               />
-              {errors.name && <span className="style_error__message__vL3pQ">{errors.name}</span>}
+              {errors.name && (
+                <span className="style_error__message__vL3pQ">
+                  {errors.name}
+                </span>
+              )}
             </div>
 
             {/* Phone */}
             <div className="style_form__group__46EVf">
               <label htmlFor="phone" className="style_form__label__-sYoI">
-                Phone Number <span className="style_required__star__UTD67">*</span>
+                Phone Number{" "}
+                <span className="style_required__star__UTD67">*</span>
               </label>
               <input
                 className={`style_inputfield__FJ49s ${
@@ -148,7 +171,11 @@ export default function ContactForm() {
                 onChange={handleChange}
                 disabled={isSubmitting}
               />
-              {errors.phone && <span className="style_error__message__vL3pQ">{errors.phone}</span>}
+              {errors.phone && (
+                <span className="style_error__message__vL3pQ">
+                  {errors.phone}
+                </span>
+              )}
             </div>
 
             {/* Email */}
@@ -170,7 +197,11 @@ export default function ContactForm() {
                 onChange={handleChange}
                 disabled={isSubmitting}
               />
-              {errors.email && <span className="style_error__message__vL3pQ">{errors.email}</span>}
+              {errors.email && (
+                <span className="style_error__message__vL3pQ">
+                  {errors.email}
+                </span>
+              )}
             </div>
 
             {/* Location */}
@@ -192,7 +223,9 @@ export default function ContactForm() {
                 disabled={isSubmitting}
               />
               {errors.location && (
-                <span className="style_error__message__vL3pQ">{errors.location}</span>
+                <span className="style_error__message__vL3pQ">
+                  {errors.location}
+                </span>
               )}
             </div>
 
@@ -223,7 +256,9 @@ export default function ContactForm() {
                 <option value="Flutter">Flutter App Development</option>
               </select>
               {errors.expertise && (
-                <span className="style_error__message__vL3pQ">{errors.expertise}</span>
+                <span className="style_error__message__vL3pQ">
+                  {errors.expertise}
+                </span>
               )}
             </div>
 
