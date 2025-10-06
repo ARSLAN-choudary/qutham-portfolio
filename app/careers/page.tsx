@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import Link from "next/link";
 import React, { useRef, useState } from "react";
@@ -140,10 +141,11 @@ Requirements:
 
   const handleJobClick = (jobs: any) => {
     setSelectedJob(jobs);
-    jobSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    jobSectionRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
   };
-
-
 
   return (
     <div className="relative w-full min-h-[calc(100vh-112px)]">
@@ -152,22 +154,37 @@ Requirements:
 
       {/* ✅ Layout Container */}
       <div className="w-full flex items-start justify-center gap-[24px] flex-wrap mt-[45px] min-[1440px]:mt-[100px] pb-[100px] px-[12px] min-[1440px]:px-[20px] max-[1440px]:flex-col-reverse max-[1440px]:items-center">
-
         {/* ✅ Main Content */}
-        <div className="w-[calc(100%-420px)] max-[1440px]:w-full min-[1440px]:bg-[hsla(0,0%,100%,.07)] bg-transparent rounded-[40px] min-h-[400px] p-0 min-[1440px]:p-[20px]" >
-
+        <div className="w-[calc(100%-420px)] max-[1440px]:w-full min-[1440px]:bg-[hsla(0,0%,100%,.07)] bg-transparent rounded-[40px] min-h-[400px] p-0 min-[1440px]:p-[20px]">
           <div className="px-0 min-[1440px]:px-[20px] flex items-center flex-col">
             {/* <img src="/card-test.webp" alt="" className="max-w-full rounded-[16px]" /> */}
             <div className="bg-[linear-gradient(180deg,hsla(0,0%,100%,.1),hsla(0,0%,100%,.07))] border border-[hsla(0,0%,100%,.1)] rounded-[24px] h-auto min-h-[100px] py-[13px] px-[12px] w-full flex items-center gap-[12px] max-[640px]:w-full   backdrop-blur-[7px]">
               <div className="bg-[hsla(0,0%,100%,.3)] rounded-full min-h-[74px] w-[74px] p-2 flex-shrink-0">
-                <Image src="/qutham-logo.enc" alt="" width={100} height={100} className="rounded-full h-full w-full" />
+                <Image
+                  src="/qutham-logo.enc"
+                  alt=""
+                  width={100}
+                  height={100}
+                  className="rounded-full h-full w-full"
+                />
               </div>
 
               {/* ✅ Job Title */}
-              <div className="flex flex-col items-start text-center max-[640px]:items-center" ref={jobSectionRef}>
-                <p className="text-[20px] font-semibold text-white ">{selectedJob.title}</p>
+              <div
+                className="flex flex-col items-start text-center max-[640px]:items-center"
+                ref={jobSectionRef}
+              >
+                <p className="text-[20px] font-semibold text-white ">
+                  {selectedJob.title}
+                </p>
                 <div className="flex items-center gap-1.5 max-[640px]:justify-center">
-                  <Image src="/location-icon.svg" alt="" width={12} height={12} className="w-[12px] h-[12px]" />
+                  <Image
+                    src="/location-icon.svg"
+                    alt=""
+                    width={12}
+                    height={12}
+                    className="w-[12px] h-[12px]"
+                  />
                   <span className="text-white text-[12px]">Bahawalpur</span>
                 </div>
               </div>
@@ -175,14 +192,21 @@ Requirements:
 
             {/* ✅ Job Description */}
             <div className="mt-[14px] py-[14px] px-[18px] text-white bg-[hsla(0,0%,100%,.06)] w-full rounded-[20px]">
-              <p className="text-center text-white text-[16px] font-semibold p-[10px] border-b border-white">Requirements</p>
-              <p className="whitespace-pre-line text-[15px] leading-relaxed flex items-center justify-center p-[12px]">{selectedJob.desc}</p>
+              <p className="text-center text-white text-[16px] font-semibold p-[10px] border-b border-white">
+                Requirements
+              </p>
+              <p className="whitespace-pre-line text-[15px] leading-relaxed flex items-center justify-center p-[12px]">
+                {selectedJob.desc}
+              </p>
             </div>
 
             {/* ✅ Buttons */}
             <div className="flex items-center gap-[12px] my-[24px] w-full max-[640px]:flex-col">
               <button className="bg-[linear-gradient(90deg,hsla(0,0%,100%,.03),hsla(0,0%,100%,.1)_54.16%,hsla(0,0%,100%,.06))] border border-[hsla(0,0%,100%,.1)] min-h-[58px] rounded-[24px] w-full max-[640px]:w-full text-white font-medium cursor-pointer">
-                <Link href="/contact?from=careers" className="block w-full h-full text-center text-[18px] font-semibold text-white py-[15px]">
+                <Link
+                  href="/contact?from=careers"
+                  className="block w-full h-full text-center text-[18px] font-semibold text-white py-[15px]"
+                >
                   Apply Now
                 </Link>
               </button>
@@ -204,10 +228,11 @@ Requirements:
               <div
                 key={idx}
                 onClick={() => handleJobClick(job)}
-                className={`rounded-[100px] h-[74px] py-[19px] pl-[16px] pr-[8px] w-full border text-[14px] font-medium text-white flex items-center justify-center cursor-pointer transition-all duration-200 ${selectedJob.title === job.title
+                className={`rounded-[100px] h-[74px] py-[19px] pl-[16px] pr-[8px] w-full border text-[14px] font-medium text-white flex items-center justify-center cursor-pointer transition-all duration-200 ${
+                  selectedJob.title === job.title
                     ? "bg-[hsla(0,0%,100%,.15)] border-[hsla(0,0%,100%,.3)]"
                     : "bg-[rgba(0,0,0,.4)] border-[hsla(0,0%,100%,.2)] hover:bg-[rgba(255,255,255,.05)]"
-                  }`}
+                }`}
               >
                 {job.title}
               </div>

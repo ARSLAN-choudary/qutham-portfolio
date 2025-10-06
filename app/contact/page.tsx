@@ -1,12 +1,13 @@
 "use client";
-import ContactForm from '../components/ContactForm/ContactForm'
+import { Suspense } from "react";
+import ContactForm from "../components/ContactForm/ContactForm";
 
 function page() {
-    return (
-        <div>
-            <ContactForm />
-        </div>
-    )
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ContactForm />
+    </Suspense>
+  );
 }
 
-export default page
+export default page;

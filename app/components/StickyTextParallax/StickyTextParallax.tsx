@@ -73,6 +73,7 @@ export default function StickyTextParallax() {
     const cursorCircleRef = useRef<HTMLDivElement | null>(null);
     const modalRef = useRef<HTMLDivElement | null>(null);
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [isHovering, setIsHovering] = useState(false);
     const [selectedCard, setSelectedCard] = useState<typeof cardData[0] | null>(null);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
