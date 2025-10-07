@@ -65,7 +65,7 @@ export const Header = () => {
               className="!h-[24px] lg:!h-[32px]"
               height={32}
               width={115}
-              src="qutham-logo.svg"
+              src="qutham-logo.svg" 
               alt="logo"
             />
           </div>
