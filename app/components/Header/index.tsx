@@ -62,7 +62,7 @@ export const Header = () => {
 
           <div className="cursor-pointer lg:mx-auto">
             <Image
-              className="!h-[24px] lg:h-[32px]"
+              className="!h-[24px] lg:!h-[32px]"
               height={32}
               width={115}
               src="qutham-logo.svg"
