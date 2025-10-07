@@ -1,3 +1,4 @@
+// HeroSlider.js
 "use client";
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -40,20 +41,18 @@ export default function HeroSlider() {
       autoplay={{ delay: 5000, disableOnInteraction: false }}
       loop={true}
       pagination={{ clickable: true }}
-      className="w-full hero-swiper pb-10"
+      className="w-[100vw] hero-swiper pb-10"
     >
       {slides.map((slide) => (
         <SwiperSlide key={slide.id}>
-          <div className="relative w-full h-[80vh] md:h-[90vh] overflow-hidden">
-            {/* 🔹 Background video (FIXED: Using <iframe> for seamless YouTube embed) */}
+          <div className="relative w-[100vw] h-[80vh] md:h-[90vh] overflow-hidden">
             <iframe
               src={getEmbedUrl(slide.video)}
               title={slide.title}
               frameBorder="0"
               allow="autoplay; loop; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
-              // Add a class for CSS styling
-              className="youtube-background-iframe" 
+              className="youtube-background-iframe !w-[100vw]" 
             />
 
             {/* 🔹 Overlay gradient */}
