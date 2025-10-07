@@ -179,7 +179,7 @@ export const FeaturedEvents = () => {
   return (
     <section
       ref={sectionRef}
-      className="max-w-screen w-full mt-[50px] h-max min-h-screen md:h-screen overflow-hidden"
+      className="max-w-screen w-full  h-max min-h-screen md:h-screen overflow-hidden"
     >
       <div className="h-max md:h-full relative">
         <div className="md:sticky top-[50px] md:top-[64px] h-max md:h-[calc(100vh-64px)] pb-[50px] bg-[url('/bg-mobile.webp')] md:bg-[url('/bg-desktop.webp')] bg-[position:50%_center] md:bg-[position:50%] bg-no-repeat bg-[length:100%_100%] flex justify-start overflow-hidden px-3 py-9 w-full">
