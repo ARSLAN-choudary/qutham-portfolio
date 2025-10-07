@@ -4,6 +4,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 import "./stiky.css";
+import SocialLinksScroll from "../SocialLinksScroll/SocialLinksScroll";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -453,20 +454,20 @@ export default function StickyTextParallax() {
             </div>
 
             {/* Scroll Section */}
-            <section className="relative overflow-visible py-32">
+            <section className="relative overflow-visible py-18">
                 <div
                     ref={containerRef}
                     className="relative flex flex-col items-center justify-center text-center space-y-6 h-screen"
                 >
-                    <span className="parallax-word text-[60px] md:text-[120px] lg:text-[184px] uppercase font-bold leading-tight text-white">
+                    <span className="parallax-word text-[50px] md:text-[100px] lg:text-[184px] uppercase font-bold leading-tight text-white">
                         We&nbsp;Build
                     </span>
 
-                    <span className="parallax-word text-[60px] md:text-[100px] lg:text-[164px] uppercase font-bold leading-tight bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text">
+                    <span className="parallax-word text-[50px] md:text-[80px] lg:text-[164px] uppercase font-bold leading-tight bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text">
                         Digital&nbsp;Dreams
                     </span>
 
-                    <span className="parallax-word text-[60px] md:text-[120px] lg:text-[184px] uppercase font-bold leading-tight text-white">
+                    <span className="parallax-word text-[50px] md:text-[100px] lg:text-[184px] uppercase font-bold leading-tight text-white">
                         That&nbsp;Inspire
                     </span>
 
@@ -507,6 +508,7 @@ export default function StickyTextParallax() {
                             </div>
                         ))}
                     </div>
+                    <SocialLinksScroll />
                 </div>
             </section>
 
@@ -634,6 +636,10 @@ export default function StickyTextParallax() {
                     <div className="absolute inset-0 -z-10" onClick={closeModal} />
                 </div>
             )}
+
+
+
+
         </div>
     );
 }
