@@ -29,7 +29,7 @@ export const FeaturedEvents = () => {
       players: "80",
     },
     {
-      id: 2,
+      id: 3,
       title: "Valorant Masters",
       image: "/cards/dinner.jpeg",
       views: "1.2M",
