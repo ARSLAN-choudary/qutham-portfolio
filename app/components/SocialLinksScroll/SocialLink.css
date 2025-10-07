@@ -1,0 +1,19 @@
+.style_social__platform__9gGBg {
+  align-items: center;
+  bottom: 20px;
+  display: flex;
+  gap: 20px;
+  left: 50%;
+  position: absolute;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  z-index: 100;
+}
+a {
+  color: #fff;
+  text-decoration: none;
+}
+.style_social__platform__9gGBg .style_social__icon__wrapper__QhDdv svg {
+  height: 58px;
+  width: 58px;
+}
