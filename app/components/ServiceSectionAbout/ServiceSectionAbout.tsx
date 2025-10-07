@@ -30,7 +30,7 @@ const services = [
         title: "Creative Graphic Design",
         description:
             "Stunning designs that speak your brand's story — from logos to marketing visuals and beyond.",
-        icon: "/about/service-icon-04.png",
+        icon: "/about/service-icon-04.jpg",
         image: "/about/service-icon-04.jpg",
     },
     {

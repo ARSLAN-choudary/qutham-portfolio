@@ -34,8 +34,9 @@ export default function RootLayout({
       <body
         className={`${lato.className} ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <SessionProvider>{children}
+        <SessionProvider>
           <Header/>
+          {children}
           <Footer />
         </SessionProvider>
       </body>

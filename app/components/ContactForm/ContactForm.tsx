@@ -80,7 +80,7 @@ export default function ContactForm() {
   };
 
   return (
-    <div className="style_contact__us__wrappper__62fYI">
+    <div className="style_contact__us__wrappper__62fYI h-full " >
       <section
         className="style_contactus__container__Flquh"
         aria-labelledby="contact-heading"
@@ -131,9 +131,8 @@ export default function ContactForm() {
                 Full Name <span className="style_required__star__UTD67">*</span>
               </label>
               <input
-                className={`style_inputfield__FJ49s ${
-                  errors.name ? "style_input__error__8x9K2" : ""
-                }`}
+                className={`style_inputfield__FJ49s ${errors.name ? "style_input__error__8x9K2" : ""
+                  }`}
                 id="name"
                 name="name"
                 type="text"
@@ -158,9 +157,8 @@ export default function ContactForm() {
                 <span className="style_required__star__UTD67">*</span>
               </label>
               <input
-                className={`style_inputfield__FJ49s ${
-                  errors.phone ? "style_input__error__8x9K2" : ""
-                }`}
+                className={`style_inputfield__FJ49s ${errors.phone ? "style_input__error__8x9K2" : ""
+                  }`}
                 id="phone"
                 name="phone"
                 type="tel"
@@ -184,9 +182,8 @@ export default function ContactForm() {
                 Email
               </label>
               <input
-                className={`style_inputfield__FJ49s ${
-                  errors.email ? "style_input__error__8x9K2" : ""
-                }`}
+                className={`style_inputfield__FJ49s ${errors.email ? "style_input__error__8x9K2" : ""
+                  }`}
                 id="email"
                 name="email"
                 type="email"
@@ -210,9 +207,8 @@ export default function ContactForm() {
                 Location <span className="style_required__star__UTD67">*</span>
               </label>
               <input
-                className={`style_inputfield__FJ49s ${
-                  errors.location ? "style_input__error__8x9K2" : ""
-                }`}
+                className={`style_inputfield__FJ49s ${errors.location ? "style_input__error__8x9K2" : ""
+                  }`}
                 id="location"
                 name="location"
                 type="text"
@@ -236,9 +232,8 @@ export default function ContactForm() {
                 <span className="style_required__star__UTD67">*</span>
               </label>
               <select
-                className={`style_inputfield__FJ49s style_placeholder__9Azjc !text-[16px] !text-[#ffffff9e] ${
-                  errors.expertise ? "style_input__error__8x9K2" : ""
-                }`}
+                className={`style_inputfield__FJ49s style_placeholder__9Azjc !text-[16px] !text-[#ffffff9e] ${errors.expertise ? "style_input__error__8x9K2" : ""
+                  }`}
                 id="expertise"
                 name="expertise"
                 value={formData.expertise}
@@ -311,7 +306,7 @@ export default function ContactForm() {
             {!fromCareers && (
               <button
                 type="submit"
-                className="style_form__submit__btn__F8DVM !mt-0"
+                className="style_form__submit__btn__F8DVM !mt-0 mb-10"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? "Sending..." : "Send Message"}

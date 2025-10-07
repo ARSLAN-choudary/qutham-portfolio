@@ -6,7 +6,7 @@ import React from "react";
 import "./footer.css";
 const Footer = () => {
   return (
-    <footer className="style_footer__section__HZm2M">
+    <footer className="style_footer__section__HZm2M pt-10">
       <div className="style_footer__grid__zAmB0">
         <div className="style_footer__column__kqYF+ style_footer__logo__Gjeig">
           <Image src="/qutham-tech.svg" alt=" Logo" width={160} height={60} />
