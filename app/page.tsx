@@ -8,6 +8,7 @@ export default function Home() {
     <>
       <Header />
       <HeroSlider/>
+      <div className=" bg-gradient-to-b from-[#0F172A] via-[#1E293B] to-[#34D399]/20 h-[50px] w-full"></div>
       <FeaturedEvents />
       <StickyTextParallax />
     </>

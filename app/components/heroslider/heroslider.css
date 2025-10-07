@@ -26,7 +26,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
   height: 100%;
   overflow: hidden;
 }
@@ -36,19 +36,20 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
   height: 100%;
   border: none;
   pointer-events: none;
   z-index: 0;
-  object-fit: cover; /* Ensure video covers the container */
+  object-fit: cover;
 }
 
 /* Force iframe to scale correctly */
 .youtube-background-iframe::after {
   content: "";
   display: block;
-  padding-bottom: 56.25%; /* Maintain 16:9 aspect ratio (9/16 = 0.5625) */
+  padding-bottom: 56.25%; 
+  width: 100vw;
 }
 
 /* Ensure no gaps on different screen sizes */
