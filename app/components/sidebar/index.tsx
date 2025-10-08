@@ -12,17 +12,86 @@ interface MenuItem {
 const menuItems: MenuItem[] = [
   { title: "Home", link: "/" },
   {
-    title: "Games",
+    title: "Services",
     children: [
-      { title: "Cricket", link: "/games/cricket" },
       {
-        title: "Football",
-        link: "/games/football",
+        title: "Web Development",
         children: [
-          { title: "Climate cup", link: "/games/football/climate-cup" },
+          { title: "Frontend Development", link: "/services/web/frontend" },
+          { title: "Backend Development", link: "/services/web/backend" },
+          { title: "Full Stack Solutions", link: "/services/web/fullstack" },
+          {
+            title: "E-Commerce Solutions",
+            link: "/services/web/ecommerce",
+          
+          },
+          { title: "Shopify Development", link: "/services/web/ecommerce/shopify" },
+          { title: "Custom Storefronts", link: "/services/web/ecommerce/custom" },
+          {
+            title: "CMS Platforms",
+            link: "/services/web/cms",
+          
+          },
+          { title: "WordPress Development", link: "/services/web/cms/wordpress" },
+          { title: "Headless CMS", link: "/services/web/cms/headless" },
         ],
       },
-    ],
+      {
+        title: "Mobile App Development",
+        children: [
+          { title: "iOS App Development", link: "/services/mobile/ios" },
+          { title: "Android App Development", link: "/services/mobile/android" },
+          {
+            title: "Cross-Platform Apps",
+            link: "/services/mobile/cross-platform",
+            
+          },
+          { title: "Flutter Apps", link: "/services/mobile/cross-platform/flutter" },
+          { title: "React Native Apps", link: "/services/mobile/cross-platform/react-native" },
+       
+        ],
+      },
+      {
+        title: "UI/UX Design",
+        children: [
+          { title: "Website Design", link: "/services/design/website" },
+          { title: "Mobile App Design", link: "/services/design/mobile" },
+          { title: "Brand Identity Design", link: "/services/design/branding" },
+          { title: "Prototyping & Wireframing", link: "/services/design/prototyping" },
+        ],
+      },
+      {
+        title: "Digital Marketing",
+        children: [
+          { title: "SEO Optimization", link: "/services/marketing/seo" },
+          { title: "Social Media Marketing", link: "/services/marketing/social-media" },
+          { title: "Content Marketing", link: "/services/marketing/content" },
+          { title: "Paid Ads (Google/Facebook)", link: "/services/marketing/paid-ads" },
+        ],
+      },
+      {
+        title: "Cloud & DevOps",
+        children: [
+          { title: "Server Deployment", link: "/services/devops/deployment" },
+          { title: "CI/CD Setup", link: "/services/devops/ci-cd" },
+          { title: "Cloud Infrastructure", link: "/services/devops/cloud" },
+          { title: "Monitoring & Automation", link: "/services/devops/monitoring" },
+        ],
+      },
+      {
+        title: "AI & Automation",
+        children: [
+          { title: "Chatbot Development", link: "/services/ai/chatbot" },
+          { title: "AI Website Builder", link: "/services/ai/website-builder" },
+          { title: "Automation Workflows", link: "/services/ai/automation" },
+          {
+            title: "Machine Learning Solutions",
+            link: "/services/ai/ml",
+
+          },
+        ],
+      },
+    ]
   },
   { title: "About Us", link: "/about" },
   { title: "Careers", link: "/careers" },
@@ -359,8 +428,8 @@ export const Sidebar = ({
     <div
       ref={ref}
       className={`fixed top-0 h-screen z-40 ${menu && sidebar
-          ? "w-[400px] transition-[width] duration-[0.3s] ease-in"
-          : "w-0"
+        ? "w-[400px] transition-[width] duration-[0.3s] ease-in"
+        : "w-0"
         }`}
       style={{ left: leftPosition }}
     >

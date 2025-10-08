@@ -4,7 +4,7 @@ import Link from "next/link";
 import React, { useRef, useState } from "react";
 import Image from "next/image";
 
-function Page() {
+export default function Page() {
   const jobs = [
     {
       title: "Frontend Developer (Angular)",
@@ -134,6 +134,14 @@ Requirements:
 - Detail-oriented and able to work independently under minimal supervision.`,
     },
   ];
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+
+
+
+  const filteredJobs = jobs.filter((job) =>
+    job.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   const [selectedJob, setSelectedJob] = useState(jobs[0]);
   // const jobRefs = useRef<HTMLDivElement[]>([]);
@@ -141,10 +149,7 @@ Requirements:
 
   const handleJobClick = (jobs: any) => {
     setSelectedJob(jobs);
-    jobSectionRef.current?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
+
   };
 
   return (
@@ -218,30 +223,64 @@ Requirements:
           </div>
         </div>
 
-        {/* ✅ Sidebar */}
-        <div className="w-[384px] max-[1440px]:w-full bg-[hsla(0,0%,100%,.1)] border border-[hsla(0,0%,100%,.2)] rounded-[32px] overflow-hidden max-[1440px]:mt-[40px] ">
-          <p className="bg-[hsla(0,0%,100%,.05)] text-white text-[16px] font-semibold px-[24px] pt-[24px] pb-[18px]">
-            Jobs
-          </p>
+        {/* ✅ Sidebar with Search */}
+        <div className="w-[384px] max-[1440px]:w-full bg-[hsla(0,0%,100%,.1)] border border-[hsla(0,0%,100%,.2)] rounded-[32px] overflow-hidden max-[1440px]:mt-[40px]">
+
+          {/* Header with Search */}
+          <div className="flex items-center justify-between bg-[hsla(0,0%,100%,.05)] text-white px-[24px] pt-[24px] pb-[18px]">
+            <p className="text-[16px] font-semibold">Jobs</p>
+
+            <div className="relative flex items-center">
+              <button
+                onClick={() => setSearchOpen(!searchOpen)}
+                className="relative cursor-pointer"
+              >
+          
+                <Image
+                  width={24}
+                  height={24}
+                  src="/header/search.svg"
+                  alt="Search"
+                />
+              </button>
+
+              {/* Smooth expanding search bar */}
+              <input
+                type="text"
+                placeholder="Search jobs..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className={`ml-2 text-white text-[14px] bg-[hsla(0,0%,100%,.08)] border border-[hsla(0,0%,100%,.2)] rounded-[20px] px-3 py-1 transition-all duration-300 ease-in-out ${searchOpen
+                  ? "opacity-100 w-[160px] visible"
+                  : "opacity-0 w-0 overflow-hidden"
+                  }`}
+              />
+            </div>
+          </div>
+
+          {/* Job List */}
           <div className="px-[12px] pb-[12px] flex flex-col items-center gap-[10px] mt-[14px]">
-            {jobs.map((job, idx) => (
-              <div
-                key={idx}
-                onClick={() => handleJobClick(job)}
-                className={`rounded-[100px] h-[74px] py-[19px] pl-[16px] pr-[8px] w-full border text-[14px] font-medium text-white flex items-center justify-center cursor-pointer transition-all duration-200 ${
-                  selectedJob.title === job.title
+            {filteredJobs.length > 0 ? (
+              filteredJobs.map((job, idx) => (
+                <div
+                  key={idx}
+                  onClick={() => handleJobClick(job)}
+                  className={`rounded-[100px] h-[74px] py-[19px] pl-[16px] pr-[8px] w-full border text-[14px] font-medium text-white flex items-center justify-center cursor-pointer transition-all duration-200 ${selectedJob.title === job.title
                     ? "bg-[hsla(0,0%,100%,.15)] border-[hsla(0,0%,100%,.3)]"
                     : "bg-[rgba(0,0,0,.4)] border-[hsla(0,0%,100%,.2)] hover:bg-[rgba(255,255,255,.05)]"
-                }`}
-              >
-                {job.title}
-              </div>
-            ))}
+                    }`}
+                >
+                  {job.title}
+                </div>
+              ))
+            ) : (
+              <p className="text-white text-[14px] opacity-60">
+                No jobs found
+              </p>
+            )}
           </div>
         </div>
       </div>
     </div>
   );
 }
-
-export default Page;

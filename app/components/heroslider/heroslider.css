@@ -7,7 +7,7 @@
 
 @media (min-width: 768px) {
   .hero-swiper {
-    height: 90vh; /* Height for medium and larger screens */
+    height: 70vh; /* Height for medium and larger screens */
   }
 }
 
