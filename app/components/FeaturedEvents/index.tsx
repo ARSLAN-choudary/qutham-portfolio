@@ -179,7 +179,7 @@ export const FeaturedEvents = () => {
   return (
     <section
       ref={sectionRef}
-      className="max-w-screen w-full  h-max min-h-screen md:max-h-max overflow-hidden bg-gradient-to-b from-[#0F172A] via-[#1E293B] to-[#34D399]/20"
+      className="max-w-screen w-full  h-max min-h-screen md:max-h-max overflow-hidden bg-[linear-gradient(180deg,hsl(60_11%_12%)_1%,hsl(31_22%_12%)_10%,hsl(11_24%_14%)_19%,hsl(344_23%_14%)_28%,hsl(300_18%_13%)_36%,hsl(292_19%_15%)_44%,hsl(285_20%_18%)_53%,hsl(278_21%_20%)_61%,hsl(271_22%_22%)_69%,hsl(272_20%_18%)_77%,hsl(272_17%_13%)_85%,hsl(275_13%_9%)_93%,hsl(0_0%_3%)_100%)] "
     >
       <div className="h-max md:h-full relative">
         <div className="md:sticky top-[50px] md:top-[64px] h-max md:h-[calc(100vh-64px)] pb-[50px] bg-[url('/bg-mobile.webp')] md:bg-[url('/bg-desktop.webp')] bg-[position:50%_center] md:bg-[position:50%] bg-no-repeat bg-[length:100%_100%] flex justify-start overflow-hidden px-3 py-9 w-full">
