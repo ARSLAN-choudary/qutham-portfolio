@@ -20,7 +20,7 @@ interface TeamCardSliderProps {
 
 function TeamCardSlider({ cards }: TeamCardSliderProps) {
   const sample = [
-    { id: 1, name: "Ali Raza", role: "Frontend Developer", experience: "3 Years", image: "/dev1.jpg" },
+    { id: 1, name: "Farhad", role: "Graphics Designer", experience: "3 Years", image: "/services/Group 700.png" },
     { id: 2, name: "Sara Khan", role: "UI/UX Designer", experience: "2 Years", image: "/dev2.jpg" },
     { id: 3, name: "Bilal Ahmed", role: "Backend Developer", experience: "4 Years", image: "/dev3.jpg" },
     { id: 4, name: "Ayesha Malik", role: "Full Stack Dev", experience: "5 Years", image: "/dev4.jpg" },
