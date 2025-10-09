@@ -6,7 +6,7 @@ function SocialLinksScroll() {
         <div className="style_social__platform__9gGBg">
             {/* Instagram */}
             <a
-                href="https://www.instagram.com/"
+                href="https://www.instagram.com/qutham_official?igsh=MTJzOGkxbjZkN3psNQ%3D%3D&utm_source=qr"
                 target="_blank"
                 rel="noreferrer"
                 className="style_social__icon__wrapper__QhDdv"
@@ -106,9 +106,9 @@ function SocialLinksScroll() {
                 </svg>
             </a>
 
-            {/* YouTube */}
+            {/* facebook */}
             <a
-                href="https://www.facebook.com/"
+                href="https://www.facebook.com/share/1DiS5boyPa/?mibextid=wwXIfr"
                 target="_blank"
                 rel="noreferrer"
                 className="style_social__icon__wrapper__QhDdv"
@@ -202,7 +202,7 @@ function SocialLinksScroll() {
 
             {/* LinkedIn */}
             <a
-                href="https://www.linkedin.com/company/"
+                href="https://www.linkedin.com/search/results/all/?heroEntityKey=urn%3Ali%3Aorganization%3A101538290&keywords=Qutham%20Technologies&origin=ENTITY_SEARCH_HOME_HISTORY&sid=Rgv"
                 target="_blank"
                 rel="noreferrer"
                 className="style_social__icon__wrapper__QhDdv"

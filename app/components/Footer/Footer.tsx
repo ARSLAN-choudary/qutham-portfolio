@@ -56,7 +56,7 @@ const Footer = () => {
                     width={16}
                     height={16}
                   />
-                  <a href="mailto:quthamtech@gmail.com">quthamtech@gmail.com</a>
+                  <a href="mailto:quthamtech@gmail.com">contact@qutham.com</a>
                 </li>
               </ul>
             </div>
@@ -64,7 +64,7 @@ const Footer = () => {
             <address className="style_footer__address__ZhTcd">
               <div className="style_social__logos__37Scg">
                 <a
-                  href="https://www.instagram.com/"
+                  href="https://www.instagram.com/qutham_official?igsh=MTJzOGkxbjZkN3psNQ%3D%3D&utm_source=qr"
                   rel="noreferrer"
                   target="_blank"
                   aria-label="Instagram"
@@ -77,7 +77,7 @@ const Footer = () => {
                   />
                 </a>
                 <a
-                  href="https://www.linkedin.com/company"
+                  href="https://www.linkedin.com/search/results/all/?heroEntityKey=urn%3Ali%3Aorganization%3A101538290&keywords=Qutham%20Technologies&origin=ENTITY_SEARCH_HOME_HISTORY&sid=Rgv"
                   rel="noreferrer"
                   target="_blank"
                   aria-label="LinkedIn"
@@ -90,7 +90,7 @@ const Footer = () => {
                   />
                 </a>
                 <a
-                  href="https://www.facebook.com"
+                  href="https://www.facebook.com/share/1DiS5boyPa/?mibextid=wwXIfr"
                   rel="noreferrer"
                   target="_blank"
                   aria-label="Facebook"
