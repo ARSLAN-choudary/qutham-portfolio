@@ -13,7 +13,7 @@ function page() {
                     <AboutHeroSection />
                 </div>
             </main>
-            <ServiceSectionAbout/>
+            <ServiceSectionAbout />
 
         </>
     )

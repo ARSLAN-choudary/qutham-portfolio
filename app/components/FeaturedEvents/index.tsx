@@ -187,21 +187,22 @@ export const FeaturedEvents = () => {
 
             <ul className="flex flex-col gap-[26px] md:flex-row md:items-center md:gap-[151px] md:mb-[-100px] will-change-transform">
               {events.map((event) => (
-                <li key={event.id} className="flex-[0_0_auto]">
-                  <div
-                    className="min-w-[336px] w-full bg-[position:50%] bg-no-repeat bg-cover rounded-[14px] cursor-pointer flex flex-col h-[216px] justify-end py-[30px] px-3 relative md:rounded-[54px] md:h-[548px] md:p-[50px] md:w-[1234px]"
-                  >
-                    <div className="absolute -z-[1] bottom-0 left-0 bg-no-repeat cursor-pointer">
-                      <Image
-                        className="w-[336px] md:w-[1234px] h-[216px] md:h-[548px] object-cover rounded-xl"
-                        width={1234}
-                        height={548}
-                        src={event.image}
-                        alt=""
-                      />
-                    </div>
-                  </div>
-                </li>
+              <li key={event.id} className="flex-[0_0_auto]">
+  <div className="relative w-[336px] md:w-[500px] h-[150px] md:h-[400px] cursor-pointer rounded-[14px] md:rounded-[54px] overflow-hidden">
+    <Image
+      className="object-cover w-full h-full"
+      fill
+      src={event.image}
+      alt={ "Event image"}
+    />
+
+    {/* Optional overlay content */}
+    <div className="absolute inset-0 flex flex-col justify-end p-3 md:p-6 text-white bg-gradient-to-t from-black/40 via-transparent">
+      {/* <h3 className="text-sm md:text-lg font-semibold">{event.name}</h3> */}
+    </div>
+  </div>
+</li>
+
               ))}
             </ul>
 
