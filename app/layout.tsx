@@ -6,6 +6,7 @@ import { Lato } from "next/font/google";
 import { SessionProvider } from "next-auth/react";
 import Footer from "./components/Footer/Footer";
 import { Header } from "./components/Header";
+import ToasterProvider from "./components/ToasterProvider/ToasterProvider";
 
 const lato = Lato({
   subsets: ["latin"],
@@ -39,6 +40,7 @@ export default function RootLayout({
           {children}
           <Footer />
         </SessionProvider>
+        <ToasterProvider />
       </body>
     </html>
   );

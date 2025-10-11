@@ -2,12 +2,12 @@
 
 .hero-swiper {
   width: 100%;
-  height: 80vh; /* Default height */
+  height: 90vh; /* Default height */
 }
 
 @media (min-width: 768px) {
   .hero-swiper {
-    height: 70vh; /* Height for medium and larger screens */
+    height: 80vh; /* Height for medium and larger screens */
   }
 }
 
