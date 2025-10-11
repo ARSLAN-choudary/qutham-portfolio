@@ -7,7 +7,7 @@ export default function ToasterProvider() {
         <Toaster
             position="top-right"
             toastOptions={{
-                duration: 4000,
+                duration: 2000,
                 style: {
                     background: "linear-gradient(90deg, #1e3a8a, #db2777)",
                     color: "#fff",
