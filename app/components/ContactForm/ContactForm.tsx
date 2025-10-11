@@ -126,9 +126,10 @@ export default function ContactForm() {
                   width={20}
                   height={20}
                 />
-                <a href="mailto:contact@qutham.com
-">contact@qutham.com
-</a>
+                <a href="mailto:contact@qutham.com" target="_blank" rel="noopener noreferrer">
+                  contact@qutham.com
+                </a>
+
               </div>
             </div>
           </div>
