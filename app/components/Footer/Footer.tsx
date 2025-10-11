@@ -23,10 +23,10 @@ const Footer = () => {
                 <Link href="/careers">Careers</Link>
               </li>
               <li className="cursor-pointer">
-                <Link href="/cricket">Our Projects</Link>
+                <Link href="/">Our Projects</Link>
               </li>
               <li className="cursor-pointer">
-                <Link href="/indoor-cricket">Our Events</Link>
+                <Link href="/">Our Events</Link>
               </li>
             </ul>
           </div>
@@ -47,7 +47,7 @@ const Footer = () => {
                     width={16}
                     height={16}
                   />
-                  <a href="tel:+923287079495">+92 328 7079495</a>
+                  <a href="tel:+92 307-0079017">+92 307-0079017 || +971 50 112 0272</a>
                 </li>
                 <li>
                   <Image
@@ -56,7 +56,7 @@ const Footer = () => {
                     width={16}
                     height={16}
                   />
-                  <a href="mailto:quthamtech@gmail.com">contact@qutham.com</a>
+                  <a href="mailto:contact@qutham.com">contact@qutham.com</a>
                 </li>
               </ul>
             </div>
@@ -112,7 +112,7 @@ const Footer = () => {
         <ul>
           <li>© 2025-26 . All rights reserved.</li>
           <li>
-            <Link href="/terms-conditions">Terms &amp; Condition</Link>
+            <Link href="/">Terms &amp; Condition</Link>
           </li>
         </ul>
       </div>
