@@ -62,12 +62,13 @@ export const FeaturedEvents = () => {
       container.style.transform = `translateX(${translateX}px)`;
     };
 
-    // Changed from 0.5 to 0.6 to start animation when section is lower on screen
+    // More precise center detection
     const centerInView = () => {
       const r = section.getBoundingClientRect();
+      // Check if section is centered in viewport with some tolerance
       return (
-        r.top <= window.innerHeight * 0.1 && // Changed from 0.5 to 0.6
-        r.bottom >= window.innerHeight * 0.1  // Changed from 0.5 to 0.6
+        r.top <= window.innerHeight * 0.2 &&
+        r.bottom >= window.innerHeight * 0.9
       );
     };
 
@@ -134,12 +135,13 @@ export const FeaturedEvents = () => {
       translateX = Math.max(-MAX_X, translateX);
       applyTransform();
 
-      // ----- REVERSE behavior -----
-
-      if (deltaY <= 0 || mapped <= 0 + 0.5) {
-        translateX = -THRESH_X_CLAMPED;
-        applyTransform();
-        switchToA();
+      // Improved reverse behavior with threshold
+      if (deltaY <= -10 || mapped <= 0 + 0.5) {
+        if (centerInView()) {
+          translateX = -THRESH_X_CLAMPED;
+          applyTransform();
+          switchToA();
+        }
       }
     };
 
@@ -173,7 +175,6 @@ export const FeaturedEvents = () => {
       className="max-w-screen w-full h-max min-h-screen md:max-h-max overflow-hidden bg-[linear-gradient(180deg,hsl(60_11%_12%)_1%,hsl(31_22%_12%)_10%,hsl(11_24%_14%)_19%,hsl(344_23%_14%)_28%,hsl(300_18%_13%)_36%,hsl(292_19%_15%)_44%,hsl(285_20%_18%)_53%,hsl(278_21%_20%)_61%,hsl(271_22%_22%)_69%,hsl(272_20%_18%)_77%,hsl(272_17%_13%)_85%,hsl(275_13%_9%)_93%,hsl(0_0%_3%)_100%)] "
     >
       <div className="h-max md:h-full relative">
-        {/* Added padding-top to push the content lower */}
         <div className="md:sticky top-[50px] md:top-[64px] h-max md:h-[calc(100vh-64px)] pb-[50px] pt-[6vh] md:pt-[2vh] bg-[url('/bg-mobile.webp')] md:bg-[url('/bg-desktop.webp')] bg-[position:50%_center] md:bg-[position:50%] bg-no-repeat bg-[length:100%_100%] flex justify-start overflow-hidden px-3 py-9 w-full">
           <div
             ref={containerRef}
@@ -187,26 +188,23 @@ export const FeaturedEvents = () => {
 
             <ul className="flex flex-col gap-[26px] md:flex-row md:items-center md:gap-[151px] md:mb-[-100px] will-change-transform">
               {events.map((event) => (
-              <li key={event.id} className="flex-[0_0_auto]">
-  <div className="relative w-[336px] md:w-[500px] h-[150px] md:h-[400px] cursor-pointer rounded-[14px] md:rounded-[54px] overflow-hidden">
-    <Image
-      className="object-cover w-full h-full"
-      fill
-      src={event.image}
-      alt={ "Event image"}
-    />
-
-    {/* Optional overlay content */}
-    <div className="absolute inset-0 flex flex-col justify-end p-3 md:p-6 text-white bg-gradient-to-t from-black/40 via-transparent">
-      {/* <h3 className="text-sm md:text-lg font-semibold">{event.name}</h3> */}
-    </div>
-  </div>
-</li>
-
+                <li key={event.id} className="flex-[0_0_auto]">
+                  <div className="relative w-[336px] md:w-[500px] h-[150px] md:h-[400px] cursor-pointer rounded-[14px] md:rounded-[54px] overflow-hidden">
+                    <Image
+                      className="object-cover w-full h-full"
+                      fill
+                      src={event.image}
+                      alt={"Event image"}
+                    />
+                    <div className="absolute inset-0 flex flex-col justify-end p-3 md:p-6 text-white bg-gradient-to-t from-black/40 via-transparent">
+                      {/* <h3 className="text-sm md:text-lg font-semibold">{event.name}</h3> */}
+                    </div>
+                  </div>
+                </li>
               ))}
             </ul>
 
-            <div className="hidden md:block min-w-[1234px]" />
+            <div className="hidden md:block min-w-[14px]" />
           </div>
         </div>
       </div>
