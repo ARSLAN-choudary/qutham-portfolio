@@ -40,6 +40,7 @@ function TeamCardSlider({ cards }: TeamCardSliderProps) {
   const prevRef = useRef<HTMLButtonElement | null>(null);
   const nextRef = useRef<HTMLButtonElement | null>(null);
   const cardRefs = useRef<HTMLDivElement[]>([]);
+  const swiperRef = useRef<unknown>(null);
 
   // 🌀 Animate cards on mount using GSAP
   useEffect(() => {
@@ -101,10 +102,25 @@ function TeamCardSlider({ cards }: TeamCardSliderProps) {
           nextEl: nextRef.current,
         }}
         onBeforeInit={(swiper) => {
-          if (swiper.params.navigation && typeof swiper.params.navigation !== "boolean") {
-            swiper.params.navigation.prevEl = prevRef.current;
-            swiper.params.navigation.nextEl = nextRef.current;
-          }
+          // Store swiper instance
+          swiperRef.current = swiper;
+
+          // Delay the navigation setup to ensure refs are available
+          setTimeout(() => {
+            if (swiper.params.navigation && typeof swiper.params.navigation !== "boolean") {
+              swiper.params.navigation.prevEl = prevRef.current;
+              swiper.params.navigation.nextEl = nextRef.current;
+            }
+          }, 0);
+        }}
+        onAfterInit={(swiper) => {
+          // Re-initialize navigation after swiper is fully initialized
+          setTimeout(() => {
+            if (swiper.navigation && swiper.params.navigation && typeof swiper.params.navigation !== "boolean") {
+              swiper.navigation.init();
+              swiper.navigation.update();
+            }
+          }, 10);
         }}
         className="py-6"
       >
