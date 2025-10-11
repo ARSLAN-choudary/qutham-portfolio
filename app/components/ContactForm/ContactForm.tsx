@@ -4,7 +4,8 @@ import { useState } from "react";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import "./Contact.css";
-
+import { sendContactForm } from "@/app/lib/services/emailjsService";
+import toast from "react-hot-toast"; 
 export default function ContactForm() {
   const searchParams = useSearchParams();
   const fromCareers = searchParams.get("from") === "careers";
@@ -52,12 +53,21 @@ export default function ContactForm() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
+
     if (!validateForm()) {
       setIsSubmitting(false);
       return;
     }
+
     try {
-      console.log("✅ Form Submitted:", formData, resume);
+      // Send email via EmailJS
+      await sendContactForm({
+        ...formData,
+        fromCareers
+      });
+
+
+      // Reset form
       setFormData({
         name: "",
         phone: "",
@@ -68,12 +78,13 @@ export default function ContactForm() {
       });
       setResume(null);
       setErrors({});
-      alert("Thank you! Your message has been sent successfully.");
+      toast.success("Thank you! Your message has been sent successfully 🎉");
+      
     } catch (error) {
-      console.error("Error submitting form:", error);
-      alert(
-        "Sorry, there was an error submitting your form. Please try again."
-      );
+      toast.error("Sorry, there was an error submitting your form. Please try again.");
+     
+     
+  
     } finally {
       setIsSubmitting(false);
     }
