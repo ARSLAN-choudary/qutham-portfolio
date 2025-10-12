@@ -21,18 +21,24 @@ interface TeamCardSliderProps {
 
 function TeamCardSlider({ cards }: TeamCardSliderProps) {
   const sample = [
-    { id: 1, name: "Farhad", role: "Graphics Designer", experience: "3 Years", image: "/services/Group 700.png" },
-    { id: 2, name: "Sara Khan", role: "UI/UX Designer", experience: "2 Years", image: "/dev2.jpg" },
-    { id: 3, name: "Bilal Ahmed", role: "Backend Developer", experience: "4 Years", image: "/dev3.jpg" },
-    { id: 4, name: "Ayesha Malik", role: "Full Stack Dev", experience: "5 Years", image: "/dev4.jpg" },
-    { id: 5, name: "Usman Tariq", role: "Mobile Engineer", experience: "3 Years", image: "/dev5.jpg" },
-    { id: 6, name: "Zainab Ali", role: "Frontend Developer", experience: "4 Years", image: "/dev6.jpg" },
-    { id: 7, name: "Omar Hassan", role: "DevOps Engineer", experience: "6 Years", image: "/dev7.jpg" },
-    { id: 8, name: "Fatima Noor", role: "Product Manager", experience: "5 Years", image: "/dev8.jpg" },
-    { id: 9, name: "Hamza Raza", role: "Data Scientist", experience: "4 Years", image: "/dev9.jpg" },
-    { id: 10, name: "Mariam Javed", role: "QA Engineer", experience: "3 Years", image: "/dev10.jpg" },
-    { id: 11, name: "Ali Rizwan", role: "Cloud Architect", experience: "7 Years", image: "/dev11.jpg" },
-    { id: 12, name: "Hina Shah", role: "Scrum Master", experience: "4 Years", image: "/dev12.jpg" },
+    { id: 10, name: "Iqra Hammed", role: "Human Resources", experience: "3 Years", image: "/team-card/hr.jpeg" },
+    { id: 1, name: "Bilal Ahmed", role: "Full Stack Developer", experience: "4 Years", image: "/team-card/bilal.jpeg" },
+    { id: 9, name: "Ahmad Dhilxn", role: "Frontend Developer", experience: "2 Years", image: "/team-card/ahmad.jpeg" },
+    { id: 2, name: "Faizan", role: "Frontend Developer", experience: "2 Years", image: "/team-card/faizan.jpeg" },
+    { id: 5, name: "Sabahat Yaseen", role: "Frontend Developer", experience: "2 Years", image: "/team-card/sabaht.jpeg" },
+    { id: 6, name: "Aqsa", role: "Frontend Developer", experience: "2 Years", image: "/team-card/aqsa.jpeg" },
+    { id: 7, name: "Sidra", role: "Frontend Developer", experience: "2 Years", image: "/team-card/sidra.jpeg" },
+    { id: 8, name: "Hina", role: "Frontend Developer", experience: "2 Years", image: "/team-card/hina.jpeg" },
+    { id: 8, name: "Awais", role: "Frontend Developer", experience: "2 Years", image: "/team-card/awais.jpeg" },
+    { id: 3, name: "Hassam", role: "Backend Developer", experience: "2 Years", image: "/team-card/hassam.jpeg" },
+    { id: 3, name: "Huzaifa", role: "Backend Developer", experience: "2 Years", image: "/team-card/huzaifa.jpeg" },
+    { id: 4, name: "Ali Randhawa", role: "Game Developer", experience: "2 Years", image: "/team-card/ali.jpeg" },
+    { id: 11, name: "Farhad", role: "Graphics Designer", experience: "3 Years", image: "/team-card/farhad.jpeg" },
+    { id: 12, name: "Farhad", role: "Graphics Designer", experience: "3 Years", image: "/team-card/g1.jpeg" },
+    { id: 13, name: "Areeba", role: "Graphics Designer", experience: "3 Years", image: "/team-card/arreba.jpeg" },
+    { id: 14, name: "Ayesha", role: "Graphics Designer", experience: "3 Years", image: "/team-card/ayesha.jpeg" },
+    { id: 14, name: "Shaima", role: "Graphics Designer", experience: "3 Years", image: "/team-card/shaima.jpeg" },
+    { id: 14, name: "Kashan Sheikh", role: "Flutter App developer", experience: "2 Years", image: "/team-card/kashan.jpeg" },
   ];
 
   const items = cards && cards.length ? cards : sample;
