@@ -15,7 +15,7 @@ const services = [
         description:
             "We specialize in crafting Modern Websites, and e-commerce solutions that seamlessly integrate with your existing business infrastructure. Our expertise encompasses front-end development, back-end development, and database integration, ensuring a cohesive and scalable web presence.",
         icon: "/about/coding.png",
-        image: "/about/web.jpg",
+        image: "/about/web.png",
     },
     {
         id: "mobileapps",
@@ -30,8 +30,8 @@ const services = [
         title: "Creative Graphic Design",
         description:
             "Our team of experienced graphic designers creates compelling visual content that enhances your brand identity and marketing efforts. We specialize in logo design, branding, print design, digital design, and UI/UX design.",
-        icon: "/about/service-icon-04.jpg",
-        image: "/about/service-icon-04.jpg",
+        icon: "/about/dsign.png",
+        image: "/about/design.png",
     },
     {
         id: "digitalmarketing",
@@ -39,7 +39,7 @@ const services = [
         description:
             "Boost your brand's online presence and engage your audience with our top-notch social media marketing strategies. From compelling content creation to targeted advertising, we specialize in driving social media success. Elevate your brand, increase customer engagement, and stay ahead in the digital landscape with our expert social media marketing services. Let's make your brand shine in the social sphere!",
         icon: "/about/automation.png",
-        image: "/about/digital-marketing-definition-new-2048x1582.png",
+        image: "/about/marketing.png",
     },
     {
         id: "SEO",
@@ -47,7 +47,7 @@ const services = [
         description:
             "Discover expert insights and practical tips on a wide range of topics with our engaging content. From technology trends to lifestyle hacks, we provide valuable information to enhance your knowledge. Stay informed and entertained with our SEO-optimized articles that cater to your interests and curiosity. Explore our site for a diverse collection of informative content tailored just for you!",
         icon: "/about/automation.png",
-        image: "/about/SEO-for-Small-Business.webp",
+        image: "/about/seo.png",
     },
 ];
 
@@ -84,12 +84,12 @@ export default function ServiceSectionAbout() {
             });
         };
 
-        // Create scroll triggers for each article
+        // Create scroll triggers for each article - UPDATED START POSITION
         articles.forEach((article, i) => {
             ScrollTrigger.create({
                 trigger: article,
-                start: "top center",
-                end: "bottom center",
+                start: "top 90%", // Changed from "top center" to start lower
+                end: "bottom 10%", // Adjusted end point
                 onEnter: () => showImage(i),
                 onEnterBack: () => showImage(i)
             });
@@ -106,28 +106,36 @@ export default function ServiceSectionAbout() {
     const galleryItems = [
         {
             id: 1,
-            image: "/about/digital-marketing-definition-new-2048x1582.png",
+            image: "/about/11.png",
         },
         {
             id: 2,
-            image: "/cards/cricket.jpg",
+            image: "/about/12.png",
         },
         {
             id: 3,
-            image: "/cards/dinner.jpeg",
+            image: "/about/17.png",
+        },
+        {
+            id: 4,
+            image: "/about/16.png",
+        },
+        {
+            id: 5,
+            image: "/about/13.png",
         },
     ];
 
-    // Separate useEffect for the gallery section
+    // Separate useEffect for the gallery section - FIXED VERSION
     useEffect(() => {
         const section = sectionRef.current;
         const container = containerRef.current;
         if (!section || !container) return;
         if (window.innerWidth < 768) return;
 
-        const TOTAL_X = container.scrollWidth - window.innerWidth; 
-const THRESHOLD_X = TOTAL_X * 10; 
-        const V_TO_H_RATIO = 1;
+        const TOTAL_X = container.scrollWidth - window.innerWidth;
+        const THRESHOLD_X = TOTAL_X * 0.8; // Changed to 80% for better transition
+        const V_TO_H_RATIO = 1.2; // Slightly increased for smoother scroll
 
         let translateX = 0;
         let isLocked = false;
@@ -145,28 +153,37 @@ const THRESHOLD_X = TOTAL_X * 10;
                 isLocked = true;
             }
         };
+
         const unlockScroll = () => {
             if (isLocked) {
                 document.body.style.overflow = "";
                 isLocked = false;
             }
         };
+
         const applyTransform = () => {
             container.style.transform = `translateX(${translateX}px)`;
         };
+
         const centerInView = () => {
             const r = section.getBoundingClientRect();
-            return r.top <= window.innerHeight * 0.5 && r.bottom >= window.innerHeight * 0.5;
+            return r.top <= window.innerHeight * 0.1 && r.bottom >= window.innerHeight * 0.1;
         };
+
         const partlyInView = () => {
             const r = section.getBoundingClientRect();
             return r.bottom >= 0 && r.top <= window.innerHeight;
         };
 
+        const isAtTopOfViewport = () => {
+            const r = section.getBoundingClientRect();
+            return r.top >= 0 && r.top <= window.innerHeight * 0.1;
+        };
+
         const switchToA = () => {
             mode = "A";
             lockScroll();
-            translateX = Math.min(0, Math.max(-MAX_X, translateX));
+            // Don't reset translateX here, keep current position
             applyTransform();
         };
 
@@ -189,7 +206,14 @@ const THRESHOLD_X = TOTAL_X * 10;
             const atStart = translateX >= -2;
             const atEnd = Math.abs(translateX) >= MAX_X - 2;
 
-            if ((e.deltaY < 0 && atStart) || (e.deltaY > 0 && atEnd)) {
+            // Allow scrolling up when at start to exit section
+            if (e.deltaY < 0 && atStart) {
+                unlockScroll();
+                return;
+            }
+
+            // Allow scrolling down when at end to continue to next section
+            if (e.deltaY > 0 && atEnd) {
                 unlockScroll();
                 return;
             }
@@ -201,6 +225,7 @@ const THRESHOLD_X = TOTAL_X * 10;
             translateX = Math.min(0, Math.max(-MAX_X, translateX));
             applyTransform();
 
+            // Switch to mode B when reaching threshold while scrolling right
             if (Math.abs(translateX) >= THRESH_X_CLAMPED && e.deltaY > 0) {
                 switchToB();
             }
@@ -216,10 +241,12 @@ const THRESHOLD_X = TOTAL_X * 10;
             translateX = Math.max(-MAX_X, translateX);
             applyTransform();
 
-            if (deltaY <= 0 || mapped <= 0 + 0.5) {
-                translateX = -THRESH_X_CLAMPED;
-                applyTransform();
+            // Switch back to mode A when scrolling up from the top
+            if (deltaY <= 0 || isAtTopOfViewport()) {
                 switchToA();
+                // Set the translateX to current position minus a small buffer
+                translateX = Math.min(0, Math.max(-MAX_X, translateX));
+                applyTransform();
             }
         };
 
@@ -228,10 +255,13 @@ const THRESHOLD_X = TOTAL_X * 10;
             MAX_X = Math.min(TOTAL_X, actualScrollable);
             THRESH_X_CLAMPED = Math.min(THRESHOLD_X, MAX_X);
             PHASE_B_REMAINING = Math.max(0, MAX_X - THRESH_X_CLAMPED);
+
+            // Clamp current translateX to new bounds
             translateX = Math.min(0, Math.max(-MAX_X, translateX));
             applyTransform();
         };
 
+        // Initialize
         switchToA();
         window.addEventListener("wheel", handleWheelA, { passive: false });
         window.addEventListener("scroll", handleScrollB, { passive: true });
@@ -330,21 +360,37 @@ const THRESHOLD_X = TOTAL_X * 10;
                                 </span>
                             </h2>
 
-                            <ul className="flex flex-col gap-[20px] md:flex-row md:items-center md:gap-[60px] will-change-transform">
-                                {galleryItems.map((item) => (
-                                    <li key={item.id} className="flex-[0_0_auto]">
-                                        <div className="relative min-w-[250px] w-full rounded-[12px] md:rounded-[24px] overflow-hidden">
+                            <ul className="flex flex-col gap-10 md:flex-row md:items-center md:gap-16 will-change-transform last:pr-20">
+                                {galleryItems.map((item, idx) => (
+                                    <li
+                                        key={item.id}
+                                        className={`flex-[0_0_auto] group relative transition-all duration-500 hover:scale-[1.05] hover:rotate-[1deg]${idx === galleryItems.length - 1 ? " pr-10 md:pr-[40px]" : ""}`}
+                                    >
+                                        <div
+                                            className="relative min-w-[260px] w-full rounded-2xl md:rounded-3xl overflow-hidden 
+        bg-gradient-to-br from-[#111111] via-[#1b1b1b] to-[#0a0a0a] 
+        border border-white/10 shadow-[0_0_20px_rgba(255,255,255,0.08)]
+        group-hover:shadow-[0_0_35px_rgba(205,255,0,0.3)]
+        flex items-center justify-center p-6 transition-all duration-500"
+                                        >
+                                            {/* Decorative Glow Ring */}
+                                            <div className="absolute inset-0 bg-gradient-to-br from-[#cdff00]/20 to-transparent opacity-0 group-hover:opacity-100 blur-2xl transition-opacity duration-500 "></div>
+
+                                            {/* Subtle floating image */}
                                             <Image
                                                 src={item.image}
                                                 alt="Gallery image"
                                                 width={600}
                                                 height={400}
-                                                className="w-[250px] md:w-[600px] h-[180px] md:h-[400px] object-cover"
+                                                className="w-[250px] md:w-[400px] h-auto object-contain 
+          transition-transform duration-500 group-hover:scale-110 group-hover:translate-y-[-4px]"
                                             />
                                         </div>
+
                                     </li>
                                 ))}
                             </ul>
+
 
                             <div className="hidden md:block min-w-[400px]" />
                         </div>

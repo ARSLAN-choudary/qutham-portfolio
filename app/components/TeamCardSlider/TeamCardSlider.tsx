@@ -3,6 +3,7 @@ import React, { useRef, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import { gsap } from "gsap";
+import Image from "next/image";
 import "swiper/css";
 import "swiper/css/navigation";
 
@@ -41,6 +42,7 @@ function TeamCardSlider({ cards }: TeamCardSliderProps) {
   const prevRef = useRef<HTMLButtonElement | null>(null);
   const nextRef = useRef<HTMLButtonElement | null>(null);
   const cardRefs = useRef<HTMLDivElement[]>([]);
+  const swiperRef = useRef<unknown>(null);
 
   // 🌀 Animate cards on mount using GSAP
   useEffect(() => {
@@ -54,14 +56,14 @@ function TeamCardSlider({ cards }: TeamCardSliderProps) {
   }, []);
 
   return (
-    <div className="relative w-full max-w-[1200px] mx-auto py-10 px-5">
+    <div className="relative w-full max-w-[1200px] mx-auto py-10 px-4 sm:px-5">
       {/* Left Arrow */}
       <button
         ref={prevRef}
-        className="absolute left-[-40px] top-1/2 -translate-y-1/2 z-10 bg-white shadow-md p-3 rounded-full hover:bg-gray-100 cursor-pointer"
+        className="absolute left-2 sm:left-[-20px] md:left-[-40px] top-1/2 -translate-y-1/2 z-10 bg-white shadow-md p-2 sm:p-3 rounded-full hover:bg-gray-100 cursor-pointer"
         aria-label="Previous"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="black" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-5 sm:w-5" fill="black" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
         </svg>
       </button>
@@ -69,62 +71,89 @@ function TeamCardSlider({ cards }: TeamCardSliderProps) {
       {/* Right Arrow */}
       <button
         ref={nextRef}
-        className="absolute right-[-40px] top-1/2 -translate-y-1/2 z-10 bg-white shadow-md p-3 rounded-full hover:bg-gray-100 cursor-pointer"
+        className="absolute right-2 sm:right-[-20px] md:right-[-40px] top-1/2 -translate-y-1/2 z-10 bg-white shadow-md p-2 sm:p-3 rounded-full hover:bg-gray-100 cursor-pointer"
         aria-label="Next"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="black" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-5 sm:w-5" fill="black" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
         </svg>
       </button>
 
       <Swiper
         modules={[Navigation]}
-        spaceBetween={20}
+        spaceBetween={16}
         slidesPerView={1}
+        touchRatio={1}
+        touchAngle={45}
+        simulateTouch={true}
+        shortSwipes={true}
+        longSwipesRatio={0.5}
+        longSwipesMs={500}
+        followFinger={true}
+        allowTouchMove={true}
+        resistance={true}
+        resistanceRatio={0.85}
         breakpoints={{
-          640: { slidesPerView: 2 },
-          768: { slidesPerView: 3 },
-          1024: { slidesPerView: 4 },
+          480: { slidesPerView: 1.5, spaceBetween: 16 },
+          640: { slidesPerView: 2, spaceBetween: 16 },
+          768: { slidesPerView: 3, spaceBetween: 16 },
+          1024: { slidesPerView: 4, spaceBetween: 20 },
         }}
         navigation={{
           prevEl: prevRef.current,
           nextEl: nextRef.current,
         }}
         onBeforeInit={(swiper) => {
-          if (swiper.params.navigation && typeof swiper.params.navigation !== "boolean") {
-            swiper.params.navigation.prevEl = prevRef.current;
-            swiper.params.navigation.nextEl = nextRef.current;
-          }
+          // Store swiper instance
+          swiperRef.current = swiper;
+
+          // Delay the navigation setup to ensure refs are available
+          setTimeout(() => {
+            if (swiper.params.navigation && typeof swiper.params.navigation !== "boolean") {
+              swiper.params.navigation.prevEl = prevRef.current;
+              swiper.params.navigation.nextEl = nextRef.current;
+            }
+          }, 0);
+        }}
+        onAfterInit={(swiper) => {
+          // Re-initialize navigation after swiper is fully initialized
+          setTimeout(() => {
+            if (swiper.navigation && swiper.params.navigation && typeof swiper.params.navigation !== "boolean") {
+              swiper.navigation.init();
+              swiper.navigation.update();
+            }
+          }, 10);
         }}
         className="py-6"
       >
         {items.map((dev, i) => (
-  <SwiperSlide key={dev.id}>
-    <div
-      ref={(el) => {
-        if (el) cardRefs.current[i] = el;
-      }}
-      className="relative group overflow-hidden rounded-2xl shadow-lg bg-white min-h-[340px]"
-    >
-      {/* Developer Image */}
-      <img
-        src={dev.image}
-        alt={dev.name}
-        className="w-full h-[340px] object-cover transition-transform duration-500 group-hover:scale-110"
-      />
+          <SwiperSlide key={dev.id}>
+            <div
+              ref={(el) => {
+                if (el) cardRefs.current[i] = el;
+              }}
+              className="relative group overflow-hidden rounded-2xl shadow-lg bg-white min-h-[300px] sm:min-h-[340px]"
+            >
+              {/* Developer Image */}
+              <Image
+                src={dev.image}
+                alt={dev.name}
+                width={400}
+                height={340}
+                className="w-full h-[300px] sm:h-[340px] object-cover transition-transform duration-500 group-hover:scale-110"
+              />
 
-      {/* Glassy Overlay */}
-      <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500">
-        <div className="backdrop-blur-md bg-white/20 p-4 rounded-t-2xl text-white">
-          <h4 className="text-lg font-semibold">{dev.name}</h4>
-          <p className="text-sm opacity-90">{dev.role}</p>
-          <p className="text-xs opacity-80">{dev.experience} Experience</p>
-        </div>
-      </div>
-    </div>
-  </SwiperSlide>
-))}
-
+              {/* Glassy Overlay */}
+              <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500">
+                <div className="backdrop-blur-md bg-white/20 p-4 rounded-t-2xl text-white">
+                  <h4 className="text-base sm:text-lg font-semibold">{dev.name}</h4>
+                  <p className="text-xs sm:text-sm opacity-90">{dev.role}</p>
+                  <p className="text-xs opacity-80">{dev.experience} Experience</p>
+                </div>
+              </div>
+            </div>
+          </SwiperSlide>
+        ))}
       </Swiper>
     </div>
   );
