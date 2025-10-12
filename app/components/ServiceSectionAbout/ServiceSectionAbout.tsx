@@ -89,7 +89,7 @@ export default function ServiceSectionAbout() {
             ScrollTrigger.create({
                 trigger: article,
                 start: "top 90%", // Changed from "top center" to start lower
-                end: "bottom 20%", // Adjusted end point
+                end: "bottom 10%", // Adjusted end point
                 onEnter: () => showImage(i),
                 onEnterBack: () => showImage(i)
             });
@@ -360,11 +360,11 @@ export default function ServiceSectionAbout() {
                                 </span>
                             </h2>
 
-                            <ul className="flex flex-col gap-10 md:flex-row md:items-center md:gap-16 will-change-transform">
-                                {galleryItems.map((item) => (
+                            <ul className="flex flex-col gap-10 md:flex-row md:items-center md:gap-16 will-change-transform last:pr-20">
+                                {galleryItems.map((item, idx) => (
                                     <li
                                         key={item.id}
-                                        className="flex-[0_0_auto] group relative transition-all duration-500 hover:scale-[1.05] hover:rotate-[1deg]"
+                                        className={`flex-[0_0_auto] group relative transition-all duration-500 hover:scale-[1.05] hover:rotate-[1deg]${idx === galleryItems.length - 1 ? " pr-10 md:pr-[40px]" : ""}`}
                                     >
                                         <div
                                             className="relative min-w-[260px] w-full rounded-2xl md:rounded-3xl overflow-hidden 
@@ -374,7 +374,7 @@ export default function ServiceSectionAbout() {
         flex items-center justify-center p-6 transition-all duration-500"
                                         >
                                             {/* Decorative Glow Ring */}
-                                            <div className="absolute inset-0 bg-gradient-to-br from-[#cdff00]/20 to-transparent opacity-0 group-hover:opacity-100 blur-2xl transition-opacity duration-500"></div>
+                                            <div className="absolute inset-0 bg-gradient-to-br from-[#cdff00]/20 to-transparent opacity-0 group-hover:opacity-100 blur-2xl transition-opacity duration-500 "></div>
 
                                             {/* Subtle floating image */}
                                             <Image
