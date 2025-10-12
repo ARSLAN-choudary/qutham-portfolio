@@ -20,18 +20,10 @@ const menuItems: MenuItem[] = [
           { title: "Frontend Development", link: "/services/web/frontend" },
           { title: "Backend Development", link: "/services/web/backend" },
           { title: "Full Stack Solutions", link: "/services/web/fullstack" },
-          {
-            title: "E-Commerce Solutions",
-            link: "/services/web/ecommerce",
-          
-          },
-          { title: "Shopify Development", link: "/services/web/ecommerce/shopify" },
-          { title: "Custom Storefronts", link: "/services/web/ecommerce/custom" },
-          {
-            title: "CMS Platforms",
-            link: "/services/web/cms",
-          
-          },
+          { title: "E-Commerce Solutions", link: "/services/web/ecommerce",},
+          { title: "Shopify Development", link: "/services/web/shopify" },
+          { title: "Custom Storefronts", link: "/services/web/custom" },
+          { title: "CMS Platforms", link: "/services/web/cms",},
           { title: "WordPress Development", link: "/services/web/cms/wordpress" },
           { title: "Headless CMS", link: "/services/web/cms/headless" },
         ],
@@ -41,14 +33,10 @@ const menuItems: MenuItem[] = [
         children: [
           { title: "iOS App Development", link: "/services/mobile/ios" },
           { title: "Android App Development", link: "/services/mobile/android" },
-          {
-            title: "Cross-Platform Apps",
-            link: "/services/mobile/cross-platform",
-            
-          },
-          { title: "Flutter Apps", link: "/services/mobile/cross-platform/flutter" },
-          { title: "React Native Apps", link: "/services/mobile/cross-platform/react-native" },
-       
+          
+          { title: "Flutter Apps", link: "/services/mobile/flutter" },
+          { title: "React Native Apps", link: "/services/mobile/reactnative" },
+
         ],
       },
       {
@@ -64,31 +52,17 @@ const menuItems: MenuItem[] = [
         title: "Digital Marketing",
         children: [
           { title: "SEO Optimization", link: "/services/marketing/seo" },
-          { title: "Social Media Marketing", link: "/services/marketing/social-media" },
+          { title: "Social Media Marketing", link: "/services/marketing/socialmedia" },
           { title: "Content Marketing", link: "/services/marketing/content" },
-          { title: "Paid Ads (Google/Facebook)", link: "/services/marketing/paid-ads" },
+          { title: "Paid Ads (Google/Facebook)", link: "/services/marketing/paidads" },
         ],
       },
       {
         title: "Cloud & DevOps",
         children: [
           { title: "Server Deployment", link: "/services/devops/deployment" },
-          { title: "CI/CD Setup", link: "/services/devops/ci-cd" },
+          { title: "CI/CD Setup", link: "/services/devops/cicd" },
           { title: "Cloud Infrastructure", link: "/services/devops/cloud" },
-          { title: "Monitoring & Automation", link: "/services/devops/monitoring" },
-        ],
-      },
-      {
-        title: "AI & Automation",
-        children: [
-          { title: "Chatbot Development", link: "/services/ai/chatbot" },
-          { title: "AI Website Builder", link: "/services/ai/website-builder" },
-          { title: "Automation Workflows", link: "/services/ai/automation" },
-          {
-            title: "Machine Learning Solutions",
-            link: "/services/ai/ml",
-
-          },
         ],
       },
     ]

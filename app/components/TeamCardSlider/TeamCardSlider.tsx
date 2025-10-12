@@ -20,11 +20,20 @@ interface TeamCardSliderProps {
 
 function TeamCardSlider({ cards }: TeamCardSliderProps) {
   const sample = [
-    { id: 1, name: "Farhad", role: "Graphics Designer", experience: "3 Years", image: "/services/Group 700.png" },
-    { id: 2, name: "Sara Khan", role: "UI/UX Designer", experience: "2 Years", image: "/dev2.jpg" },
-    { id: 3, name: "Bilal Ahmed", role: "Backend Developer", experience: "4 Years", image: "/dev3.jpg" },
-    { id: 4, name: "Ayesha Malik", role: "Full Stack Dev", experience: "5 Years", image: "/dev4.jpg" },
-    { id: 5, name: "Usman Tariq", role: "Mobile Engineer", experience: "3 Years", image: "/dev5.jpg" },
+    { id: 1, name: "Bilal Ahmed", role: "Full Stack Developer", experience: "4 Years", image: "/team-card/bilal.jpeg" },
+    { id: 2, name: "Faizan", role: "Frontend Developer", experience: "2 Years", image: "/team-card/faizan.jpeg" },
+    { id: 3, name: "Hassam", role: "Frontend Developer", experience: "2 Years", image: "/team-card/hassam.jpeg" },
+    { id: 4, name: "Ali Randhawa", role: "Frontend Developer", experience: "2 Years", image: "/team-card/ali.jpeg" },
+    { id: 5, name: "Sabahat Yaseen", role: "Frontend Developer", experience: "2 Years", image: "/team-card/sabaht.jpeg" },
+    { id: 6, name: "Aqsa", role: "Frontend Developer", experience: "2 Years", image: "/team-card/aqsa.jpeg" },
+    { id: 7, name: "Sidra", role: "Frontend Developer", experience: "2 Years", image: "/team-card/sidra.jpeg" },
+    { id: 8, name: "Hina", role: "Frontend Developer", experience: "2 Years", image: "/team-card/hina.jpeg" },
+    { id: 9, name: "Ahmad Dhilxn", role: "Frontend Developer", experience: "2 Years", image: "/team-card/ahmad.jpeg" },
+    { id: 10, name: "Iqra Hammed", role: "Human Resources", experience: "3 Years", image: "/team-card/farhad.jpeg" },
+    { id: 11, name: "Farhad", role: "Graphics Designer", experience: "3 Years", image: "/team-card/farhad.jpeg" },
+    { id: 12, name: "Farhad", role: "Graphics Designer", experience: "3 Years", image: "/team-card/g1.jpeg" },
+    { id: 13, name: "Areeba", role: "Graphics Designer", experience: "3 Years", image: "/team-card/areeba.jpeg" },
+    { id: 14, name: "Ayesha", role: "Graphics Designer", experience: "3 Years", image: "/team-card/areeba.jpeg" },
   ];
 
   const items = cards && cards.length ? cards : sample;
