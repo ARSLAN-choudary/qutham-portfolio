@@ -1,24 +1,21 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import { useParams, notFound } from "next/navigation";
+import { useParams, notFound, useRouter } from "next/navigation";
 import { gsap } from "gsap";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
-
+import Image from "next/image"; 
 import {
   FaReact,
   FaNodeJs,
   FaShopify,
   FaHtml5,
   FaCss3,
-  FaChartLine,
   FaWordpress,
-  FaBullhorn,
-  FaPaintBrush,
-  FaSearchengin,
   FaInstagram,
   FaLinkedin,
   FaFacebook,
@@ -48,8 +45,6 @@ import {
   SiMailchimp,
   SiAdobephotoshop,
   SiAdobeillustrator,
-  SiAdobeindesign,
-  SiAdobe,
   SiExpress,
   SiStrapi,
   SiSanity,
@@ -58,7 +53,6 @@ import {
   SiWebflow,
   SiMysql,
   SiShopify,
-  SiDart,
   SiFirebase,
   SiKotlin,
   SiSwift,
@@ -90,10 +84,7 @@ import {
   SiBitbucket,
   SiTerraform,
   SiKubernetes,
-  SiGrafana,
-  SiPrometheus,
-  SiDatadog,
-  SiSentry,
+  SiDocker,
 } from "react-icons/si";
 import { FaFlutter, FaXTwitter } from "react-icons/fa6";
 
@@ -536,20 +527,24 @@ devops: {
       ],
     },
 
-    infrastructure: {
-      title: "Cloud Infrastructure & Scaling",
-      subtitle: "CLOUD INFRASTRUCTURE",
-      description:
-        "We architect and manage cloud infrastructure to ensure reliability, auto-scaling, and optimized cost — using AWS, Google Cloud, and Azure.",
-      bg: "/services/infrastructure.webp",
-      images: ["/services/infrastructure1.webp", "/services/infrastructure2.webp"],
-      orbitTechs: [
-        { id: "aws", icon: <FaAws size={26} color="#FF9900" /> },
-        { id: "gcp", icon: <SiGooglecloud size={26} color="#4285F4" /> },
-        { id: "terraform", icon: <SiTerraform size={26} color="#844FBA" /> },
-        { id: "kubernetes", icon: <SiKubernetes size={26} color="#326CE5" /> },
-      ],
-    },
+  cloud: {
+  title: "Cloud Infrastructure & DevOps",
+  subtitle: "CLOUD INFRASTRUCTURE MANAGEMENT",
+  description:
+    "We design, deploy, and manage scalable cloud infrastructure using top providers like AWS, Azure, and Google Cloud. Our DevOps solutions ensure reliability, cost efficiency, and seamless performance through automated provisioning, monitoring, and scaling.",
+  bg: "/services/cloud.jpg",
+  images: [
+    "/services/cloudinfra1.webp",
+    "/services/cloudinfra2.webp"
+  ],
+  orbitTechs: [
+    { id: "gcp", icon: <SiGooglecloud size={26} color="#4285F4" /> },
+    { id: "terraform", icon: <SiTerraform size={26} color="#623CE4" /> },
+    { id: "docker", icon: <SiDocker size={26} color="#2496ED" /> },
+    { id: "kubernetes", icon: <SiKubernetes size={26} color="#326CE5" /> },
+  ],
+},
+
 
   },
 },
@@ -562,7 +557,8 @@ devops: {
 
 // ✅ Step 2: Dynamic component using both params
 export default function DynamicServiceSlugPage() {
-  const { web, slug } = useParams(); // /services/web/frontend
+  const { web, slug } = useParams();
+  const router = useRouter(); // ✅ Move to top
   const containerRef = useRef<HTMLDivElement | null>(null);
   const iconsRef = useRef<Array<HTMLDivElement | null>>([]);
   const rotRef = useRef<HTMLDivElement | null>(null);
@@ -570,11 +566,10 @@ export default function DynamicServiceSlugPage() {
   const mainData = SERVICE_DATA[web as string];
   if (!mainData) return notFound();
 
-  // find specific slug data
   const slugData = mainData.sublinks?.[slug as string];
   if (!slugData) return notFound();
 
-  // orbit animation
+  // Orbit animation
   useEffect(() => {
     const container = containerRef.current;
     const rot = rotRef.current;
@@ -583,13 +578,15 @@ export default function DynamicServiceSlugPage() {
     const radius = Math.min(container.clientWidth, container.clientHeight) * 0.38;
     const cx = container.clientWidth / 2;
     const cy = container.clientHeight / 2;
+    const iconSize = iconsRef.current[0]?.offsetWidth || 48;
+    const offset = iconSize / 2;
 
     iconsRef.current.forEach((el, idx) => {
       if (!el) return;
       const angle = (idx / iconsRef.current.length) * Math.PI * 2;
       const x = cx + Math.cos(angle) * radius;
       const y = cy + Math.sin(angle) * radius;
-      gsap.set(el, { x: x - 24, y: y - 24 });
+      gsap.set(el, { x: x - offset, y: y - offset });
     });
 
     gsap.to(rot, {
@@ -600,31 +597,52 @@ export default function DynamicServiceSlugPage() {
       transformOrigin: "50% 50%",
     });
 
-    return () => gsap.killTweensOf("*");
-  }, [web, slug]);
+    const handleResize = () => {
+      const newRadius = Math.min(container.clientWidth, container.clientHeight) * 0.38;
+      const newCx = container.clientWidth / 2;
+      const newCy = container.clientHeight / 2;
+      const firstIcon = iconsRef.current?.[0];
+      const newOffset = firstIcon ? firstIcon.offsetWidth / 2 : 24;
+
+      iconsRef.current.forEach((el, idx) => {
+        if (!el) return;
+        const angle = (idx / iconsRef.current.length) * Math.PI * 2;
+        const x = newCx + Math.cos(angle) * newRadius;
+        const y = newCy + Math.sin(angle) * newRadius;
+        gsap.set(el, { x: x - newOffset, y: y - newOffset });
+      });
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // ✅ Only render after hooks
+  if (!mainData) return notFound();
+  if (!slugData) return notFound();
+
+
 
   return (
-    <div
-      className="relative w-full min-h-screen bg-cover bg-center bg-no-repeat"
-      style={{
-        backgroundImage: `url('/scroler/socials-bg-desktop.c0beceae096e8677d45b.webp')`,
-      }}
-    >
+    <div className="relative w-full min-h-screen bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: `url('/scroler/socials-bg-desktop.c0beceae096e8677d45b.webp')` }}>
+
       {/* ================= HEADER SECTION ================= */}
-      <section
-        className="relative overflow-hidden min-h-[600px] flex items-center justify-center bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${slugData.bg})` }}
-      >
+      <section className="relative overflow-hidden min-h-[500px] sm:min-h-[600px] flex items-center justify-center bg-cover bg-center bg-no-repeat px-4 sm:px-6"
+        style={{ backgroundImage: `url(${slugData.bg})` }}>
         <div className="relative z-10 w-full">
-          <div className="mx-auto px-6 py-16 md:py-24 max-w-7xl">
-            <div className="max-w-[90%] p-8 md:p-12 rounded-xl backdrop-blur-md bg-white/5 border border-white/10 transition duration-500">
-              <p className="text-sm font-light uppercase tracking-widest text-white/70 mb-2">
+          <div className="mx-auto px-4 sm:px-6 py-12 sm:py-16 md:py-24 max-w-6xl">
+            <div className="max-w-[95%] sm:max-w-[90%] p-6 sm:p-8 md:p-12 rounded-xl backdrop-blur-md bg-white/5 border border-white/10 transition duration-500 text-center sm:text-left">
+              <p className="text-xs sm:text-sm font-light uppercase tracking-widest text-white/70 mb-2">
                 {mainData.subtitle}
               </p>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-tight mb-8 drop-shadow-lg">
+              <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-white leading-tight mb-6 drop-shadow-lg">
                 {mainData.title}
               </h1>
-              <button className="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-full text-white bg-teal-500 hover:bg-teal-600 shadow-xl transition duration-300 transform hover:scale-[1.03]">
+              <button
+                className="inline-flex items-center justify-center px-6 sm:px-8 py-2.5 sm:py-3 border border-transparent text-sm sm:text-base font-medium rounded-full text-white bg-teal-500 hover:bg-teal-600 shadow-xl transition duration-300 transform hover:scale-[1.03] cursor-pointer"
+                onClick={() => router.push("/contact")}
+              >
                 {mainData.button}
               </button>
             </div>
@@ -633,11 +651,11 @@ export default function DynamicServiceSlugPage() {
       </section>
 
       {/* ================= IMAGE SLIDER ================= */}
-      <section className="relative w-full flex flex-col justify-between gap-10 bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl py-10 px-7 shadow-2xl overflow-hidden max-w-7xl mx-auto my-16">
+      <section className="relative w-full flex flex-col justify-between gap-8 sm:gap-10 bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl py-8 sm:py-10 px-4 sm:px-7 shadow-2xl overflow-hidden max-w-7xl mx-auto my-10 sm:my-16">
         <div className="flex items-center justify-center w-full">
-          <div className="w-[95%] relative flex items-center justify-center">
+          <div className="w-full sm:w-[95%] relative flex items-center justify-center">
             {/* Custom Arrows */}
-            <div className="absolute -left-12 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-white/20 hover:bg-white/40 rounded-full flex items-center justify-center cursor-pointer text-white swiper-prev-custom">
+            <div className="hidden sm:flex absolute -left-6 sm:-left-12 top-1/2 -translate-y-1/2 z-20 w-8 h-8 sm:w-10 sm:h-10 bg-white/20 hover:bg-white/40 rounded-full items-center justify-center cursor-pointer text-white swiper-prev-custom">
               ❮
             </div>
 
@@ -647,67 +665,66 @@ export default function DynamicServiceSlugPage() {
                 nextEl: ".swiper-next-custom",
                 prevEl: ".swiper-prev-custom",
               }}
-              spaceBetween={30}
+              spaceBetween={20}
               slidesPerView={1}
               loop
-              className="rounded-2xl overflow-hidden shadow-lg"
+              className="rounded-2xl overflow-hidden shadow-lg w-full"
             >
               {slugData.images.map((img: string, idx: number) => (
                 <SwiperSlide key={idx}>
-                  <img
+                  <Image
                     src={img}
                     alt={`Slide ${idx}`}
-                    className="w-full h-[340px] object-cover rounded-2xl"
+                    width={800}
+                    height={400}
+                    className="w-full h-[220px] sm:h-[300px] md:h-[340px] object-cover rounded-2xl"
                   />
                 </SwiperSlide>
               ))}
             </Swiper>
 
-            <div className="absolute -right-12 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-white/20 hover:bg-white/40 rounded-full flex items-center justify-center cursor-pointer text-white swiper-next-custom">
+            <div className="hidden sm:flex absolute -right-6 sm:-right-12 top-1/2 -translate-y-1/2 z-20 w-8 h-8 sm:w-10 sm:h-10 bg-white/20 hover:bg-white/40 rounded-full items-center justify-center cursor-pointer text-white swiper-next-custom">
               ❯
             </div>
           </div>
         </div>
 
         {/* ================= TEXT + ORBIT ================= */}
-        <div className="flex flex-col md:flex-row justify-between gap-5 md:gap-5 relative md:px-5">
-          <div className="w-full md:w-1/2 text-left">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+        <div className="flex flex-col lg:flex-row justify-between items-center gap-8 md:gap-5 relative md:px-5">
+          {/* Text Section */}
+          <div className="w-full lg:w-1/2 text-center lg:text-left">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">
               {mainData.descriptionTitle}
             </h2>
-            <p className="text-white/80 max-w-xl leading-relaxed">
+            <p className="text-white/80 text-sm sm:text-base max-w-xl mx-auto lg:mx-0 leading-relaxed">
               {mainData.descriptionText}
             </p>
           </div>
 
-          <div className="relative w-full md:w-1/2 flex items-center justify-end">
-            <div
-              ref={containerRef}
-              className="relative w-[300px] h-[300px] sm:w-[380px] sm:h-[380px] rounded-full flex items-center justify-center overflow-visible"
-            >
+          {/* Orbit Section */}
+          <div className="relative w-full flex items-center justify-center lg:justify-end mt-6 lg:mt-0">
+            <div ref={containerRef} className="relative flex items-center justify-center rounded-full overflow-visible w-[50vw] h-[50vw] max-w-[380px] max-h-[380px] min-w-[180px] min-h-[180px]">
               <div ref={rotRef} className="absolute inset-0">
                 {(slugData.orbitTechs || mainData.orbitTechs || []).map((t: any, i: number) => (
-
                   <div
                     key={t.id}
-                    ref={(el) => {
-                      iconsRef.current[i] = el;
-                    }}
-                    className="absolute w-12 h-12 rounded-full flex items-center justify-center bg-white/80 shadow-lg backdrop-blur-md"
+                    ref={(el) => { iconsRef.current[i] = el; }}
+                    className="absolute flex items-center justify-center rounded-full bg-white/40 shadow-lg backdrop-blur-md w-[6vw] h-[6vw] min-w-[22px] min-h-[22px] max-w-[48px] max-h-[48px]"
                   >
                     {t.icon}
                   </div>
                 ))}
               </div>
 
-              <div className="relative z-20 flex items-center justify-center">
-                <div className="w-28 h-28 sm:w-36 sm:h-36 rounded-full bg-white flex items-center justify-center shadow-2xl">
-                  <img
-                    src="/header/logo.svg"
-                    alt="Qutham Logo"
-                    className="w-20 h-auto object-contain"
-                  />
-                </div>
+              {/* Center Logo */}
+              <div className="absolute top-[70%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[18vw] min-w-[40px] flex items-center justify-center">
+                <Image
+                  src="/header/qutha logo ne.svg"
+                  alt="Qutham Logo"
+                  width={100}
+                  height={100}
+                  className="object-contain"
+                />
               </div>
             </div>
           </div>

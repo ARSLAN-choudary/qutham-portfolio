@@ -186,7 +186,7 @@ export const FeaturedEvents = () => {
               </span>
             </h2>
 
-            <ul className="flex flex-col gap-[26px] md:flex-row md:items-center md:gap-[151px] md:mb-[-100px] will-change-transform">
+            <ul className="flex flex-col gap-[26px] md:flex-row md:items-center md:gap-[50px] md:mb-[-100px] will-change-transform">
               {events.map((event) => (
                 <li key={event.id} className="flex-[0_0_auto]">
                   <div className="relative w-[336px] md:w-[500px] h-[150px] md:h-[400px] cursor-pointer rounded-[14px] md:rounded-[54px] overflow-hidden">

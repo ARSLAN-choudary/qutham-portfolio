@@ -8,12 +8,12 @@ export const Header = () => {
   const [sidebar, isSidebar] = useState(false);
   const [childOpen, setChildOpen] = useState(false);
   const [nestedChildOpen, setNestedChildOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile] = useState(false);
 
   return (
     <>
       {/* HEADER */}
-      <div className="h-[50px] lg:h-[64px] bg-[hsla(0,0%,8%,.4)] backdrop-blur-2xl w-full fixed top-0 z-10 flex items-center justify-between px-6 lg:px-[50px]">
+      <div className="h-[50px] lg:h-[64px] bg-[hsla(0,0%,8%,.4)] backdrop-blur-2xl w-full fixed top-0 z-20 flex items-center justify-between px-6 lg:px-[50px] ">
         
         {/* LEFT: Hamburger */}
         <div
@@ -40,7 +40,7 @@ export const Header = () => {
         <Link href="/" className="cursor-pointer flex items-center justify-center">
 
           <Image
-  src="\header\logo.svg"
+  src="/header/qutha logo ne.svg"
   alt="logo"
   width={180}
   height={0}
