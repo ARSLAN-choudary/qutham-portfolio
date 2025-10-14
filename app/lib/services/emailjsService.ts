@@ -26,7 +26,7 @@ export const sendContactForm = async (formData: ContactFormData) => {
             source: formData.fromCareers ? 'Careers Page' : 'Contact Page'
         };
 
-        const response = await emailjs.send(
+        await emailjs.send(
             emailjsConfig.serviceId,
             emailjsConfig.templateId,
             templateParams,
@@ -36,9 +36,7 @@ export const sendContactForm = async (formData: ContactFormData) => {
         // If there's a resume file, send it separately
     
         return { success: true, message: 'Email sent successfully!' };
-    } catch (error) {
+    } catch {
         toast.error("Sorry, Failed to send email. Please try again.");
-       
     }
 };
-

@@ -30,16 +30,14 @@ class LocationTimeService {
                 country: data.country,
                 timezone: data.timezone
             };
-        } catch (error) {
-            
+        } catch {
             toast.error("Sorry, Error fetching location");
-            throw error;
+            throw new Error("Failed to fetch location");
         }
     }
 
     getCurrentHour(timezone: string): number {
         try {
-      
             const now = new Date();
             const formatter = new Intl.DateTimeFormat('en-US', {
                 timeZone: timezone,
@@ -51,19 +49,15 @@ class LocationTimeService {
             const hourPart = parts.find(part => part.type === 'hour');
             const hour = hourPart ? parseInt(hourPart.value) : now.getHours();
 
-        
             return hour;
 
-        } catch (error) {
-          
+        } catch {
             toast.error("Sorry, Error getting hour from timezone, using local time");
-           
             return new Date().getHours();
         }
     }
 
     getGreetingData(hour: number, countryCode: string): GreetingData {
-   
         let englishGreeting = '';
         let timeOfDay: 'morning' | 'afternoon' | 'evening' | 'night' = 'morning';
         let isDaytime = true;
@@ -88,7 +82,6 @@ class LocationTimeService {
 
         const nativeGreeting = this.getNativeGreeting(englishGreeting, countryCode);
 
-      
         return {
             englishGreeting,
             nativeGreeting,
@@ -101,81 +94,32 @@ class LocationTimeService {
     private getNativeGreeting(englishGreeting: string, countryCode: string): string {
         const greetings: { [key: string]: { [key: string]: string } } = {
             'Good Morning': {
-                'PK': 'صبح بخیر', // Urdu - Pakistan
-                'IN': 'सुप्रभात', // Hindi - India
-                'AE': 'صباح الخير', // Arabic - UAE
-                'SA': 'صباح الخير', // Arabic - Saudi Arabia
-                'CN': '早上好', // Chinese - China
-                'HK': '早晨', // Cantonese - Hong Kong
-                'JP': 'おはよう', // Japanese - Japan
-                'KR': '안녕하세요', // Korean - South Korea
-                'FR': 'Bonjour', // French - France
-                'DE': 'Guten Morgen', // German - Germany
-                'ES': 'Buenos días', // Spanish - Spain
-                'IT': 'Buongiorno', // Italian - Italy
-                'BR': 'Bom dia', // Portuguese - Brazil
-                'RU': 'Доброе утро', // Russian - Russia
-                'TR': 'Günaydın', // Turkish - Turkey
-                'NL': 'Goedemorgen', // Dutch - Netherlands
+                'PK': 'صبح بخیر', 'IN': 'सुप्रभात', 'AE': 'صباح الخير', 'SA': 'صباح الخير',
+                'CN': '早上好', 'HK': '早晨', 'JP': 'おはよう', 'KR': '안녕하세요',
+                'FR': 'Bonjour', 'DE': 'Guten Morgen', 'ES': 'Buenos días', 'IT': 'Buongiorno',
+                'BR': 'Bom dia', 'RU': 'Доброе утро', 'TR': 'Günaydın', 'NL': 'Goedemorgen',
             },
             'Good Afternoon': {
-                'PK': 'دوپہر بخیر',
-                'IN': 'शुभ दोपहर',
-                'AE': 'مساء الخير',
-                'SA': 'مساء الخير',
-                'CN': '下午好',
-                'HK': '午安',
-                'JP': 'こんにちは',
-                'KR': '안녕하세요',
-                'FR': 'Bon après-midi',
-                'DE': 'Guten Tag',
-                'ES': 'Buenas tardes',
-                'IT': 'Buon pomeriggio',
-                'BR': 'Boa tarde',
-                'RU': 'Добрый день',
-                'TR': 'Tünaydın',
-                'NL': 'Goedemiddag',
+                'PK': 'دوپہر بخیر', 'IN': 'शुभ दोपहर', 'AE': 'مساء الخير', 'SA': 'مساء الخير',
+                'CN': '下午好', 'HK': '午安', 'JP': 'こんにちは', 'KR': '안녕하세요',
+                'FR': 'Bon après-midi', 'DE': 'Guten Tag', 'ES': 'Buenas tardes', 'IT': 'Buon pomeriggio',
+                'BR': 'Boa tarde', 'RU': 'Добрый день', 'TR': 'Tünaydın', 'NL': 'Goedemiddag',
             },
             'Good Evening': {
-                'PK': 'شام بخیر',
-                'IN': 'शुभ संध्या',
-                'AE': 'مساء الخير',
-                'SA': 'مساء الخير',
-                'CN': '晚上好',
-                'HK': '晚安',
-                'JP': 'こんばんは',
-                'KR': '안녕하세요',
-                'FR': 'Bonsoir',
-                'DE': 'Guten Abend',
-                'ES': 'Buenas noches',
-                'IT': 'Buona sera',
-                'BR': 'Boa noite',
-                'RU': 'Добрый вечер',
-                'TR': 'İyi akşamlar',
-                'NL': 'Goedenavond',
+                'PK': 'شام بخیر', 'IN': 'शुभ संध्या', 'AE': 'مساء الخير', 'SA': 'مساء الخير',
+                'CN': '晚上好', 'HK': '晚安', 'JP': 'こんばんは', 'KR': '안녕하세요',
+                'FR': 'Bonsoir', 'DE': 'Guten Abend', 'ES': 'Buenas noches', 'IT': 'Buona sera',
+                'BR': 'Boa noite', 'RU': 'Добрый вечер', 'TR': 'İyi akşamlar', 'NL': 'Goedenavond',
             },
             'Good Night': {
-                'PK': 'شب بخیر',
-                'IN': 'शुभ रात्रि',
-                'AE': 'تصبح على خير',
-                'SA': 'تصبح على خير',
-                'CN': '晚安',
-                'HK': '晚安',
-                'JP': 'おやすみなさい',
-                'KR': '안녕히 주무세요',
-                'FR': 'Bonne nuit',
-                'DE': 'Gute Nacht',
-                'ES': 'Buenas noches',
-                'IT': 'Buona notte',
-                'BR': 'Boa noite',
-                'RU': 'Спокойной ночи',
-                'TR': 'İyi geceler',
-                'NL': 'Goedenacht',
+                'PK': 'شب بخیر', 'IN': 'शुभ रात्रि', 'AE': 'تصبح على خير', 'SA': 'تصبح على خير',
+                'CN': '晚安', 'HK': '晚安', 'JP': 'おやすみなさい', 'KR': '안녕히 주무세요',
+                'FR': 'Bonne nuit', 'DE': 'Gute Nacht', 'ES': 'Buenas noches', 'IT': 'Buona notte',
+                'BR': 'Boa noite', 'RU': 'Спокойной ночи', 'TR': 'İyi geceler', 'NL': 'Goedenacht',
             }
         };
 
-        const native = greetings[englishGreeting]?.[countryCode];
-        return native || englishGreeting;
+        return greetings[englishGreeting]?.[countryCode] || englishGreeting;
     }
 }
 

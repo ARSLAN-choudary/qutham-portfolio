@@ -6,6 +6,7 @@ import { useSearchParams } from "next/navigation";
 import "./Contact.css";
 import { sendContactForm } from "@/app/lib/services/emailjsService";
 import toast from "react-hot-toast";
+
 export default function ContactForm() {
   const searchParams = useSearchParams();
   const fromCareers = searchParams.get("from") === "careers";
@@ -21,7 +22,6 @@ export default function ContactForm() {
 
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [resume, setResume] = useState<File | null>(null);
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
@@ -44,12 +44,6 @@ export default function ContactForm() {
     if (errors[name]) setErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      setResume(e.target.files[0]);
-    }
-  };
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -60,12 +54,10 @@ export default function ContactForm() {
     }
 
     try {
-      // Send email via EmailJS
       await sendContactForm({
         ...formData,
-        fromCareers
+        fromCareers,
       });
-
 
       // Reset form
       setFormData({
@@ -76,22 +68,19 @@ export default function ContactForm() {
         expertise: "",
         comments: "",
       });
-      setResume(null);
       setErrors({});
       toast.success("Thank you! Your message has been sent successfully 🎉");
-
-    } catch (error) {
-      toast.error("Sorry, there was an error submitting your form. Please try again.");
-
-
-
+    } catch {
+      toast.error(
+        "Sorry, there was an error submitting your form. Please try again."
+      );
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <div className="style_contact__us__wrappper__62fYI h-full " >
+    <div className="style_contact__us__wrappper__62fYI h-full">
       <section
         className="style_contactus__container__Flquh"
         aria-labelledby="contact-heading"
@@ -126,10 +115,13 @@ export default function ContactForm() {
                   width={20}
                   height={20}
                 />
-                <a href="mailto:contact@qutham.com" target="_blank" rel="noopener noreferrer">
+                <a
+                  href="mailto:contact@qutham.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   contact@qutham.com
                 </a>
-
               </div>
             </div>
           </div>
@@ -138,15 +130,15 @@ export default function ContactForm() {
         {/* RIGHT SIDE - FORM */}
         <div className="style_form__wrapper__eIlmx">
           <form onSubmit={handleSubmit} noValidate>
-            {/* --- SAME FIELDS --- */}
             {/* Name */}
             <div className="style_form__group__46EVf">
               <label htmlFor="name" className="style_form__label__-sYoI">
                 Full Name <span className="style_required__star__UTD67">*</span>
               </label>
               <input
-                className={`style_inputfield__FJ49s ${errors.name ? "style_input__error__8x9K2" : ""
-                  }`}
+                className={`style_inputfield__FJ49s ${
+                  errors.name ? "style_input__error__8x9K2" : ""
+                }`}
                 id="name"
                 name="name"
                 type="text"
@@ -171,8 +163,9 @@ export default function ContactForm() {
                 <span className="style_required__star__UTD67">*</span>
               </label>
               <input
-                className={`style_inputfield__FJ49s ${errors.phone ? "style_input__error__8x9K2" : ""
-                  }`}
+                className={`style_inputfield__FJ49s ${
+                  errors.phone ? "style_input__error__8x9K2" : ""
+                }`}
                 id="phone"
                 name="phone"
                 type="tel"
@@ -196,8 +189,9 @@ export default function ContactForm() {
                 Email
               </label>
               <input
-                className={`style_inputfield__FJ49s ${errors.email ? "style_input__error__8x9K2" : ""
-                  }`}
+                className={`style_inputfield__FJ49s ${
+                  errors.email ? "style_input__error__8x9K2" : ""
+                }`}
                 id="email"
                 name="email"
                 type="email"
@@ -221,8 +215,9 @@ export default function ContactForm() {
                 Location <span className="style_required__star__UTD67">*</span>
               </label>
               <input
-                className={`style_inputfield__FJ49s ${errors.location ? "style_input__error__8x9K2" : ""
-                  }`}
+                className={`style_inputfield__FJ49s ${
+                  errors.location ? "style_input__error__8x9K2" : ""
+                }`}
                 id="location"
                 name="location"
                 type="text"
@@ -246,8 +241,9 @@ export default function ContactForm() {
                 <span className="style_required__star__UTD67">*</span>
               </label>
               <select
-                className={`style_inputfield__FJ49s style_placeholder__9Azjc !text-[16px] !text-[#ffffff9e] ${errors.expertise ? "style_input__error__8x9K2" : ""
-                  }`}
+                className={`style_inputfield__FJ49s style_placeholder__9Azjc !text-[16px] !text-[#ffffff9e] ${
+                  errors.expertise ? "style_input__error__8x9K2" : ""
+                }`}
                 id="expertise"
                 name="expertise"
                 value={formData.expertise}
@@ -289,7 +285,7 @@ export default function ContactForm() {
               />
             </div>
 
-            {/* 👇 Conditional file upload + button */}
+            {/* Conditional file upload */}
             {fromCareers && (
               <>
                 <div className="style_form__group__46EVf">
@@ -302,7 +298,6 @@ export default function ContactForm() {
                     name="resume"
                     accept=".pdf,.doc,.docx"
                     className="style_inputfield__FJ49s"
-                    onChange={handleFileChange}
                     disabled={isSubmitting}
                   />
                 </div>

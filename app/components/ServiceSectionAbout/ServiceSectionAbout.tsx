@@ -285,7 +285,7 @@ export default function ServiceSectionAbout() {
                 <div className="style_gully__services__container__RMvWw">
                     {/* Services Details - Left Side */}
                     <div className="style_services__details__uAqsp">
-                        {services.map((service, index) => (
+                        {services.map((service) => (
                             <article key={service.id} className="style_text__block__wsB1a">
                                 <div className="style_text__block__content__sbNUu">
                                     <div className="style_text__block__heading__2FrB6">
