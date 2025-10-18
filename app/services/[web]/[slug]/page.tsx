@@ -703,31 +703,57 @@ export default function DynamicServiceSlugPage() {
 
           {/* Orbit Section */}
           <div className="relative w-full flex items-center justify-center lg:justify-end mt-6 lg:mt-0">
-            <div ref={containerRef} className="relative flex items-center justify-center rounded-full overflow-visible w-[50vw] h-[50vw] max-w-[380px] max-h-[380px] min-w-[180px] min-h-[180px]">
-              <div ref={rotRef} className="absolute inset-0">
-                {(slugData.orbitTechs || mainData.orbitTechs || []).map((t: any, i: number) => (
-                  <div
-                    key={t.id}
-                    ref={(el) => { iconsRef.current[i] = el; }}
-                    className="absolute flex items-center justify-center rounded-full bg-white/40 shadow-lg backdrop-blur-md w-[6vw] h-[6vw] min-w-[22px] min-h-[22px] max-w-[48px] max-h-[48px]"
-                  >
-                    {t.icon}
-                  </div>
-                ))}
-              </div>
-
-              {/* Center Logo */}
-              <div className="absolute top-[70%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[18vw] min-w-[40px] flex items-center justify-center">
-                <Image
-                  src="/header/qutha logo ne.svg"
-                  alt="Qutham Logo"
-                  width={100}
-                  height={100}
-                  className="object-contain"
-                />
-              </div>
-            </div>
+  <div 
+    ref={containerRef} 
+    className="relative flex items-center justify-center rounded-full overflow-visible 
+               w-[50vw] h-[50vw] 
+               max-w-[380px] max-h-[380px] 
+               min-w-[180px] min-h-[180px]
+               sm:w-[40vw] sm:h-[40vw]
+               md:w-[35vw] md:h-[35vw]"
+  >
+    <div ref={rotRef} className="absolute inset-0">
+      {(slugData.orbitTechs || mainData.orbitTechs || []).map((t: any, i: number) => (
+        <div
+          key={t.id}
+          ref={(el) => { iconsRef.current[i] = el; }}
+          className="absolute flex items-center justify-center rounded-full 
+                     bg-white/40 shadow-lg backdrop-blur-md 
+                     w-[clamp(22px,8vw,48px)] h-[clamp(22px,8vw,48px)]
+                     sm:w-[clamp(24px,7vw,46px)] sm:h-[clamp(24px,7vw,46px)]
+                     md:w-[clamp(26px,6vw,44px)] md:h-[clamp(26px,6vw,44px)]"
+          style={{
+            transform: `rotate(${i * (360 / (slugData.orbitTechs || mainData.orbitTechs || []).length)}deg) 
+                       translate(calc(50vw - clamp(11px,4vw,24px))) 
+                       rotate(-${i * (360 / (slugData.orbitTechs || mainData.orbitTechs || []).length)}deg)`
+          }}
+        >
+          <div className="flex items-center justify-center 
+                         w-[clamp(16px,6vw,36px)] h-[clamp(16px,6vw,36px)]
+                         sm:w-[clamp(18px,5vw,34px)] sm:h-[clamp(18px,5vw,34px)]
+                         md:w-[clamp(20px,4.5vw,32px)] md:h-[clamp(20px,4.5vw,32px)]">
+            {t.icon}
           </div>
+        </div>
+      ))}
+    </div>
+
+    {/* Center Logo - Responsive */}
+    <div className="absolute top-[50%] left-1/2 -translate-x-1/2 -translate-y-1/2 
+                   w-[clamp(40px,18vw,80px)] 
+                   sm:w-[clamp(45px,16vw,75px)]
+                   md:w-[clamp(50px,14vw,70px)] 
+                   flex items-center justify-center">
+      <Image
+        src="/qutham-tech.svg"
+        alt="Qutham Logo"
+        width={100}
+        height={100}
+        className="object-contain w-full h-auto"
+      />
+    </div>
+  </div>
+</div>
         </div>
       </section>
     </div>

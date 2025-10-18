@@ -12,7 +12,7 @@ function AboutHeader() {
                     In today’s digital era, a strong online presence defines success — from websites and web apps to mobile apps that connect and engage. At Qutham Tech, we craft innovative digital solutions, including SEO, graphic designing, and digital marketing, to turn ideas into impact and empower businesses to grow.
                 </p>
                 <Link href="/contact" className="style_custom__button__DuUUn">
-                    <span>Book Now</span>
+                    <span>Join Now</span>
                     <Image
                         src="/about/arrowForward.bfdd2445f54c5be8c49e9c1f9e37d943.svg"
                         alt="forward icon"

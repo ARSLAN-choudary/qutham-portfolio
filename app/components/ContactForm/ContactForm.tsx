@@ -69,7 +69,12 @@ export default function ContactForm() {
         comments: "",
       });
       setErrors({});
-      toast.success("Thank you! Your message has been sent successfully 🎉");
+      
+      if (fromCareers) {
+        toast.success("Thank you! Your job application has been submitted successfully 🎉");
+      } else {
+        toast.success("Thank you! Your message has been sent successfully 🎉");
+      }
     } catch {
       toast.error(
         "Sorry, there was an error submitting your form. Please try again."
@@ -285,42 +290,17 @@ export default function ContactForm() {
               />
             </div>
 
-            {/* Conditional file upload */}
-            {fromCareers && (
-              <>
-                <div className="style_form__group__46EVf">
-                  <label htmlFor="resume" className="style_form__label__-sYoI">
-                    Upload Resume
-                  </label>
-                  <input
-                    type="file"
-                    id="resume"
-                    name="resume"
-                    accept=".pdf,.doc,.docx"
-                    className="style_inputfield__FJ49s"
-                    disabled={isSubmitting}
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="style_form__submit__btn__F8DVM !mt-0"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? "Submitting..." : "Submit"}
-                </button>
-              </>
-            )}
-
-            {/* Default Send Message button */}
-            {!fromCareers && (
-              <button
-                type="submit"
-                className="style_form__submit__btn__F8DVM !mt-0 mb-10"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? "Sending..." : "Send Message"}
-              </button>
-            )}
+            {/* Single Submit Button for Both Cases */}
+            <button
+              type="submit"
+              className="style_form__submit__btn__F8DVM !mt-0 mb-10"
+              disabled={isSubmitting}
+            >
+              {isSubmitting 
+                ? (fromCareers ? "Submitting..." : "Sending...") 
+                : (fromCareers ? "Submit Application" : "Send Message")
+              }
+            </button>
           </form>
         </div>
       </section>
