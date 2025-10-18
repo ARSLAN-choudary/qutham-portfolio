@@ -26,8 +26,8 @@ Requirements:
     },
     {
       title: "Frontend Developer (React / Next.js)",
-      desc: `We’re hiring a mid-level React / Next.js Developer to join our fast-paced development team. 
-You’ll build modern, scalable, and SEO-optimized applications with React, Redux Toolkit, and Next.js. 
+      desc: `We're hiring a mid-level React / Next.js Developer to join our fast-paced development team. 
+You'll build modern, scalable, and SEO-optimized applications with React, Redux Toolkit, and Next.js. 
 Must have 2–3 years of hands-on experience in frontend development using React ecosystem.
 
 Key Responsibilities:
@@ -134,23 +134,26 @@ Requirements:
 - Detail-oriented and able to work independently under minimal supervision.`,
     },
   ];
+
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedJob, setSelectedJob] = useState(jobs[0]);
+  const jobSectionRef = useRef<HTMLDivElement | null>(null);
 
-
+  const handleJobClick = (job: any, e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setSelectedJob(job);
+    
+    // Scroll to top of job details section on mobile
+    if (window.innerWidth < 1440) {
+      jobSectionRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   const filteredJobs = jobs.filter((job) =>
     job.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
-  const [selectedJob, setSelectedJob] = useState(jobs[0]);
-  // const jobRefs = useRef<HTMLDivElement[]>([]);
-  const jobSectionRef = useRef<HTMLDivElement | null>(null);
-
-  const handleJobClick = (jobs: any) => {
-    setSelectedJob(jobs);
-
-  };
 
   return (
     <div className="relative w-full min-h-[calc(100vh-112px)]">
@@ -159,33 +162,35 @@ Requirements:
 
       {/* ✅ Layout Container */}
       <div className="w-full flex items-start justify-center gap-[24px] flex-wrap mt-[45px] min-[1440px]:mt-[100px] pb-[100px] px-[12px] min-[1440px]:px-[20px] max-[1440px]:flex-col-reverse max-[1440px]:items-center">
-        {/* ✅ Main Content */}
+        
+        {/* ✅ Main Content - Job Details */}
         <div className="w-[calc(100%-420px)] max-[1440px]:w-full min-[1440px]:bg-[hsla(0,0%,100%,.07)] bg-transparent rounded-[40px] min-h-[400px] p-0 min-[1440px]:p-[20px]">
           <div className="px-0 min-[1440px]:px-[20px] flex items-center flex-col">
-            {/* <img src="/card-test.webp" alt="" className="max-w-full rounded-[16px]" /> */}
-            <div className="bg-[linear-gradient(180deg,hsla(0,0%,100%,.1),hsla(0,0%,100%,.07))] border border-[hsla(0,0%,100%,.1)] rounded-[24px] h-auto min-h-[100px] py-[13px] px-[12px] w-full flex items-center gap-[12px] max-[640px]:w-full   backdrop-blur-[7px]">
+            
+            {/* ✅ Job Header Card */}
+            <div 
+              className="bg-[linear-gradient(180deg,hsla(0,0%,100%,.1),hsla(0,0%,100%,.07))] border border-[hsla(0,0%,100%,.1)] rounded-[24px] h-auto min-h-[100px] py-[13px] px-[12px] w-full flex items-center gap-[12px] max-[640px]:w-full backdrop-blur-[7px]"
+              ref={jobSectionRef}
+            >
               <div className="bg-[hsla(0,0%,100%,.3)] rounded-full min-h-[74px] w-[74px] p-2 flex-shrink-0">
                 <Image
                   src="/qutham-logo.enc"
-                  alt=""
+                  alt="Qutham Logo"
                   width={100}
                   height={100}
-                  className="rounded-full h-full w-full"
+                  className="rounded-full h-full w-full object-cover"
                 />
               </div>
 
-              {/* ✅ Job Title */}
-              <div
-                className="flex flex-col items-start text-center max-[640px]:items-center"
-                ref={jobSectionRef}
-              >
-                <p className="text-[20px] font-semibold text-white ">
+              {/* ✅ Job Title and Location */}
+              <div className="flex flex-col items-start text-center max-[640px]:items-center max-[640px]:w-full">
+                <p className="text-[20px] font-semibold text-white">
                   {selectedJob.title}
                 </p>
-                <div className="flex items-center gap-1.5 max-[640px]:justify-center">
+                <div className="flex items-center gap-1.5 max-[640px]:justify-center mt-1">
                   <Image
                     src="/location-icon.svg"
-                    alt=""
+                    alt="Location"
                     width={12}
                     height={12}
                     className="w-[12px] h-[12px]"
@@ -197,87 +202,92 @@ Requirements:
 
             {/* ✅ Job Description */}
             <div className="mt-[14px] py-[14px] px-[18px] text-white bg-[hsla(0,0%,100%,.06)] w-full rounded-[20px]">
-              <p className="text-center text-white text-[16px] font-semibold p-[10px] border-b border-white">
-                Requirements
+              <p className="text-center text-white text-[16px] font-semibold p-[10px] border-b border-white/30">
+                Job Description & Requirements
               </p>
-              <p className="whitespace-pre-line text-[15px] leading-relaxed flex items-center justify-center p-[12px]">
+              <div className="whitespace-pre-line text-[15px] leading-relaxed p-[12px]">
                 {selectedJob.desc}
-              </p>
+              </div>
             </div>
 
-            {/* ✅ Buttons */}
+            {/* ✅ Action Buttons */}
             <div className="flex items-center gap-[12px] my-[24px] w-full max-[640px]:flex-col">
-              <button className="bg-[linear-gradient(90deg,hsla(0,0%,100%,.03),hsla(0,0%,100%,.1)_54.16%,hsla(0,0%,100%,.06))] border border-[hsla(0,0%,100%,.1)] min-h-[58px] rounded-[24px] w-full max-[640px]:w-full text-white font-medium cursor-pointer">
-                <Link
-                  href="/contact?from=careers"
-                  className="block w-full h-full text-center text-[18px] font-semibold text-white py-[15px]"
-                >
+              <Link
+                href="/contact?from=careers"
+                className="block w-full"
+              >
+                <button className="bg-[linear-gradient(90deg,hsla(0,0%,100%,.03),hsla(0,0%,100%,.1)_54.16%,hsla(0,0%,100%,.06))] border border-[hsla(0,0%,100%,.1)] min-h-[58px] rounded-[24px] w-full text-white font-medium cursor-pointer text-[18px] font-semibold py-[15px] hover:bg-[hsla(0,0%,100%,.1)] transition-all duration-200">
                   Apply Now
-                </Link>
-              </button>
-
-              {/* <button className="bg-[linear-gradient(90deg,hsla(0,0%,100%,.03),hsla(0,0%,100%,.1)_54.16%,hsla(0,0%,100%,.06))] border border-[hsla(0,0%,100%,.1)] min-h-[58px] rounded-[24px] w-[calc(50%-6px)] max-[640px]:w-full text-white font-medium cursor-pointer">
-                <p className="text-[18px] tex-white font-semibold">Join Us</p>
-              </button> */}
+                </button>
+              </Link>
             </div>
+
           </div>
         </div>
 
-        {/* ✅ Sidebar with Search */}
+        {/* ✅ Sidebar - Job List */}
         <div className="w-[384px] max-[1440px]:w-full bg-[hsla(0,0%,100%,.1)] border border-[hsla(0,0%,100%,.2)] rounded-[32px] overflow-hidden max-[1440px]:mt-[40px]">
-
-          {/* Header with Search */}
+          
+          {/* ✅ Sidebar Header with Search */}
           <div className="flex items-center justify-between bg-[hsla(0,0%,100%,.05)] text-white px-[24px] pt-[24px] pb-[18px]">
-            <p className="text-[16px] font-semibold">Jobs</p>
+            <p className="text-[16px] font-semibold">Open Positions</p>
 
             <div className="relative flex items-center">
               <button
                 onClick={() => setSearchOpen(!searchOpen)}
-                className="relative cursor-pointer"
+                className="relative cursor-pointer p-1 hover:bg-[hsla(0,0%,100%,.1)] rounded-full transition-colors"
               >
-          
                 <Image
-                  width={24}
-                  height={24}
+                  width={20}
+                  height={20}
                   src="/header/search.svg"
-                  alt="Search"
+                  alt="Search Jobs"
                 />
               </button>
 
-              {/* Smooth expanding search bar */}
+              {/* ✅ Search Input */}
               <input
                 type="text"
                 placeholder="Search jobs..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className={`ml-2 text-white text-[14px] bg-[hsla(0,0%,100%,.08)] border border-[hsla(0,0%,100%,.2)] rounded-[20px] px-3 py-1 transition-all duration-300 ease-in-out ${searchOpen
-                  ? "opacity-100 w-[160px] visible"
-                  : "opacity-0 w-0 overflow-hidden"
-                  }`}
+                className={`ml-2 text-white text-[14px] bg-[hsla(0,0%,100%,.08)] border border-[hsla(0,0%,100%,.2)] rounded-[20px] px-3 py-2 transition-all duration-300 ease-in-out placeholder-white/60 ${
+                  searchOpen
+                    ? "opacity-100 w-[160px] visible"
+                    : "opacity-0 w-0 overflow-hidden"
+                }`}
               />
             </div>
           </div>
 
-          {/* Job List */}
-          <div className="px-[12px] pb-[12px] flex flex-col items-center gap-[10px] mt-[14px]">
+          {/* ✅ Job List */}
+          <div className="px-[12px] pb-[12px] flex flex-col items-center gap-[10px] mt-[14px] max-h-[500px] overflow-y-auto">
             {filteredJobs.length > 0 ? (
               filteredJobs.map((job, idx) => (
                 <div
                   key={idx}
-                  onClick={() => handleJobClick(job)}
-                  className={`rounded-[100px] h-[74px] py-[19px] pl-[16px] pr-[8px] w-full border text-[14px] font-medium text-white flex items-center justify-center cursor-pointer transition-all duration-200 ${selectedJob.title === job.title
-                    ? "bg-[hsla(0,0%,100%,.15)] border-[hsla(0,0%,100%,.3)]"
-                    : "bg-[rgba(0,0,0,.4)] border-[hsla(0,0%,100%,.2)] hover:bg-[rgba(255,255,255,.05)]"
-                    }`}
+                  onClick={(e) => handleJobClick(job, e)}
+                  className={`rounded-[100px] h-[74px] py-[19px] pl-[16px] pr-[8px] w-full border text-[14px] font-medium text-white flex items-center justify-center cursor-pointer transition-all duration-200 ${
+                    selectedJob.title === job.title
+                      ? "bg-[hsla(0,0%,100%,.15)] border-[hsla(0,0%,100%,.3)] shadow-lg"
+                      : "bg-[rgba(0,0,0,.4)] border-[hsla(0,0%,100%,.2)] hover:bg-[rgba(255,255,255,.1)] hover:border-[hsla(0,0%,100%,.3)]"
+                  }`}
                 >
-                  {job.title}
+                  <span className="text-center px-2">{job.title}</span>
                 </div>
               ))
             ) : (
-              <p className="text-white text-[14px] opacity-60">
-                No jobs found
-              </p>
+              <div className="text-white text-[14px] opacity-60 py-8 text-center">
+                No jobs found matching "{searchTerm}"
+              </div>
             )}
+          </div>
+
+          {/* ✅ Jobs Count */}
+          <div className="px-[24px] py-[16px] border-t border-[hsla(0,0%,100%,.1)]">
+            <p className="text-white/70 text-[12px] text-center">
+              Showing {filteredJobs.length} of {jobs.length} positions
+            </p>
           </div>
         </div>
       </div>

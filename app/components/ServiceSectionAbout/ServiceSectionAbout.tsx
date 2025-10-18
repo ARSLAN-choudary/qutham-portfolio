@@ -59,7 +59,7 @@ export default function ServiceSectionAbout() {
         if (!imagesWrapper) return;
 
         const images = imagesWrapper.querySelectorAll("img");
-        const articles = document.querySelectorAll(".style_text__block__wsB1a");
+        const articles = document.querySelectorAll(".style_gully__services__container__RMvWw .style_text__block__wsB1a"); 
 
         // Set initial state
         gsap.set(images, {
@@ -67,10 +67,12 @@ export default function ServiceSectionAbout() {
             scale: 0.8
         });
 
-        gsap.set(images[0], {
-            opacity: 1,
-            scale: 1
-        });
+        if (images.length > 0) {
+            gsap.set(images[0], {
+                opacity: 1,
+                scale: 1
+            });
+        }
 
         // Function to show specific image
         const showImage = (index: number) => {
@@ -84,12 +86,12 @@ export default function ServiceSectionAbout() {
             });
         };
 
-        // Create scroll triggers for each article - UPDATED START POSITION
+        // Create scroll triggers for each article
         articles.forEach((article, i) => {
             ScrollTrigger.create({
                 trigger: article,
-                start: "top 90%", // Changed from "top center" to start lower
-                end: "bottom 10%", // Adjusted end point
+                start: "top 90%",
+                end: "bottom 10%",
                 onEnter: () => showImage(i),
                 onEnterBack: () => showImage(i)
             });
@@ -102,6 +104,7 @@ export default function ServiceSectionAbout() {
 
     const sectionRef = useRef<HTMLDivElement | null>(null);
     const containerRef = useRef<HTMLDivElement | null>(null);
+    const lastGalleryItemRef = useRef<HTMLLIElement | null>(null);
 
     const galleryItems = [
         {
@@ -126,26 +129,45 @@ export default function ServiceSectionAbout() {
         },
     ];
 
-    // Separate useEffect for the gallery section - FIXED VERSION
+    // Separate useEffect for the gallery section - FINAL FIXED VERSION
     useEffect(() => {
         const section = sectionRef.current;
         const container = containerRef.current;
-        if (!section || !container) return;
+        const lastItem = lastGalleryItemRef.current;
+        if (!section || !container || !lastItem) return;
         if (window.innerWidth < 768) return;
 
-        const TOTAL_X = container.scrollWidth - window.innerWidth;
-        const THRESHOLD_X = TOTAL_X * 0.8; // Changed to 80% for better transition
-        const V_TO_H_RATIO = 1.2; // Slightly increased for smoother scroll
+        const V_TO_H_RATIO = 1.2;
+        // Increased the safe margin for more visibility (from 40 to 80)
+        const DESKTOP_SAFE_MARGIN = 80; 
 
         let translateX = 0;
         let isLocked = false;
         let mode: "A" | "B" = "A";
         let phaseBStartScrollY = 0;
 
-        let actualScrollable = Math.max(0, container.scrollWidth - window.innerWidth);
-        let MAX_X = Math.min(TOTAL_X, actualScrollable);
-        let THRESH_X_CLAMPED = Math.min(THRESHOLD_X, MAX_X);
-        let PHASE_B_REMAINING = Math.max(0, MAX_X - THRESH_X_CLAMPED);
+        let MAX_X = 0;
+        let THRESHOLD_X = 0;
+        let THRESH_X_CLAMPED = 0;
+        let PHASE_B_REMAINING = 0;
+
+        const calculateBounds = () => {
+            const viewportWidth = window.innerWidth;
+            
+            // 1. Get the last item's position relative to the start of the container
+            // lastItem.offsetLeft is the left edge. Add lastItem.offsetWidth to get the right edge.
+            const lastItemRightPosition = lastItem.offsetLeft + lastItem.offsetWidth;
+
+            // 2. Calculate the total required scroll distance (MAX_X)
+            // This is the distance from the container's start to the last item's right edge, 
+            // minus the viewport width and PLUS the safe margin we want to keep visible on the right.
+            MAX_X = Math.max(0, lastItemRightPosition - viewportWidth + DESKTOP_SAFE_MARGIN);
+            
+            // 3. Set threshold for mode switch (80% of MAX_X)
+            THRESHOLD_X = MAX_X * 0.8;
+            THRESH_X_CLAMPED = Math.min(THRESHOLD_X, MAX_X);
+            PHASE_B_REMAINING = Math.max(0, MAX_X - THRESH_X_CLAMPED);
+        };
 
         const lockScroll = () => {
             if (!isLocked) {
@@ -183,7 +205,6 @@ export default function ServiceSectionAbout() {
         const switchToA = () => {
             mode = "A";
             lockScroll();
-            // Don't reset translateX here, keep current position
             applyTransform();
         };
 
@@ -206,13 +227,11 @@ export default function ServiceSectionAbout() {
             const atStart = translateX >= -2;
             const atEnd = Math.abs(translateX) >= MAX_X - 2;
 
-            // Allow scrolling up when at start to exit section
             if (e.deltaY < 0 && atStart) {
                 unlockScroll();
                 return;
             }
 
-            // Allow scrolling down when at end to continue to next section
             if (e.deltaY > 0 && atEnd) {
                 unlockScroll();
                 return;
@@ -225,7 +244,6 @@ export default function ServiceSectionAbout() {
             translateX = Math.min(0, Math.max(-MAX_X, translateX));
             applyTransform();
 
-            // Switch to mode B when reaching threshold while scrolling right
             if (Math.abs(translateX) >= THRESH_X_CLAMPED && e.deltaY > 0) {
                 switchToB();
             }
@@ -236,25 +254,27 @@ export default function ServiceSectionAbout() {
             if (!partlyInView()) return;
 
             const deltaY = window.scrollY - phaseBStartScrollY;
+            
             const mapped = Math.max(0, Math.min(PHASE_B_REMAINING, deltaY * V_TO_H_RATIO));
+            
             translateX = -THRESH_X_CLAMPED - mapped;
             translateX = Math.max(-MAX_X, translateX);
             applyTransform();
 
-            // Switch back to mode A when scrolling up from the top
             if (deltaY <= 0 || isAtTopOfViewport()) {
                 switchToA();
-                // Set the translateX to current position minus a small buffer
                 translateX = Math.min(0, Math.max(-MAX_X, translateX));
                 applyTransform();
             }
         };
 
         const handleResize = () => {
-            actualScrollable = Math.max(0, container.scrollWidth - window.innerWidth);
-            MAX_X = Math.min(TOTAL_X, actualScrollable);
-            THRESH_X_CLAMPED = Math.min(THRESHOLD_X, MAX_X);
-            PHASE_B_REMAINING = Math.max(0, MAX_X - THRESH_X_CLAMPED);
+            if (window.innerWidth < 768) {
+                unlockScroll();
+                return;
+            }
+            
+            calculateBounds(); // Recalculate all bounds on resize
 
             // Clamp current translateX to new bounds
             translateX = Math.min(0, Math.max(-MAX_X, translateX));
@@ -262,7 +282,13 @@ export default function ServiceSectionAbout() {
         };
 
         // Initialize
-        switchToA();
+        calculateBounds();
+        if (isAtTopOfViewport()) {
+            switchToA();
+        } else {
+            unlockScroll();
+        }
+        
         window.addEventListener("wheel", handleWheelA, { passive: false });
         window.addEventListener("scroll", handleScrollB, { passive: true });
         window.addEventListener("resize", handleResize);
@@ -273,7 +299,7 @@ export default function ServiceSectionAbout() {
             window.removeEventListener("resize", handleResize);
             unlockScroll();
         };
-    }, []);
+    }, [galleryItems.length]);
 
     return (
         <>
@@ -360,11 +386,14 @@ export default function ServiceSectionAbout() {
                                 </span>
                             </h2>
 
-                            <ul className="flex flex-col gap-10 md:flex-row md:items-center md:gap-16 will-change-transform last:pr-20">
+                            <ul className="flex flex-col gap-10 md:flex-row md:items-center md:gap-16 will-change-transform">
                                 {galleryItems.map((item, idx) => (
                                     <li
                                         key={item.id}
-                                        className={`flex-[0_0_auto] group relative transition-all duration-500 hover:scale-[1.05] hover:rotate-[1deg]${idx === galleryItems.length - 1 ? " pr-10 md:pr-[40px]" : ""}`}
+                                        // Conditional ref for the last element
+                                        ref={idx === galleryItems.length - 1 ? lastGalleryItemRef : null}
+                                        // Increased the right padding from pr-[40px] to pr-[80px] to match JS margin
+                                        className={`flex-[0_0_auto] group relative transition-all duration-500 hover:scale-[1.05] hover:rotate-[1deg] pr-20 md:pr-[80px]`}
                                     >
                                         <div
                                             className="relative min-w-[260px] w-full rounded-2xl md:rounded-3xl overflow-hidden 
@@ -391,8 +420,6 @@ export default function ServiceSectionAbout() {
                                 ))}
                             </ul>
 
-
-                            <div className="hidden md:block min-w-[400px]" />
                         </div>
                     </div>
                 </div>
