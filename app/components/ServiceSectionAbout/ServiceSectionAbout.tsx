@@ -380,27 +380,28 @@ export default function ServiceSectionAbout() {
                             ref={containerRef}
                             className="flex items-center flex-col gap-9 mx-auto md:flex-row md:gap-[80px] will-change-transform transition-transform duration-200 ease-out"
                         >
-                            <h2 className="uppercase z-10">
+                            <h2 className="uppercase z-10 text-center md:text-left">
                                 <span className="text-[32px] md:text-[80px] font-[900] leading-[120%] text-[#cdff00] [text-shadow:0_0_3px_#cdff00,0_0_6px_#cdff00] text-white">
                                     Our <br /> Clients
                                 </span>
                             </h2>
 
-                            <ul className="flex flex-col gap-10 md:flex-row md:items-center md:gap-16 will-change-transform">
+                            {/* MOBILE FIX: Center the cards on mobile */}
+                            <ul className="flex flex-col gap-10 md:flex-row md:items-center md:gap-16 will-change-transform w-full md:w-auto">
                                 {galleryItems.map((item, idx) => (
                                     <li
                                         key={item.id}
                                         // Conditional ref for the last element
                                         ref={idx === galleryItems.length - 1 ? lastGalleryItemRef : null}
-                                        // Increased the right padding from pr-[40px] to pr-[80px] to match JS margin
-                                        className={`flex-[0_0_auto] group relative transition-all duration-500 hover:scale-[1.05] hover:rotate-[1deg] pr-20 md:pr-[80px]`}
+                                        // MOBILE FIX: Remove right padding on mobile and center items
+                                        className={`flex-[0_0_auto] group relative transition-all duration-500 hover:scale-[1.05] hover:rotate-[1deg] md:pr-[80px] w-full flex justify-center md:justify-start md:w-auto`}
                                     >
                                         <div
-                                            className="relative min-w-[260px] w-full rounded-2xl md:rounded-3xl overflow-hidden 
+                                            className="relative min-w-[260px] w-full max-w-[280px] md:min-w-[260px] md:w-full rounded-2xl md:rounded-3xl overflow-hidden 
         bg-gradient-to-br from-[#111111] via-[#1b1b1b] to-[#0a0a0a] 
         border border-white/10 shadow-[0_0_20px_rgba(255,255,255,0.08)]
         group-hover:shadow-[0_0_35px_rgba(205,255,0,0.3)]
-        flex items-center justify-center p-6 transition-all duration-500"
+        flex items-center justify-center p-6 transition-all duration-500 mx-auto md:mx-0"
                                         >
                                             {/* Decorative Glow Ring */}
                                             <div className="absolute inset-0 bg-gradient-to-br from-[#cdff00]/20 to-transparent opacity-0 group-hover:opacity-100 blur-2xl transition-opacity duration-500 "></div>
@@ -411,15 +412,13 @@ export default function ServiceSectionAbout() {
                                                 alt="Gallery image"
                                                 width={600}
                                                 height={400}
-                                                className="w-[250px] md:w-[400px] h-auto object-contain 
+                                                className="w-[220px] md:w-[400px] h-auto object-contain 
           transition-transform duration-500 group-hover:scale-110 group-hover:translate-y-[-4px]"
                                             />
                                         </div>
-
                                     </li>
                                 ))}
                             </ul>
-
                         </div>
                     </div>
                 </div>
