@@ -13,7 +13,7 @@ interface Card {
   id: number;
   name: string;
   role: string;
-  workWithUs: string;
+  workWithUs?: string;
   image: string;
 }
 
@@ -23,29 +23,32 @@ interface TeamCardSliderProps {
 
 function TeamCardSlider({ cards }: TeamCardSliderProps) {
 const sample: Card[] = [
-  { id: 1, name: "Iqra Hammed", role: "Human Resources", workWithUs: "5 Years", image: "/team-card/hr.jpeg" },
-  { id: 2, name: "Bilal Ahmed", role: "Full Stack Developer", workWithUs: "4 Years", image: "/team-card/bilal.jpeg" },
-  { id: 3, name: "Arslan Aslam", role: "Frontend Developer", workWithUs: "3 Years", image: "/team-card/arslan.jpeg" },
-  { id: 4, name: "Asad Ali", role: "Frontend Developer", workWithUs: "3 Years", image: "/team-card/asad.jpeg" },
-  { id: 5, name: "Rafey Talha", role: "Frontend Developer", workWithUs: "3 Years", image: "/team-card/rafey.jpeg" },
-  { id: 6, name: "Maaz Bukhari", role: "Frontend Developer", workWithUs: "3 Years", image: "/team-card/maaz.jpeg" },
-  { id: 7, name: "Ahmad Dhilxn", role: "Frontend Developer", workWithUs: "2 Years", image: "/team-card/ahmad.jpeg" },
-  { id: 8, name: "Faizan", role: "Frontend Developer", workWithUs: "2 Years", image: "/team-card/faizan.jpeg" },
-  { id: 9, name: "Sabahat Yaseen", role: "Frontend Developer", workWithUs: "2 Years", image: "/team-card/sabaht.jpeg" },
-  { id: 10, name: "Aqsa", role: "Frontend Developer", workWithUs: "2 Years", image: "/team-card/aqsa.jpeg" },
-  { id: 11, name: "Sidra", role: "Frontend Developer", workWithUs: "2 Years", image: "/team-card/sidra.jpeg" },
-  { id: 12, name: "Hina", role: "Frontend Developer", workWithUs: "2 Years", image: "/team-card/hina.jpeg" },
-  { id: 13, name: "Awais", role: "Frontend Developer", workWithUs: "2 Years", image: "/team-card/awais.jpeg" },
-  { id: 14, name: "Hassam", role: "Backend Developer", workWithUs: "2 Years", image: "/team-card/hassam.jpeg" },
-  { id: 15, name: "Huzaifa", role: "Backend Developer", workWithUs: "2 Years", image: "/team-card/huzaifa.jpeg" },
-  { id: 16, name: "Ali Randhawa", role: "Game Developer", workWithUs: "2 Years", image: "/team-card/ali.jpeg" },
-  { id: 17, name: "Farhad", role: "Graphics Designer", workWithUs: "3 Years", image: "/team-card/farhad.jpeg" },
-  { id: 18, name: "Farhad", role: "Graphics Designer", workWithUs: "3 Years", image: "/team-card/g1.jpeg" },
-  { id: 19, name: "Areeba", role: "Graphics Designer", workWithUs: "3 Years", image: "/team-card/arreba.jpeg" },
-  { id: 20, name: "Ayesha", role: "Graphics Designer", workWithUs: "3 Years", image: "/team-card/ayesha.jpeg" },
-  { id: 21, name: "Shaima", role: "Graphics Designer", workWithUs: "3 Years", image: "/team-card/shaima.jpeg" },
-  { id: 22, name: "Kashan Sheikh", role: "Flutter App Developer", workWithUs: "2 Years", image: "/team-card/kashan.jpeg" },
-  { id: 23, name: "Moiz", role: "Flutter App Developer", workWithUs: "2 Years", image: "/team-card/moiz.jpg" },
+
+  { id: 1, name: "Ceo Fahad Khan", role: "Ceo",  image: "/team-card/ceo.png" },
+  { id: 1, name: "Iqra Hammed", role: "Human Resources", workWithUs: "5 Years", image: "/team-card/hr.png" },
+  { id: 2, name: "Bilal Ahmed", role: "Full Stack Developer", workWithUs: "3 Years", image: "/team-card/bilal.png" },
+  { id: 3, name: "Arslan Aslam", role: "Frontend Developer", workWithUs: "3 Years", image: "/team-card/arslan.png" },
+  { id: 4, name: "Asad Ali", role: "Frontend Developer", workWithUs: "3 Years", image: "/team-card/asad.png" },
+  { id: 5, name: "Rafey Talha", role: "Frontend Developer", workWithUs: "3 Years", image: "/team-card/aqeel.png" },
+  { id: 5, name: "Rafey Talha", role: "Frontend Developer", workWithUs: "3 Years", image: "/team-card/tariq.png" },
+  { id: 5, name: "Rafey Talha", role: "Frontend Developer", workWithUs: "3 Years", image: "/team-card/rafey.png" },
+  { id: 6, name: "Maaz Bukhari", role: "Frontend Developer", workWithUs: "3 Years", image: "/team-card/maaz.png" },
+  { id: 7, name: "Ahmad Dhilxn", role: "Frontend Developer", workWithUs: "2 Years", image: "/team-card/ahmed.png" },
+  { id: 8, name: "Faizan", role: "Frontend Developer", workWithUs: "2 Years", image: "/team-card/faizan.png" },
+  { id: 9, name: "Sabahat Yaseen", role: "Frontend Developer", workWithUs: "2 Years", image: "/team-card/sabaht.png" },
+  { id: 10, name: "Aqsa", role: "Frontend Developer", workWithUs: "2 Years", image: "/team-card/aqsa.png" },
+  { id: 11, name: "Sidra", role: "Frontend Developer", workWithUs: "2 Years", image: "/team-card/sidra.png" },
+  { id: 12, name: "Hina", role: "Frontend Developer", workWithUs: "2 Years", image: "/team-card/hina.png" },
+  { id: 13, name: "Awais", role: "Frontend Developer", workWithUs: "2 Years", image: "/team-card/awais.png" },
+  { id: 14, name: "Hassam", role: "Backend Developer", workWithUs: "2 Years", image: "/team-card/hassam.png" },
+  { id: 15, name: "Huzaifa", role: "Backend Developer", workWithUs: "2 Years", image: "/team-card/huzaifa.png" },
+  { id: 16, name: "Ali Randhawa", role: "Game Developer", workWithUs: "2 Years", image: "/team-card/ali.png" },
+  { id: 17, name: "Farhad", role: "Graphics Designer", workWithUs: "3 Years", image: "/team-card/farhad.png" },
+  { id: 18, name: "Farhad", role: "Graphics Designer", workWithUs: "3 Years", image: "/team-card/g1.png" },
+  { id: 19, name: "Areeba", role: "Graphics Designer", workWithUs: "3 Years", image: "/team-card/arreba.png" },
+  { id: 20, name: "Ayesha", role: "Graphics Designer", workWithUs: "3 Years", image: "/team-card/ayesha.png" },
+  { id: 21, name: "Shaima", role: "Graphics Designer", workWithUs: "3 Years", image: "/team-card/shaima.png" },
+  { id: 22, name: "Kashan Sheikh", role: "Flutter App Developer", workWithUs: "2 Years", image: "/team-card/kashan.png" },
 ];
 
 
@@ -142,7 +145,9 @@ const swiperRef = useRef<SwiperType | null>(null);
                 <div className="backdrop-blur-md bg-white/20 p-4 rounded-t-2xl text-white">
                   <h4 className="text-base sm:text-lg font-semibold">{dev.name}</h4>
                   <p className="text-xs sm:text-sm opacity-90">{dev.role}</p>
-                  <p className="text-xs opacity-80">Work With Us: {dev.workWithUs}</p>
+                   {dev.role.toLowerCase() !== "ceo" && (
+            <p className="text-xs opacity-80">Work With Us: {dev.workWithUs}</p>
+          )}
                 </div>
               </div>
             </div>
