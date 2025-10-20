@@ -12,19 +12,63 @@ interface MenuItem {
 const menuItems: MenuItem[] = [
   { title: "Home", link: "/" },
   {
-    title: "Games",
+    title: "Services",
     children: [
-      { title: "Cricket", link: "/games/cricket" },
       {
-        title: "Football",
-        link: "/games/football",
+        title: "Web Development",
         children: [
-          { title: "Climate cup", link: "/games/football/climate-cup" },
+          { title: "Frontend Development", link: "/services/web/frontend" },
+          { title: "Backend Development", link: "/services/web/backend" },
+          { title: "Full Stack Solutions", link: "/services/web/fullstack" },
+          { title: "E-Commerce Solutions", link: "/services/web/ecommerce",},
+          { title: "Shopify Development", link: "/services/web/shopify" },
+          { title: "Custom Storefronts", link: "/services/web/custom" },
+          { title: "CMS Platforms", link: "/services/web/cms",},
+          { title: "WordPress Development", link: "/services/web/cms/wordpress" },
+          { title: "Headless CMS", link: "/services/web/cms/headless" },
         ],
       },
-    ],
+      {
+        title: "Mobile App Development",
+        children: [
+          { title: "iOS App Development", link: "/services/mobile/ios" },
+          { title: "Android App Development", link: "/services/mobile/android" },
+          
+          { title: "Flutter Apps", link: "/services/mobile/flutter" },
+          { title: "React Native Apps", link: "/services/mobile/reactnative" },
+
+        ],
+      },
+      {
+        title: "UI/UX Design",
+        children: [
+          { title: "Website Design", link: "/services/design/website" },
+          { title: "Mobile App Design", link: "/services/design/mobile" },
+          { title: "Brand Identity Design", link: "/services/design/branding" },
+          { title: "Prototyping & Wireframing", link: "/services/design/prototyping" },
+        ],
+      },
+      {
+        title: "Digital Marketing",
+        children: [
+          { title: "SEO Optimization", link: "/services/marketing/seo" },
+          { title: "Social Media Marketing", link: "/services/marketing/socialmedia" },
+          { title: "Content Marketing", link: "/services/marketing/content" },
+          { title: "Paid Ads (Google/Facebook)", link: "/services/marketing/paidads" },
+        ],
+      },
+      {
+        title: "Cloud & DevOps",
+        children: [
+          { title: "Server Deployment", link: "/services/devops/deployment" },
+          { title: "CI/CD Setup", link: "/services/devops/cicd" },
+          { title: "Cloud Infrastructure", link: "/services/devops/cloud" },
+        ],
+      },
+    ]
   },
-  { title: "About", link: "/about" },
+  { title: "About Us", link: "/about" },
+  { title: "Careers", link: "/careers" },
   { title: "Contact", link: "/contact" },
 ];
 
@@ -241,8 +285,8 @@ export const Sidebar = ({
             (currentView === "main"
               ? handleHover(item, "main")
               : currentView === "child"
-              ? handleHover(item, "child")
-              : undefined)
+                ? handleHover(item, "child")
+                : undefined)
           }
           onClick={() =>
             handleClick(
@@ -250,19 +294,17 @@ export const Sidebar = ({
               currentView === "main"
                 ? "main"
                 : currentView === "child"
-                ? "child"
-                : "nested"
+                  ? "child"
+                  : "nested"
             )
           }
-          className={`cursor-pointer w-full flex items-center justify-between transition-all relative ${
-            isMobile ? "py-3" : ""
-          }`}
+          className={`cursor-pointer w-full flex items-center justify-between transition-all relative ${isMobile ? "py-3" : ""
+            }`}
           style={{ transitionDelay: delay }}
         >
           <span
-            className={`font-medium w-full transition-colors ${
-              isMobile ? "text-[20px]" : "text-[24px]"
-            } ${isActive ? "text-white" : "text-[hsla(0,0%,100%,.7)]"}`}
+            className={`font-medium w-full transition-colors ${isMobile ? "text-[20px]" : "text-[24px]"
+              } ${isActive ? "text-white" : "text-[hsla(0,0%,100%,.7)]"}`}
           >
             {item.title}
           </span>
@@ -284,14 +326,14 @@ export const Sidebar = ({
       currentView === "main"
         ? menuItems
         : currentView === "child"
-        ? childMenu
-        : nestedMenu;
+          ? childMenu
+          : nestedMenu;
     const parentTitle =
       currentView === "child"
         ? childParent
         : currentView === "nested"
-        ? nestedParent
-        : null;
+          ? nestedParent
+          : null;
 
     return (
       <div className={`pt-[50px] w-full h-full ${isMobile ? "px-6" : ""}`}>
@@ -333,9 +375,8 @@ export const Sidebar = ({
 
           {/* Menu Items */}
           <ul
-            className={`flex flex-col ${
-              isMobile ? "min-w-0 gap-6" : "min-w-[300px] gap-9"
-            }`}
+            className={`flex flex-col ${isMobile ? "min-w-0 gap-6" : "min-w-[300px] gap-9"
+              }`}
           >
             {renderItems(items)}
           </ul>
@@ -360,18 +401,16 @@ export const Sidebar = ({
   ) => (
     <div
       ref={ref}
-      className={`fixed top-0 h-screen z-40 ${
-        menu && sidebar
-          ? "w-[400px] transition-[width] duration-[0.3s] ease-in"
-          : "w-0"
-      }`}
+      className={`fixed top-0 h-screen z-40 ${menu && sidebar
+        ? "w-[400px] transition-[width] duration-[0.3s] ease-in"
+        : "w-0"
+        }`}
       style={{ left: leftPosition }}
     >
       <div className="pt-[50px] w-full h-full px-[50px]">
         <div
-          className={`mb-9 py-9 border-b-[0.8px] border-solid border-[hsla(0,0%,100%,.5)] transition-opacity duration-500 ease-in-out ${
-            menu && sidebar ? "opacity-100" : "opacity-0"
-          }`}
+          className={`mb-9 py-9 border-b-[0.8px] border-solid border-[hsla(0,0%,100%,.5)] transition-opacity duration-500 ease-in-out ${menu && sidebar ? "opacity-100" : "opacity-0"
+            }`}
         >
           <h2 className="text-white text-[24px] leading-[21px] font-bold">
             {parent}
@@ -392,9 +431,8 @@ export const Sidebar = ({
                 style={{ transitionDelay: `${idx * 150}ms` }}
               >
                 <span
-                  className={`text-[24px] transition-transform duration-300 ease-in-out relative leading-[21px] font-medium w-full ${
-                    isActive ? "text-white" : "text-[hsla(0,0%,100%,.7)]"
-                  }`}
+                  className={`text-[24px] transition-transform duration-300 ease-in-out relative leading-[21px] font-medium w-full ${isActive ? "text-white" : "text-[hsla(0,0%,100%,.7)]"
+                    }`}
                   style={{
                     transform: delayed ? "translateX(0)" : "translateX(-1rem)",
                   }}
@@ -426,25 +464,22 @@ export const Sidebar = ({
           className="fixed top-0 left-0 w-full h-full z-40 overflow-hidden"
         >
           <div
-            className={`absolute top-0 left-0 w-full h-full transform transition-transform duration-300 ease-in-out ${getMobileClass()} ${
-              currentView !== "main" ? "hidden" : ""
-            }`}
+            className={`absolute top-0 left-0 w-full h-full transform transition-transform duration-300 ease-in-out ${getMobileClass()} ${currentView !== "main" ? "hidden" : ""
+              }`}
           >
             {renderMenu()}
           </div>
 
           <div
-            className={`absolute top-0 left-0 w-full h-full ${
-              currentView === "child" ? "block" : "hidden"
-            }`}
+            className={`absolute top-0 left-0 w-full h-full ${currentView === "child" ? "block" : "hidden"
+              }`}
           >
             {renderMenu()}
           </div>
 
           <div
-            className={`absolute top-0 left-0 w-full h-full ${
-              currentView === "nested" ? "block" : "hidden"
-            }`}
+            className={`absolute top-0 left-0 w-full h-full ${currentView === "nested" ? "block" : "hidden"
+              }`}
           >
             {renderMenu()}
           </div>
@@ -453,9 +488,8 @@ export const Sidebar = ({
         <>
           <div
             ref={sidebarRef}
-            className={`fixed top-0 left-0 h-screen w-[400px] z-40 transform transition-transform duration-300 ease-in-out ${
-              sidebar ? "translate-x-0" : "-translate-x-full"
-            }`}
+            className={`fixed top-0 left-0 h-screen w-[400px] z-40 transform transition-transform duration-300 ease-in-out ${sidebar ? "translate-x-0" : "-translate-x-full"
+              }`}
           >
             {renderMenu()}
           </div>

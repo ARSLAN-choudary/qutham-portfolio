@@ -1,0 +1,61 @@
+/* heroslider.css */
+
+.hero-swiper {
+  width: 100%;
+  height: 90vh; /* Default height */
+}
+
+@media (min-width: 768px) {
+  .hero-swiper {
+    height: 80vh; /* Height for medium and larger screens */
+  }
+}
+
+.swiper-pagination-bullet {
+  background: white !important;
+  opacity: 0.6;
+}
+
+.swiper-pagination-bullet-active {
+  background: #22d3ee !important; /* cyan-400 */
+  opacity: 1;
+}
+
+/* Video wrapper to ensure full coverage */
+.video-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* YouTube iframe styling */
+.youtube-background-iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100%;
+  border: none;
+  pointer-events: none;
+  z-index: 0;
+  object-fit: cover;
+}
+
+/* Force iframe to scale correctly */
+.youtube-background-iframe::after {
+  content: "";
+  display: block;
+  padding-bottom: 56.25%; 
+  width: 100vw;
+}
+
+/* Ensure no gaps on different screen sizes */
+@media (max-width: 767px) {
+  .youtube-background-iframe {
+    width: 100%;
+    height: 100%;
+  }
+}

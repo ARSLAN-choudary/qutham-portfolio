@@ -5,6 +5,8 @@ import "./globals.css";
 import { Lato } from "next/font/google";
 import { SessionProvider } from "next-auth/react";
 import Footer from "./components/Footer/Footer";
+import { Header } from "./components/Header";
+import ToasterProvider from "./components/ToasterProvider/ToasterProvider";
 
 const lato = Lato({
   subsets: ["latin"],
@@ -33,9 +35,12 @@ export default function RootLayout({
       <body
         className={`${lato.className} ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <SessionProvider>{children}
+        <SessionProvider>
+          <Header/>
+          {children}
           <Footer />
         </SessionProvider>
+        <ToasterProvider />
       </body>
     </html>
   );
