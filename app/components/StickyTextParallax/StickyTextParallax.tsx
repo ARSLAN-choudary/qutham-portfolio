@@ -66,7 +66,6 @@ export default function StickyTextParallax() {
     const cursorCircleRef = useRef<HTMLDivElement | null>(null);
     const modalRef = useRef<HTMLDivElement | null>(null);
 
-    const [isHovering, setIsHovering] = useState(false);
     const [selectedCard, setSelectedCard] = useState<(typeof cardData)[0] | null>(null);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -125,13 +124,11 @@ export default function StickyTextParallax() {
         };
 
         const handleCardHover = () => {
-            setIsHovering(true);
             document.body.style.cursor = "none";
             gsap.to(cursorCircle, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(1.7)" });
         };
 
         const handleCardLeave = () => {
-            setIsHovering(false);
             document.body.style.cursor = "default";
             gsap.to(cursorCircle, { opacity: 0, scale: 0.5, duration: 0.2, ease: "power2.out" });
         };

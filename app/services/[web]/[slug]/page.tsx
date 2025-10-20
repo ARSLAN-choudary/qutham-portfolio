@@ -558,18 +558,16 @@ devops: {
 // ✅ Step 2: Dynamic component using both params
 export default function DynamicServiceSlugPage() {
   const { web, slug } = useParams();
-  const router = useRouter(); // ✅ Move to top
+  const router = useRouter();
   const containerRef = useRef<HTMLDivElement | null>(null);
   const iconsRef = useRef<Array<HTMLDivElement | null>>([]);
   const rotRef = useRef<HTMLDivElement | null>(null);
 
+  // ✅ Early return - check data before any hooks
   const mainData = SERVICE_DATA[web as string];
-  if (!mainData) return notFound();
+  const slugData = mainData?.sublinks?.[slug as string];
 
-  const slugData = mainData.sublinks?.[slug as string];
-  if (!slugData) return notFound();
-
-  // Orbit animation
+  // Orbit animation - NOW this runs after early returns
   useEffect(() => {
     const container = containerRef.current;
     const rot = rotRef.current;
@@ -617,11 +615,9 @@ export default function DynamicServiceSlugPage() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // ✅ Only render after hooks
+  // ✅ Check data after hooks
   if (!mainData) return notFound();
   if (!slugData) return notFound();
-
-
 
   return (
     <div className="relative w-full min-h-screen bg-cover bg-center bg-no-repeat"

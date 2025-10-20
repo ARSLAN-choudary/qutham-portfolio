@@ -24,10 +24,10 @@ Requirements:
 - Good understanding of authentication, JWT, and role-based access control.
 - Excellent problem-solving skills and attention to detail.`,
     },
-    {
-      title: "Frontend Developer (React / Next.js)",
-      desc: `We're hiring a mid-level React / Next.js Developer to join our fast-paced development team. 
-You'll build modern, scalable, and SEO-optimized applications with React, Redux Toolkit, and Next.js. 
+   {
+  title: "Frontend Developer (React / Next.js)",
+  desc: `We&apos;re hiring a mid-level React / Next.js Developer to join our fast-paced development team. 
+You&apos;ll build modern, scalable, and SEO-optimized applications with React, Redux Toolkit, and Next.js. 
 Must have 2–3 years of hands-on experience in frontend development using React ecosystem.
 
 Key Responsibilities:
@@ -42,7 +42,7 @@ Requirements:
 - Experience with Git, code reviews, and agile development environments.
 - Familiarity with performance optimization and Lighthouse audits.
 - Excellent teamwork and communication skills.`,
-    },
+},
     {
       title: "Backend Developer",
       desc: `We are looking for a skilled Backend Developer with 3+ years of experience in building scalable and secure APIs. 
@@ -277,9 +277,27 @@ Requirements:
                 </div>
               ))
             ) : (
+          <div className="px-[12px] pb-[12px] flex flex-col items-center gap-[10px] mt-[14px] max-h-[500px] overflow-y-auto">
+            {filteredJobs.length > 0 ? (
+              filteredJobs.map((job, idx) => (
+                <div
+                  key={idx}
+                  onClick={(e) => handleJobClick(job, e)}
+                  className={`rounded-[100px] h-[74px] py-[19px] pl-[16px] pr-[8px] w-full border text-[14px] font-medium text-white flex items-center justify-center cursor-pointer transition-all duration-200 ${
+                    selectedJob.title === job.title
+                      ? "bg-[hsla(0,0%,100%,.15)] border-[hsla(0,0%,100%,.3)] shadow-lg"
+                      : "bg-[rgba(0,0,0,.4)] border-[hsla(0,0%,100%,.2)] hover:bg-[rgba(255,255,255,.1)] hover:border-[hsla(0,0%,100%,.3)]"
+                  }`}
+                >
+                  <span className="text-center px-2">{job.title}</span>
+                </div>
+              ))
+            ) : (
               <div className="text-white text-[14px] opacity-60 py-8 text-center">
-                No jobs found matching "{searchTerm}"
+                No jobs found matching &quot;{searchTerm}&quot;
               </div>
+            )}
+          </div>
             )}
           </div>
 
