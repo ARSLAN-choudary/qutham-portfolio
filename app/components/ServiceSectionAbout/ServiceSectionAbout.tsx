@@ -370,7 +370,7 @@ export default function ServiceSectionAbout() {
             </section>
 
             {/* Featured Gallery Section - Images Only */}
-            <section
+            {/* <section
                 ref={sectionRef}
                 className="max-w-screen w-full min-h-screen overflow-hidden bg-gradient-to-b from-[#1a1919] to-[#090909] py-12"
             >
@@ -386,14 +386,11 @@ export default function ServiceSectionAbout() {
                                 </span>
                             </h2>
 
-                            {/* MOBILE FIX: Center the cards on mobile */}
                             <ul className="flex flex-col gap-10 md:flex-row md:items-center md:gap-16 will-change-transform w-full md:w-auto">
                                 {galleryItems.map((item, idx) => (
                                     <li
                                         key={item.id}
-                                        // Conditional ref for the last element
                                         ref={idx === galleryItems.length - 1 ? lastGalleryItemRef : null}
-                                        // MOBILE FIX: Remove right padding on mobile and center items
                                         className={`flex-[0_0_auto] group relative transition-all duration-500 hover:scale-[1.05] hover:rotate-[1deg] md:pr-[80px] w-full flex justify-center md:justify-start md:w-auto`}
                                     >
                                         <div
@@ -403,10 +400,9 @@ export default function ServiceSectionAbout() {
         group-hover:shadow-[0_0_35px_rgba(205,255,0,0.3)]
         flex items-center justify-center p-6 transition-all duration-500 mx-auto md:mx-0"
                                         >
-                                            {/* Decorative Glow Ring */}
                                             <div className="absolute inset-0 bg-gradient-to-br from-[#cdff00]/20 to-transparent opacity-0 group-hover:opacity-100 blur-2xl transition-opacity duration-500 "></div>
 
-                                            {/* Subtle floating image */}
+                                            
                                             <Image
                                                 src={item.image}
                                                 alt="Gallery image"
@@ -422,7 +418,7 @@ export default function ServiceSectionAbout() {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> */}
         </>
     );
 }

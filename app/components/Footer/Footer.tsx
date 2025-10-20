@@ -67,7 +67,7 @@ export default function Footer() {
             <Image src="/footer/LinkedinLogo.97a9ef66ee3eaa6c7c5594ee9002cbbd.svg" alt="LinkedIn" width={18} height={18} className="hover:scale-110 transition lg:w-[30px]" />
           </a>
           <a href="https://www.facebook.com/share/1DiS5boyPa/?mibextid=wwXIfr" target="_blank" rel="noreferrer">
-            <Image src="/footer/facebook-logo.png" alt="Facebook" width={16} height={16} className="hover:scale-110 transition lg:w-[23px]" />
+            <Image src="/footer/f.svg" alt="Facebook" width={16} height={16} className="hover:scale-110 transition lg:w-[23px]" />
           </a>
         </div>
       </div>
