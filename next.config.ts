@@ -1,7 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config optio */
+  reactStrictMode: true,
+  output: "standalone",
 };
 
 export default nextConfig;
