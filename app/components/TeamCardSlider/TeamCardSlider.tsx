@@ -45,7 +45,7 @@ const sample: Card[] = [
   { id: 16, name: "Ali Randhawa", role: "Game Developer", workWithUs: "2 Years", image: "/team-card/ali.png" },
   { id: 17, name: "Farhad", role: "Graphics Designer", workWithUs: "3 Years", image: "/team-card/farhad.png" },
   { id: 18, name: "Farhad", role: "Graphics Designer", workWithUs: "3 Years", image: "/team-card/g1.png" },
-  { id: 19, name: "Areeba", role: "Graphics Designer", workWithUs: "3 Years", image: "/team-card/arreba.png" },
+  { id: 19, name: "Areeba", role: "Graphics Designer", workWithUs: "3 Years", image: "/team-card/areeba.png" },
   { id: 20, name: "Ayesha", role: "Graphics Designer", workWithUs: "3 Years", image: "/team-card/ayesha.png" },
   { id: 21, name: "Shaima", role: "Graphics Designer", workWithUs: "3 Years", image: "/team-card/shaima.png" },
   { id: 22, name: "Kashan Sheikh", role: "Flutter App Developer", workWithUs: "2 Years", image: "/team-card/kashan.png" },
