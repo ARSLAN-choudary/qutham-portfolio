@@ -216,7 +216,7 @@ Requirements:
                 href="/contact?from=careers"
                 className="block w-full"
               >
-                <button className="bg-[linear-gradient(90deg,hsla(0,0%,100%,.03),hsla(0,0%,100%,.1)_54.16%,hsla(0,0%,100%,.06))] border border-[hsla(0,0%,100%,.1)] min-h-[58px] rounded-[24px] w-full text-white font-medium cursor-pointer text-[18px] font-semibold py-[15px] hover:bg-[hsla(0,0%,100%,.1)] transition-all duration-200">
+                <button className="bg-[linear-gradient(90deg,hsla(0,0%,100%,.03),hsla(0,0%,100%,.1)_54.16%,hsla(0,0%,100%,.06))] border border-[hsla(0,0%,100%,.1)] min-h-[58px] rounded-[24px] w-full text-white  cursor-pointer text-[18px] font-semibold py-[15px] hover:bg-[hsla(0,0%,100%,.1)] transition-all duration-200">
                   Apply Now
                 </button>
               </Link>

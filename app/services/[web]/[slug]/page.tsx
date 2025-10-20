@@ -90,7 +90,7 @@ import { FaFlutter, FaXTwitter } from "react-icons/fa6";
 
 
 // ✅ Step 1: Keep all service data in this file
-export const SERVICE_DATA: Record<string, any> = {
+ const SERVICE_DATA: Record<string, any> = {
 web: {
   title: "Building Seamless Digital Experiences",
   subtitle: "WEB DEVELOPMENT",

@@ -381,7 +381,7 @@ export default function ServiceSectionAbout() {
                             className="flex items-center flex-col gap-9 mx-auto md:flex-row md:gap-[80px] will-change-transform transition-transform duration-200 ease-out"
                         >
                             <h2 className="uppercase z-10 text-center md:text-left">
-                                <span className="text-[32px] md:text-[80px] font-[900] leading-[120%] text-[#cdff00] [text-shadow:0_0_3px_#cdff00,0_0_6px_#cdff00] text-white">
+                                <span className="text-[32px] md:text-[80px] font-[900] leading-[120%]  [text-shadow:0_0_3px_#cdff00,0_0_6px_#cdff00] text-white">
                                     Our <br /> Clients
                                 </span>
                             </h2>
