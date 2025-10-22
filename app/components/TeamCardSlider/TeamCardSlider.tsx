@@ -32,7 +32,7 @@ const sample: Card[] = [
   { id: 5, name: "Aqeel Anwar", role: "Frontend Developer", workWithUs: "3 Years", image: "/team-card/aqeel.png" },
   { id: 5, name: "Tariq Raheem", role: "Frontend Developer", workWithUs: "3 Years", image: "/team-card/tariq.png" },
   { id: 5, name: "Rafey Talha", role: "Frontend Developer", workWithUs: "3 Years", image: "/team-card/rafey.png" },
-  { id: 6, name: "Maaz Bukhari", role: "Frontend Developer", workWithUs: "3 Years", image: "/team-card/maaz.png" },
+  { id: 6, name: "Maaz Bukhari", role: "Frontend Developer", workWithUs: "3 Years", image: "/team-card/maz.png" },
   { id: 7, name: "Ahmad Dhilxn", role: "Frontend Developer", workWithUs: "2 Years", image: "/team-card/ahmed.png" },
   { id: 8, name: "Faizan", role: "Frontend Developer", workWithUs: "2 Years", image: "/team-card/faizan.png" },
   { id: 9, name: "Sabahat Yaseen", role: "Frontend Developer", workWithUs: "2 Years", image: "/team-card/sabaht.png" },
@@ -44,11 +44,11 @@ const sample: Card[] = [
   { id: 15, name: "Huzaifa", role: "Backend Developer", workWithUs: "2 Years", image: "/team-card/huzaifa.png" },
   { id: 16, name: "Ali Randhawa", role: "Game Developer", workWithUs: "2 Years", image: "/team-card/ali.png" },
   { id: 17, name: "Farhad", role: "Graphics Designer", workWithUs: "3 Years", image: "/team-card/farhad.png" },
-  { id: 18, name: "Farhad", role: "Graphics Designer", workWithUs: "3 Years", image: "/team-card/g1.png" },
   { id: 19, name: "Areeba", role: "Graphics Designer", workWithUs: "3 Years", image: "/team-card/areeba.png" },
   { id: 20, name: "Ayesha", role: "Graphics Designer", workWithUs: "3 Years", image: "/team-card/ayesha.png" },
   { id: 21, name: "Shaima", role: "Graphics Designer", workWithUs: "3 Years", image: "/team-card/shaima.png" },
   { id: 22, name: "Kashan Sheikh", role: "Flutter App Developer", workWithUs: "2 Years", image: "/team-card/kashan.png" },
+  { id: 22, name: "Kashan Sheikh", role: "Flutter App Developer", workWithUs: "2 Years", image: "/team-card/khalid.png" },
 ];
 
 
