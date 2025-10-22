@@ -64,12 +64,7 @@ export default function HeroSection() {
         <p className="text-sm sm:text-base md:text-lg text-gray-300 mb-6 sm:mb-8 leading-relaxed">
           Explore the innovations driving artificial intelligence and next-gen automation.
         </p>
-      <Link
-  href="/about"
-  className="w-fit bg-gradient-to-r from-cyan-400 to-green-400 text-black font-semibold text-sm sm:text-base px-6 sm:px-8 py-2 sm:py-3 rounded-full shadow-lg hover:opacity-90 transition cursor-pointer"
->
-  Learn More
-</Link>
+   
       </div>
     </section>
   );
