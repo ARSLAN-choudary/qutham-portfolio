@@ -18,7 +18,7 @@ export const FeaturedEvents = () => {
     },
     {
       id: 2,
-      image: "/cards/in-office.jpg",
+      image: "/cards/in-office.jpeg",
     },
     {
       id: 3,
@@ -171,6 +171,7 @@ export const FeaturedEvents = () => {
 
   return (
     <section
+    id="projects"
       ref={sectionRef}
       className="max-w-screen w-full h-max min-h-screen md:max-h-max overflow-hidden bg-[linear-gradient(180deg,hsl(60_11%_12%)_1%,hsl(31_22%_12%)_10%,hsl(11_24%_14%)_19%,hsl(344_23%_14%)_28%,hsl(300_18%_13%)_36%,hsl(292_19%_15%)_44%,hsl(285_20%_18%)_53%,hsl(278_21%_20%)_61%,hsl(271_22%_22%)_69%,hsl(272_20%_18%)_77%,hsl(272_17%_13%)_85%,hsl(275_13%_9%)_93%,hsl(0_0%_3%)_100%)] "
     >

@@ -2,9 +2,23 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter, usePathname } from "next/navigation";
 import React from "react";
 
 export default function Footer() {
+  const router = useRouter();
+   const pathname = usePathname();
+
+  const handleNavigate = (sectionId: string) => {
+    if (pathname === "/") {
+      // already home page par ho → smooth scroll
+      const el = document.getElementById(sectionId);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    } else {
+      // kisi aur page par ho → navigate + hash pass
+      router.push(`/#${sectionId}`);
+    }
+  };
   return (
     <footer className="bg-black text-white w-full border-t border-[#1a1a1a] py-6">
       {/* Flex Row Layout */}
@@ -23,7 +37,7 @@ export default function Footer() {
           <ul className="flex gap-4 text-xs text-gray-300">
             <li><Link href="/about" className="hover:text-white transition">About</Link></li>
             <li><Link href="/careers" className="hover:text-white transition">Careers</Link></li>
-            <li><Link href="/" className="hover:text-white transition">Projects</Link></li>
+            <li><Link href="/" className="hover:text-white transition" onClick={() => handleNavigate("projects")}>Projects</Link></li>
             <li><Link href="/" className="hover:text-white transition">Events</Link></li>
           </ul>
         </div>
@@ -42,7 +56,7 @@ export default function Footer() {
         width={12}
         height={12}
       />
-      <a href="tel:+92 307-0079017">+92 307-0079017 / +971 50 112 0272</a>
+      <a href="tel:+92 307-0079017">+923287079495 / +971 50 112 0272</a>
     </li>
 
     <li className="flex items-center gap-2 justify-center md:justify-start">

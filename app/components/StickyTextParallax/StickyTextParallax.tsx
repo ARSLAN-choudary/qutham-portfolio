@@ -35,17 +35,17 @@ const cardData = [
         title: "Lushspaces",
         description: "Description for Lushspaces highlighting innovation.",
     },
-    {
-        id: 4,
-        mainImage: "/cards/card-4.webp",
-        gallery: [
-            "/cards/card-4.webp",
-            "/cards/card-4-2.webp",
-            "/cards/card-4-3.webp",
-        ],
-        title: "Project Four",
-        description: "Description for project four featuring creative solutions.",
-    },
+    // {
+    //     id: 4,
+    //     mainImage: "/cards/card-4.webp",
+    //     gallery: [
+    //         "/cards/card-4.webp",
+    //         "/cards/card-4-2.webp",
+    //         "/cards/card-4-3.webp",
+    //     ],
+    //     title: "Project Four",
+    //     description: "Description for project four featuring creative solutions.",
+    // },
     {
         id: 5,
         mainImage: "/cards/card-5.webp",

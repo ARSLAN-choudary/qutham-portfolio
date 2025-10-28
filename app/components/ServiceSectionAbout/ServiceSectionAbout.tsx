@@ -370,7 +370,7 @@ export default function ServiceSectionAbout() {
             </section>
 
             {/* Featured Gallery Section - Images Only */}
-            {/* <section
+            <section
                 ref={sectionRef}
                 className="max-w-screen w-full min-h-screen overflow-hidden bg-gradient-to-b from-[#1a1919] to-[#090909] py-12"
             >
@@ -418,7 +418,7 @@ export default function ServiceSectionAbout() {
                         </div>
                     </div>
                 </div>
-            </section> */}
+            </section>
         </>
     );
 }
