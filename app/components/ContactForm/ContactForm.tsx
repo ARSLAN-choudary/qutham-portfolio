@@ -110,7 +110,7 @@ export default function ContactForm() {
                   width={20}
                   height={20}
                 />
-                <a href="tel:+92 307-0079017">+92 307-0079017 || +971 50 112 0272</a>
+                <a href="tel:+92 307-0079017">+92 3287079495 || +971 50 112 0272</a>
               </div>
 
               <div>

@@ -24,13 +24,13 @@ interface TeamCardSliderProps {
 function TeamCardSlider({ cards }: TeamCardSliderProps) {
 const sample: Card[] = [
 
-  { id: 1, name: "Ceo Fahad Khan", role: "Ceo",  image: "/team-card/ceo.png" },
+  { id: 1, name: "Ceo Muhammad Fahad Khan", role: "Ceo",  image: "/team-card/ceo.png" },
   { id: 1, name: "Iqra Hammed", role: "Human Resources", workWithUs: "5 Years", image: "/team-card/hr.png" },
   { id: 2, name: "Bilal Ahmed", role: "Full Stack Developer", workWithUs: "4 Years", image: "/team-card/bilal.png" },
   { id: 3, name: "Arslan Aslam", role: "Frontend Developer", workWithUs: "4 Years", image: "/team-card/arslan.png" },
   { id: 4, name: "Asad Ali", role: "Frontend Developer", workWithUs: "3 Years", image: "/team-card/asad.png" },
   { id: 5, name: "Aqeel Anwar", role: "Frontend Developer", workWithUs: "3 Years", image: "/team-card/aqeel.png" },
-  { id: 5, name: "Tariq Raheem", role: "Frontend Developer", workWithUs: "3 Years", image: "/team-card/tariq.png" },
+  { id: 5, name: "Tariq Raheem", role: "Game Developer", workWithUs: "2 Years", image: "/team-card/tariq.png" },
   { id: 5, name: "Rafay Talha", role: "Frontend Developer", workWithUs: "4 Years", image: "/team-card/rafey.png" },
   { id: 6, name: "Syed Maaz", role: "Frontend Developer", workWithUs: "4 Years", image: "/team-card/maz.png" },
   { id: 7, name: "Ahmad Dhilxn", role: "Frontend Developer", workWithUs: "3 Years", image: "/team-card/ahmed.png" },
@@ -47,7 +47,7 @@ const sample: Card[] = [
   { id: 17, name: "Moiz", role: "Graphics Designer", workWithUs: "3 Years", image: "/team-card/moiz.png" },
   { id: 19, name: "Areeba", role: "Graphics Designer", workWithUs: "3 Years", image: "/team-card/areeba.png" },
   { id: 20, name: "Ayesha", role: "Graphics Designer", workWithUs: "3 Years", image: "/team-card/ayesha.png" },
-  { id: 21, name: "Shaima", role: "Graphics Designer", workWithUs: "3 Years", image: "/team-card/shaima.png" },
+  { id: 21, name: "Shaima", role: "Social Media Mananger", workWithUs: "3 Years", image: "/team-card/shaima.png" },
   { id: 22, name: "Kashan Sheikh", role: "Flutter App Developer", workWithUs: "2 Years", image: "/team-card/kashan.png" },
   { id: 22, name: "Khalid", role: "Flutter App Developer", workWithUs: "2 Years", image: "/team-card/khalid.png" },
 ];

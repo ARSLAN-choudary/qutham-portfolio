@@ -5,6 +5,7 @@ import StickyTextParallax from "./components/StickyTextParallax/StickyTextParall
 import TeamCardSlider from "./components/TeamCardSlider/TeamCardSlider";
 
 export default function Home() {
+  
   return (
     <>
       <Header />
